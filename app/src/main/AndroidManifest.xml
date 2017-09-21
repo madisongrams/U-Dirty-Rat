@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.gatech.jjmae.u_dirty_rat">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -22,6 +21,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registration_Page"></activity>
+        <activity
+            android:name=".ExistingUserLogin"
+            android:label="@string/title_activity_existing_user_login"
+            android:parentActivityName=".WelcomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.gatech.jjmae.u_dirty_rat.WelcomeActivity" />
+        </activity>
     </application>
 
 </manifest>
