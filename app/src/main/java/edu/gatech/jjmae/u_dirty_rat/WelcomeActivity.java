@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 
-
+import res.layout.ExistingUserLogin;
 
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -22,7 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
         Button next = (Button) findViewById(R.id.button);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+                Intent myIntent = new Intent(view.getContext(), Registration_Page.class);
                 startActivityForResult(myIntent, 0);
             }
 
@@ -33,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
         Button next1 = (Button) findViewById(R.id.button2);
         next1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+                Intent myIntent = new Intent(view.getContext(), ExistingUserLogin.class);
                 startActivityForResult(myIntent, 0);
             }
 
