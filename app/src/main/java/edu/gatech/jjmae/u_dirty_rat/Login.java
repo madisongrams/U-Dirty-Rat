@@ -18,6 +18,7 @@ public class Login {
      * @return whether or not the username and password are correct
      */
     public static boolean login(String user, String password) {
+        usernamesPasswords.put("jjmae", "password");
         return !(user == null) && !(password == null) && usernamesPasswords.containsKey(user)
                 && usernamesPasswords.get(user).equals(password);
     }

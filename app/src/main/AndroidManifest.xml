@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".Registration_Page"></activity>
         <activity
-            android:name=".ExistingUserLogin"
+            android:name=".ExistingUserLoginActivity"
             android:label="@string/title_activity_existing_user_login"
             android:parentActivityName=".WelcomeActivity">
             <meta-data
@@ -33,6 +33,7 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>
