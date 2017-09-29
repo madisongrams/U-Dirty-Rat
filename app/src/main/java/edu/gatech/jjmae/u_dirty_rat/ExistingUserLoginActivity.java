@@ -77,7 +77,7 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
             return false;
         }
 
-        if (Login.login(username, password)) {
+        if (UserData.login(username, password)) {
             return true;
         } else {
             displayErrorMessage("Username and password combination are incorrect.");
