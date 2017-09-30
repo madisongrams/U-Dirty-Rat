@@ -3,9 +3,13 @@ package edu.gatech.jjmae.u_dirty_rat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Spinner;
+import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.content.Intent;
 
 public class Registration_Page extends AppCompatActivity {
 
@@ -15,6 +19,16 @@ public class Registration_Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration__page);
+        Button createaccount = (Button) findViewById(R.id.button);
+        createaccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+                    startActivityForResult(myIntent, 0);
+                setContentView(R.layout.activity_welcome);
+                }
+        });
+
     }
 
     public void addItemsOnSpinner() {
