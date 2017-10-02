@@ -37,7 +37,6 @@ public class Registration_Page extends AppCompatActivity {
                 if (properRegistration()) {
                     Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
                     startActivityForResult(myIntent, 0);
-                    setContentView(R.layout.activity_welcome);
                 }
             }
         });
