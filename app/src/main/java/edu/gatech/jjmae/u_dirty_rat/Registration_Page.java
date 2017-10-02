@@ -26,11 +26,12 @@ public class Registration_Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration__page);
+        spinner = (Spinner) findViewById(R.id.spinner);
         newUsernameView = (EditText) findViewById(R.id.editText);
         newPasswordView = (EditText) findViewById(R.id.editText2);
         Button createaccount = (Button) findViewById(R.id.button);
         addItemsOnSpinner();
-        addListenerOnSpinnerItemSelection();
+      //  addListenerOnSpinnerItemSelection();
         createaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,7 +45,6 @@ public class Registration_Page extends AppCompatActivity {
     }
 
     public void addItemsOnSpinner() {
-        spinner = (Spinner) findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
         list.add("user");
         list.add("admin");
@@ -52,9 +52,9 @@ public class Registration_Page extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
     }
-    public void addListenerOnSpinnerItemSelection() {
-        spinner = (Spinner) findViewById(R.id.spinner);
-      //  spinner.setOnItemSelectedListener(new OnItemSelectedListener());
+    public String addListenerOnSpinnerItemSelection() {
+        String selectedItem = (String) spinner.getSelectedItem();
+        return selectedItem;
     }
     private boolean properRegistration() {
 
@@ -82,7 +82,11 @@ public class Registration_Page extends AppCompatActivity {
             displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_email));
             return false;
         }
-        UserData.register(username, password,false);
+        boolean admin;
+       admin = addListenerOnSpinnerItemSelection().equals("admin");
+
+
+        UserData.register(username, password,admin);
         return true;
     }
 
