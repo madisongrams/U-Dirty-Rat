@@ -82,7 +82,11 @@ public class Registration_Page extends AppCompatActivity {
             displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_email));
             return false;
         }
-        UserData.register(username, password,false);
+        String error = UserData.register(username, password, false);
+        if (error != null) {
+            displayErrorMessage(error);
+            return false;
+        }
         return true;
     }
 
