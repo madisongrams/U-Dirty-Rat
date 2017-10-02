@@ -76,11 +76,11 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
             displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_email));
             return false;
         }
-
-        if (UserData.login(username, password)) {
+        String error = UserData.login(username, password);
+        if (error == null) {
             return true;
         } else {
-            displayErrorMessage("Username and password combination are incorrect.");
+            displayErrorMessage(error);
             return false;
         }
     }

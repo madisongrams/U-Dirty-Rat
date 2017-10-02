@@ -22,21 +22,32 @@ public class UserData {
     private static SecretKey key;
     private static Cipher cipher;
 
-    public HashMap<String, User> getUsers() {
+    private static AbstractUser currentUser;
+
+    public static HashMap<String, User> getUsers() {
         return users;
     }
 
-    public HashMap<String, Admin> getAdmins() {
+    public static HashMap<String, Admin> getAdmins() {
         return admins;
+    }
+
+    public static AbstractUser getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(AbstractUser user) {
+        currentUser = user;
     }
 
     /**
      * A method that allows for login functionality
      * @param user the username entered
      * @param password the password entered
-     * @return whether or not the username and password are correct
+     * @return error message when there's an error, and null on success
      */
-    public static boolean login(String user, String password) {
+    public static String login(String user, String password) {
+        user = user.toLowerCase();
         // here is the default login info, commented out to test registration
         //TODO: just remove this entirely once registration is functional
 //        String defaultPass = encryptPassword("pass");
@@ -47,10 +58,21 @@ public class UserData {
 
         String encryptedPassword = encryptPassword(password);
         if (encryptedPassword == null) {
-            return false;
+            return "There was an issue on our end! Please try logging in again.";
         }
-        return !(user == null) && !(password == null) && usernamesPasswords.containsKey(user)
-                && usernamesPasswords.get(user).equals(encryptedPassword);
+        if (!(user == null) && !(password == null) && usernamesPasswords.containsKey(user)
+                && usernamesPasswords.get(user).equals(encryptedPassword)) {
+            Admin isAdmin = admins.get(user);
+            User isUser = users.get(user);
+            if (isAdmin != null) {
+                currentUser = isAdmin;
+            } else {
+                currentUser = isUser;
+            }
+            return null;
+        } else {
+            return "Username and Password combination are incorrect.";
+        }
     }
 
     /**
@@ -61,6 +83,7 @@ public class UserData {
      * @return whether or not registration was a success
      */
     public static boolean register(String user, String password, boolean isAdmin) {
+        user = user.toLowerCase();
         if (usernamesPasswords.containsKey(user)) {
             return false;
         }
@@ -70,9 +93,13 @@ public class UserData {
         }
         usernamesPasswords.put(user, encryptedPassword);
         if (isAdmin) {
-            admins.put(user, new Admin(user));
+            Admin admin = new Admin(user);
+            currentUser = admin;
+            admins.put(user, admin);
         } else {
-            users.put(user, new User(user));
+            User newUser = new User(user);
+            currentUser = newUser;
+            users.put(user, newUser);
         }
         return true;
     }
