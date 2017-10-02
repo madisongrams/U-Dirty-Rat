@@ -6,6 +6,7 @@ import android.widget.Spinner;
 import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
+import android.view.View.OnClickListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,8 @@ public class Registration_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration__page);
         Button createaccount = (Button) findViewById(R.id.button);
+        addItemsOnSpinner();
+        addListenerOnSpinnerItemSelection();
         createaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,5 +42,9 @@ public class Registration_Page extends AppCompatActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
+    }
+    public void addListenerOnSpinnerItemSelection() {
+        spinner = (Spinner) findViewById(R.id.spinner);
+       // spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
     }
 }
