@@ -80,16 +80,16 @@ public class UserData {
      * @param user username of new user
      * @param password user's password
      * @param isAdmin whether or not a user is an admin
-     * @return whether or not registration was a success
+     * @return error message or null if successful registration
      */
-    public static boolean register(String user, String password, boolean isAdmin) {
+    public static String register(String user, String password, boolean isAdmin) {
         user = user.toLowerCase();
         if (usernamesPasswords.containsKey(user)) {
-            return false;
+            return "That username is taken.";
         }
         String encryptedPassword = encryptPassword(password);
         if (encryptedPassword == null) {
-            return false;
+            return "There was an issue on our end! Please try logging in again.";
         }
         usernamesPasswords.put(user, encryptedPassword);
         if (isAdmin) {
@@ -101,7 +101,7 @@ public class UserData {
             currentUser = newUser;
             users.put(user, newUser);
         }
-        return true;
+        return null;
     }
 
     /**

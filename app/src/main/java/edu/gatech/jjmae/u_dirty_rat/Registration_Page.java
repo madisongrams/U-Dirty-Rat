@@ -45,6 +45,7 @@ public class Registration_Page extends AppCompatActivity {
     }
 
     public void addItemsOnSpinner() {
+        spinner = (Spinner) findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
         list.add("user");
         list.add("admin");
@@ -84,9 +85,13 @@ public class Registration_Page extends AppCompatActivity {
         }
         boolean admin;
        admin = addListenerOnSpinnerItemSelection().equals("admin");
+        String error = UserData.register(username, password, admin);
+        if (error != null) {
+            displayErrorMessage(error);
+            return false;
+        }
 
 
-        UserData.register(username, password,admin);
         return true;
     }
 
