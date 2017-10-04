@@ -29,9 +29,30 @@ public class HomeActivity extends AppCompatActivity {
 
         // When this button (logout) is hit, we should go back to welcome screen.
         // User should also be logged out
-
         Button next1 = (Button) findViewById(R.id.button3);
         next1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                UserData.setCurrentUser(null);
+                Intent myIntent = new Intent(view.getContext(), WelcomeActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+
+        });
+
+        // When this button (add a rat entry) is hit, ...
+        Button next2 = (Button) findViewById(R.id.button8);
+        next2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                UserData.setCurrentUser(null);
+                Intent myIntent = new Intent(view.getContext(), WelcomeActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+
+        });
+
+        // When this button (view rat entries) is hit, ...
+        Button next3 = (Button) findViewById(R.id.button7);
+        next3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 UserData.setCurrentUser(null);
                 Intent myIntent = new Intent(view.getContext(), WelcomeActivity.class);

@@ -9,7 +9,8 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 /**
- * Created by Madison on 9/17/2017.
+ * The User data class for the user
+ * Created by Madison on 9/29/2017.
  */
 
 //TODO: return specific reasons for login and registration failure
@@ -24,6 +25,13 @@ public class UserData {
 
     private static AbstractUser currentUser;
 
+
+
+    /**
+     *
+     * all getters and setters for UserData
+     *
+     */
     public static HashMap<String, User> getUsers() {
         return users;
     }
@@ -36,6 +44,11 @@ public class UserData {
         return currentUser;
     }
 
+
+
+    /**
+     * @param user the new current user
+     */
     public static void setCurrentUser(AbstractUser user) {
         currentUser = user;
     }
