@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         next1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 UserData.setCurrentUser(null);
-                Intent myIntent = new Intent(view.getContext(), NewRatSighting.class);
+                Intent myIntent = new Intent(view.getContext(), WelcomeActivity.class);
                 startActivityForResult(myIntent, 0);
             }
 
@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         next2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 UserData.setCurrentUser(null);
-                Intent myIntent = new Intent(view.getContext(), WelcomeActivity.class);
+                Intent myIntent = new Intent(view.getContext(), NewRatSighting.class);
                 startActivityForResult(myIntent, 0);
             }
 
