@@ -93,9 +93,8 @@ public class HomeActivity extends AppCompatActivity {
 
             String line;
             br.readLine(); //get rid of header line
-            int count = 0;
-            while ((line = br.readLine()) != null && count < 50) {
-                Log.d(HomeActivity.TAG, line);
+            while ((line = br.readLine()) != null) {
+                //Log.d(HomeActivity.TAG, line);
                 String[] tokens = line.split(",");
                 int id = 0;
                 int zip = 0;
@@ -122,7 +121,7 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
-                count++;
+
                 model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude));
             }
             br.close();

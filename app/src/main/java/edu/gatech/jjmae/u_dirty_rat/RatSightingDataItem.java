@@ -34,6 +34,10 @@ public class RatSightingDataItem {
         this._Longitude = longitude;
     }
 
+    /**
+     * All getters for the instance variables in this class
+     *
+     */
     public int get_ID() {
         return _ID;
     }
@@ -71,7 +75,10 @@ public class RatSightingDataItem {
     }
 
 
-
+    /**
+     * a simple tostring method
+     * @return string representing an instance of this class
+     */
     public String toString() {
         return _ID + " " + _Date + " " + _Borough;
     }

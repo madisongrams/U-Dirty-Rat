@@ -25,7 +25,7 @@ public class RatSightingsList extends AppCompatActivity {
         setContentView(R.layout.activity_rat_sighting_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.setTitle(getTitle());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,8 @@ public class RatSightingsList extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mDateView.setText( mValues.get(position).get_Date().toString());
+            String date = mValues.get(position).get_Date().toString();
+            holder.mDateView.setText(date.substring(0, 10) + " " + date.substring(30, 34));
             holder.mBoroughView.setText(mValues.get(position).get_Borough());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
