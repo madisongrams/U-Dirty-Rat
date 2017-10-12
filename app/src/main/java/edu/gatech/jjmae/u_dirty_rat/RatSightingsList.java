@@ -64,7 +64,7 @@ public class RatSightingsList extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
             String date = mValues.get(position).get_Date().toString();
-            holder.mDateView.setText(date.substring(0, 10) + " " + date.substring(30, 34));
+            holder.mDateView.setText(date.substring(0, 10) + " " + date.substring(24, 28));
             holder.mBoroughView.setText(mValues.get(position).get_Borough());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
