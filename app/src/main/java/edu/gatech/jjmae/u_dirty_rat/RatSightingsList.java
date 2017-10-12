@@ -40,10 +40,17 @@ public class RatSightingsList extends AppCompatActivity {
         setupRecyclerView((RecyclerView) recyclerView);
     }
 
+    /**
+     * sets up the recycler view
+     * @param recyclerView returns the recyclerview that's set up
+     */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SampleItemRecyclerViewAdapter(SampleModel.INSTANCE.getItems()));
     }
 
+    /**
+     * Class for the Recycler view adapter that displays rat data
+     */
     public class SampleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SampleItemRecyclerViewAdapter.ViewHolder> {
 
@@ -81,15 +88,26 @@ public class RatSightingsList extends AppCompatActivity {
         }
 
         @Override
+        /**
+         * @return number of rat data items
+         */
         public int getItemCount() {
             return mValues.size();
         }
 
+        /**
+         * View Holder class to display the recycler view
+         */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mDateView;
         public final TextView mBoroughView;
         public RatSightingDataItem mItem;
+
+            /**
+             * constructor that takes in a view for the view holder
+             * @param view view used for viewholder
+             */
 
         public ViewHolder(View view) {
             super(view);
@@ -97,6 +115,7 @@ public class RatSightingsList extends AppCompatActivity {
             mDateView = (TextView) view.findViewById(R.id.date);
             mBoroughView = (TextView) view.findViewById(R.id.borough);
         }
+
 
         @Override
         public String toString() {

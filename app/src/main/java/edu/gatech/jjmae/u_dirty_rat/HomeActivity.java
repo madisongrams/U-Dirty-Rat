@@ -74,6 +74,12 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * method for what happens when view rat data is pressed.
+     * if it is the app's first time, the data is read in from csv file and only then
+     *
+     * @param view view where button is located
+     */
     public void onLoadButtonPressed(View view) {
         Log.v(HomeActivity.TAG, "Pressed the load button");
         if (firstTime) {
@@ -84,6 +90,10 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * method that reads in the csv file
+     * reads in entire csv file and records data into a SampleModel
+     */
     private void readSDFile() {
         SampleModel model = SampleModel.INSTANCE;
 

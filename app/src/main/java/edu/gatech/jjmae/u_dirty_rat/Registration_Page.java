@@ -44,6 +44,9 @@ public class Registration_Page extends AppCompatActivity {
 
     }
 
+    /**
+     * adds items (user, admin) to the spinner for this page
+     */
     public void addItemsOnSpinner() {
         spinner = (Spinner) findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
@@ -53,10 +56,22 @@ public class Registration_Page extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
     }
+
+    /**
+     * listener for spinner
+     * @return current spinner selection
+     */
     public String addListenerOnSpinnerItemSelection() {
         String selectedItem = (String) spinner.getSelectedItem();
         return selectedItem;
     }
+
+    /**
+     * tests registration when user presses register.
+     * it does a few checks before passing it to the model to do a
+     * final check on the username and login
+     * @return boolean dependent on whether or not registration is successful
+     */
     private boolean properRegistration() {
 
         // Store values at the time of the login attempt.
@@ -94,7 +109,11 @@ public class Registration_Page extends AppCompatActivity {
 
         return true;
     }
-
+    /**
+     * determines whether given user name is valid
+     * @param username username to be tested
+     * @return boolean whether or not username is valid
+     */
     private boolean isUsernameValid(String username) {
         //TODO: decide what makes username valid?
      //   if(username.length() < 5) {
@@ -103,12 +122,19 @@ public class Registration_Page extends AppCompatActivity {
 
         return true;
     }
-
+    /**
+     * determines whether given password is valid
+     * @param password password to be tested
+     * @return boolean whether or not password is valid
+     */
     private boolean isPasswordValid(String password) {
         //TODO: make this better and more clear
         return password.length() > 2;
     }
-
+    /**
+     * method to display an error message with an alert dialog
+     * @param error the error message to be displayed
+     */
     private void displayErrorMessage(String error) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         Log.e("error", "displayErrorMessage: " + error);

@@ -85,16 +85,29 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * determines whether given user name is valid
+     * @param username username to be tested
+     * @return boolean whether or not username is valid
+     */
     private boolean isUsernameValid(String username) {
         //TODO: decide what makes username valid?
         return true;
     }
-
+    /**
+     * determines whether given password is valid
+     * @param password password to be tested
+     * @return boolean whether or not password is valid
+     */
     private boolean isPasswordValid(String password) {
         //TODO: make this better and more clear
         return password.length() > 2;
     }
 
+    /**
+     * method to display an error message with an alert dialog
+     * @param error the error message to be displayed
+     */
     private void displayErrorMessage(String error) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         Log.e("error", "displayErrorMessage: " + error);
