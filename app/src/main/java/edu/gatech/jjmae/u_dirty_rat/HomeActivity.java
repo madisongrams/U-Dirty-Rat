@@ -22,7 +22,6 @@ import java.util.Date;
 public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";
-    private boolean firstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +81,9 @@ public class HomeActivity extends AppCompatActivity {
      */
     public void onLoadButtonPressed(View view) {
         Log.v(HomeActivity.TAG, "Pressed the load button");
-        if (firstTime) {
+        SampleModel model = SampleModel.INSTANCE;
+        if (model.getItems().size() < 100000) {
             readSDFile();
-            firstTime = false;
         }
         Intent intent = new Intent(this, RatSightingsList.class);
         startActivity(intent);

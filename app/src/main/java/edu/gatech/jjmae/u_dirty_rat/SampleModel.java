@@ -2,6 +2,7 @@ package edu.gatech.jjmae.u_dirty_rat;
 
 import android.util.Log;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ public class SampleModel {
     public static final SampleModel INSTANCE = new SampleModel();
 
     private List<RatSightingDataItem> items;
+    private int currentid = 35502400;
 
     /**
      * constructor that initializes backing array
@@ -29,6 +31,7 @@ public class SampleModel {
      */
     public void addItem(RatSightingDataItem item) {
         items.add(item);
+        currentid++;
     }
 
     /**
@@ -51,5 +54,13 @@ public class SampleModel {
         }
         Log.d("MYAPP", "Warning - Failed to find id: " + id);
         return null;
+    }
+
+    /**
+     * current id is the id to be used for a new rat
+     * @return current id
+     */
+    public int getCurrentid() {
+        return currentid;
     }
 }
