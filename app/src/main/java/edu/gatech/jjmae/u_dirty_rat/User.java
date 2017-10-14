@@ -17,4 +17,5 @@ public class User extends AbstractUser {
         super(username);
     }
 
+
 }

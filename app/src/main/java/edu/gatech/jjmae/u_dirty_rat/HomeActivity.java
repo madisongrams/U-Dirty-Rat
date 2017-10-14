@@ -130,8 +130,8 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
-
-                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude));
+                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7],
+                        zip, tokens[9], tokens[16], tokens[23], latitude, longitude));
             }
             br.close();
         } catch (IOException e) {

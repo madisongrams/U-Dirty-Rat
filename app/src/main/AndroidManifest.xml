@@ -36,11 +36,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CreateNewRatSighting"
-            android:label="@string/title_activity_new_rat_sighting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RatSightingsList"
-            android:label="@string/title_activity_detail_rat_sighting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RatSighting_ViewDetail"></activity>
     </application>

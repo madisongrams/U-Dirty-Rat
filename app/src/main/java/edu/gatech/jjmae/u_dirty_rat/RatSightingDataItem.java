@@ -22,9 +22,8 @@ public class RatSightingDataItem {
     public RatSightingDataItem(int id, Date date, String location, int zip,
                                String address, String city, String borough, double latitude,
                                double longitude) {
-
         this._ID = id;
-        this._Date =date;
+        this._Date = date;
         this._Location = location;
         this._ZipCode = zip;
         this._Address = address;
