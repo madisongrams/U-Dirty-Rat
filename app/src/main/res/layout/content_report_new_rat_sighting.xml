@@ -15,6 +15,7 @@
         android:layout_marginStart="3dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/latitude"
         tools:layout_constraintBaseline_creator="1"
+        android:inputType="numberSigned"
         app:layout_constraintLeft_toRightOf="@+id/latitude" />
 
     <EditText
@@ -22,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:inputType="numberSigned"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="@+id/longitude"
@@ -35,6 +37,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         tools:layout_constraintLeft_creator="1"
+        android:inputType="phone"
         android:layout_marginStart="3dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/zip"
         tools:layout_constraintBaseline_creator="1"
@@ -42,6 +45,7 @@
 
     <EditText
         android:id="@+id/editcity"
+        android:inputType="text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -163,7 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="date"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
         android:layout_marginEnd="13dp"
@@ -185,6 +189,7 @@
 
     <EditText
         android:id="@+id/editaddress"
+        android:inputType="textPostalAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
