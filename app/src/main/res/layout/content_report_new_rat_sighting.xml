@@ -35,14 +35,14 @@
         android:id="@+id/editzip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
         android:ems="10"
         android:hint="99999"
-        tools:layout_constraintLeft_creator="1"
         android:inputType="phone"
-        android:layout_marginStart="3dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/zip"
+        app:layout_constraintLeft_toRightOf="@+id/zip"
         tools:layout_constraintBaseline_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/zip" />
+        tools:layout_constraintLeft_creator="1" />
 
     <EditText
         android:id="@+id/editcity"
