@@ -15,6 +15,7 @@
         android:layout_marginStart="3dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/latitude"
         tools:layout_constraintBaseline_creator="1"
+        android:inputType="numberSigned"
         app:layout_constraintLeft_toRightOf="@+id/latitude" />
 
     <EditText
@@ -22,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:inputType="numberSigned"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="@+id/longitude"
@@ -33,18 +35,22 @@
         android:id="@+id/editzip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        tools:layout_constraintLeft_creator="1"
         android:layout_marginStart="3dp"
+        android:ems="10"
+        android:hint="99999"
+        android:inputType="phone"
         app:layout_constraintBaseline_toBaselineOf="@+id/zip"
+        app:layout_constraintLeft_toRightOf="@+id/zip"
         tools:layout_constraintBaseline_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/zip" />
+        tools:layout_constraintLeft_creator="1" />
 
     <EditText
         android:id="@+id/editcity"
+        android:inputType="text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Rattington"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/editlongitude"
@@ -163,7 +169,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
+        android:hint="12/31/1969"
+        android:inputType="date"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
         android:layout_marginEnd="13dp"
@@ -177,6 +184,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="1-2 Family Dwelling"
         android:inputType="text"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintBaseline_toBaselineOf="@+id/location"
@@ -185,9 +193,11 @@
 
     <EditText
         android:id="@+id/editaddress"
+        android:inputType="textPostalAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="1010 Dirtyrat Dr"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginStart="7dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/address"

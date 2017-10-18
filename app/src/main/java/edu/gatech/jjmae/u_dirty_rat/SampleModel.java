@@ -16,7 +16,7 @@ public class SampleModel {
     public static final SampleModel INSTANCE = new SampleModel();
 
     private List<RatSightingDataItem> items;
-    private int currentid = 35502400;
+    private int currentid = 40000000;
 
     /**
      * constructor that initializes backing array
@@ -31,7 +31,6 @@ public class SampleModel {
      */
     public void addItem(RatSightingDataItem item) {
         items.add(item);
-        currentid++;
     }
 
     /**
@@ -61,6 +60,6 @@ public class SampleModel {
      * @return current id
      */
     public int getCurrentid() {
-        return currentid;
+        return currentid++;
     }
 }

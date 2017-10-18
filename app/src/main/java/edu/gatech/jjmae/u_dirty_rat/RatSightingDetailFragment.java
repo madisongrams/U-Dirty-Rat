@@ -57,6 +57,7 @@ public class RatSightingDetailFragment extends Fragment {
             Log.d("MYAPP", "Getting ready to set id");
 //            ((TextView) rootView.findViewById(R.id.title_id)).setText("" + mItem.get_ID());
             Log.d("MYAPP", "Getting ready to set name");
+            ((TextView) rootView.findViewById(R.id.id)).setText("" + mItem.get_ID());
             ((TextView) rootView.findViewById(R.id.date)).setText(mItem.get_Date().toString());
             ((TextView) rootView.findViewById(R.id.location)).setText(mItem.get_Location());
             ((TextView) rootView.findViewById(R.id.zip)).setText("" + mItem.get_ZipCode());
