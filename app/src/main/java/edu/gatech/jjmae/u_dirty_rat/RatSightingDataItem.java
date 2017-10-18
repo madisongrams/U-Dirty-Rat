@@ -19,10 +19,21 @@ public class RatSightingDataItem {
     private double _Latitude;
     private double _Longitude;
 
+    /**
+     * constructor to create a data item with all necessary fields
+     * @param id rat id
+     * @param date date of rat sighting
+     * @param location location of rat
+     * @param zip zip code of rat
+     * @param address address where rat was seen
+     * @param city city rat was seen
+     * @param borough borough rat was seen
+     * @param latitude rat's location latitude
+     * @param longitude rat's location longitude
+     */
     public RatSightingDataItem(int id, Date date, String location, int zip,
                                String address, String city, String borough, double latitude,
                                double longitude) {
-
         this._ID = id;
         this._Date =date;
         this._Location = location;
