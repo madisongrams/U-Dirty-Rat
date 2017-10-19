@@ -1,21 +1,19 @@
-package edu.gatech.jjmae.u_dirty_rat;
+package edu.gatech.jjmae.u_dirty_rat.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
-public class RatSighting_ViewDetail extends AppCompatActivity {
+import edu.gatech.jjmae.u_dirty_rat.R;
+
+public class RatSightingViewDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rat_sighting__view_detail);
+        setContentView(R.layout.activity_rat_sighting_view_detail);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
 //        setSupportActionBar(toolbar);
 
@@ -67,7 +65,7 @@ public class RatSighting_ViewDetail extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, RatSightingsList.class));
+            navigateUpTo(new Intent(this, RatSightingsListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

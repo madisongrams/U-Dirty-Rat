@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="edu.gatech.jjmae.u_dirty_rat.RatSightingsList"
+    tools:context="edu.gatech.jjmae.u_dirty_rat.controller.RatSightingsListActivity"
     tools:listitem="@layout/rat_item_list_content" />

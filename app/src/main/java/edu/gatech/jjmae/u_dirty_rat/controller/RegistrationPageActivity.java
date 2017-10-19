@@ -1,4 +1,4 @@
-package edu.gatech.jjmae.u_dirty_rat;
+package edu.gatech.jjmae.u_dirty_rat.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +14,11 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.content.Intent;
 
-public class Registration_Page extends AppCompatActivity {
+import edu.gatech.jjmae.u_dirty_rat.R;
+import edu.gatech.jjmae.u_dirty_rat.model.UserData;
+
+public class RegistrationPageActivity extends AppCompatActivity {
 
     private Spinner spinner;
     private EditText newUsernameView;
@@ -25,7 +27,7 @@ public class Registration_Page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration__page);
+        setContentView(R.layout.activity_registration_page);
         spinner = (Spinner) findViewById(R.id.spinner);
         newUsernameView = (EditText) findViewById(R.id.editText);
         newPasswordView = (EditText) findViewById(R.id.editText2);

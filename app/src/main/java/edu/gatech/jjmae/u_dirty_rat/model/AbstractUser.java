@@ -1,4 +1,4 @@
-package edu.gatech.jjmae.u_dirty_rat;
+package edu.gatech.jjmae.u_dirty_rat.model;
 
 /**
  * The abstract class that is the outline for user and admin

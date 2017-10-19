@@ -1,10 +1,8 @@
-package edu.gatech.jjmae.u_dirty_rat;
+package edu.gatech.jjmae.u_dirty_rat.controller;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +15,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CreateNewRatSighting extends AppCompatActivity {
+import edu.gatech.jjmae.u_dirty_rat.R;
+import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
+import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
+
+public class NewRatSightingActivity extends AppCompatActivity {
     private EditText mEditDate;
     private EditText mEditLocation;
     private EditText mEditZip;

@@ -1,4 +1,4 @@
-package edu.gatech.jjmae.u_dirty_rat;
+package edu.gatech.jjmae.u_dirty_rat.model;
 
 import android.util.Base64;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package edu.gatech.jjmae.u_dirty_rat;
+package edu.gatech.jjmae.u_dirty_rat.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,11 @@ import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import edu.gatech.jjmae.u_dirty_rat.R;
+import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
+import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
+import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -57,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
         Button next2 = (Button) findViewById(R.id.button8);
         next2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), CreateNewRatSighting.class);
+                Intent myIntent = new Intent(view.getContext(), NewRatSightingActivity.class);
                 startActivityForResult(myIntent, 0);
             }
 
@@ -85,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
         if (model.getItems().size() < 100000) {
             readSDFile();
         }
-        Intent intent = new Intent(this, RatSightingsList.class);
+        Intent intent = new Intent(this, RatSightingsListActivity.class);
         startActivity(intent);
     }
 

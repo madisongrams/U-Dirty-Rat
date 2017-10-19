@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.gatech.jjmae.u_dirty_rat.CreateNewRatSighting">
+    tools:context="edu.gatech.jjmae.u_dirty_rat.controller.NewRatSightingActivity">
 
     <EditText
         android:id="@+id/editlatitude"
