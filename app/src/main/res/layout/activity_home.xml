@@ -6,7 +6,7 @@
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.gatech.jjmae.u_dirty_rat.HomeActivity">
+    tools:context="edu.gatech.jjmae.u_dirty_rat.controller.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

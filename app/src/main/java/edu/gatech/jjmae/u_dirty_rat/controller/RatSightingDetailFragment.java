@@ -1,15 +1,18 @@
-package edu.gatech.jjmae.u_dirty_rat;
+package edu.gatech.jjmae.u_dirty_rat.controller;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import edu.gatech.jjmae.u_dirty_rat.R;
+import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
+import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
 public class RatSightingDetailFragment extends Fragment {
     /**
