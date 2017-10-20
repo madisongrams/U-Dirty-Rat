@@ -42,7 +42,11 @@
             android:name=".controller.RatSightingsListActivity"
             android:label="@string/title_activity_detail_rat_sighting"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".controller.RatSightingViewDetailActivity"></activity>
+        <activity android:name=".controller.RatSightingViewDetailActivity" />
+        <activity
+            android:name=".controller.SelectDatesActivity"
+            android:label="@string/title_activity_select_dates"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

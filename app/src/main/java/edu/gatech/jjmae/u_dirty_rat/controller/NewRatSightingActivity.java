@@ -124,7 +124,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
         SampleModel model = SampleModel.INSTANCE;
         int id = model.getCurrentid();
         //TODO: add borough entry
-        model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city, latitudeDoub, longitudeDoub));
+        model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city, latitudeDoub, longitudeDoub), true);
         return true;
     }
 
