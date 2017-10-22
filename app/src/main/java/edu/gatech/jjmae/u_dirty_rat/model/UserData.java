@@ -19,7 +19,6 @@ public class UserData {
     private static HashMap<String, User> users = new HashMap<String, User>();
     private static HashMap<String, Admin> admins = new HashMap<String, Admin>();
 
-    private static KeyGenerator keyGen;
     private static SecretKey key;
     private static Cipher cipher;
 
@@ -122,22 +121,39 @@ public class UserData {
      * @return success or failure of key and cipher creation
      */
     private static boolean setUpKey() {
-        if (keyGen != null) {
+        if (key != null) {
             return true;
         }
+        //TODO first try and get key from database, else create the new key
+        // so something like...
+        // if (key in database) {
+        //      key = value from database;
+        //      return true;
+        // }
         try {
-            keyGen = KeyGenerator.getInstance("AES");
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
             key = keyGen.generateKey();
-            cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.ENCRYPT_MODE, key);
+            //TODO add to database
             return true;
-
         } catch (Exception e) {
             Log.e(e.getMessage(), "setUpKey: exception initializing key");
             return false;
         }
     }
 
+    private static boolean setUpCipher() {
+        if (cipher != null) {
+            return true;
+        }
+        try {
+            cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            return true;
+        } catch (Exception e) {
+            Log.e(e.getMessage(), "setUpCipher: exception setting up cipher");
+            return false;
+        }
+    }
     /**
      * method to encrypt a password with set cipher and key
      * @param password password to be encrypted
@@ -146,6 +162,8 @@ public class UserData {
     private static String encryptPassword(String password) {
         try {
             if (!setUpKey()) {
+                return null;
+            } else if (!setUpCipher()) {
                 return null;
             }
             byte[] dataBytes = password.getBytes();
