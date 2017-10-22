@@ -14,7 +14,7 @@ public class User extends AbstractUser {
      * @param username the username
      */
     public User(String username) {
-        super(username);
+        super(username, false);
     }
 
 }

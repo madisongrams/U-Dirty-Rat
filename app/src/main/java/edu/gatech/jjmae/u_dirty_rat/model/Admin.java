@@ -14,8 +14,7 @@ public class Admin extends AbstractUser {
      *
      */
     public Admin(String username) {
-        super(username);
+        super(username, true);
     }
-
 
 }
