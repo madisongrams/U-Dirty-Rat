@@ -8,15 +8,20 @@ package edu.gatech.jjmae.u_dirty_rat.model;
 public abstract class AbstractUser {
 
     private String username;
+    private boolean isAdmin;
+    private String email;
 
     /**
      * a constructor for AbstractUser
      *
      * @param username the username
+     * @param isAdmin the administrator identifier
      *
      */
-    public AbstractUser(String username) {
+    public AbstractUser(String username, boolean isAdmin, String email) {
         this.username = username;
+        this.isAdmin = isAdmin;
+        this.email = email;
     }
 
     /**
@@ -39,5 +44,44 @@ public abstract class AbstractUser {
         return username;
     }
 
+    /**
+     * a setter for isAdmin parameter
+     *
+     * @param isAdmin the new admin data
+     *
+     */
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    /**
+     * a getter for isAdmin parameter
+     *
+     * @return isAdmin
+     *
+     */
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    /**
+     * a setter for the email parameter
+     *
+     * @param email the new email
+     *
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * a getter for the email parameter
+     *
+     * @return email
+     *
+     */
+    public String getEmail() {
+        return email;
+    }
 
 }

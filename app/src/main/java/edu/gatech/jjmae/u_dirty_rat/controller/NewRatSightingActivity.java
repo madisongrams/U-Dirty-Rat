@@ -107,6 +107,9 @@ public class NewRatSightingActivity extends AppCompatActivity {
             displayErrorMessage("Longitude must be a valid decimal.");
             return false;
         }
+        if (longitudeDoub < -180 || longitudeDoub > 180) {
+            displayErrorMessage("Invalid longitude.");
+        }
         double latitudeDoub = 0.0;
         try {
             latitudeDoub = Double.parseDouble(latitude);
@@ -114,11 +117,14 @@ public class NewRatSightingActivity extends AppCompatActivity {
             displayErrorMessage("Latitude must be a valid decimal.");
             return false;
         }
-
+        if (latitudeDoub < -90 || latitudeDoub > 90) {
+            displayErrorMessage("Invalid latitude.");
+            return false;
+        }
         SampleModel model = SampleModel.INSTANCE;
         int id = model.getCurrentid();
         //TODO: add borough entry
-        model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city, latitudeDoub, longitudeDoub));
+        model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city, latitudeDoub, longitudeDoub), true);
         return true;
     }
 

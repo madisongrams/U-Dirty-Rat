@@ -1,13 +1,14 @@
 package edu.gatech.jjmae.u_dirty_rat.model;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
  * Created by Justin on 10/9/2017.
  */
 
-public class RatSightingDataItem {
+public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Comparator<RatSightingDataItem> {
 
     private int _ID;
     private Date _Date;
@@ -93,4 +94,15 @@ public class RatSightingDataItem {
     public String toString() {
         return _ID + " " + _Date + " " + _Borough;
     }
+
+    @Override
+    public int compareTo(RatSightingDataItem r) {
+        return get_Date().compareTo(r.get_Date());
+    }
+
+    @Override
+    public int compare(RatSightingDataItem r1, RatSightingDataItem r2) {
+        return r1.get_Date().compareTo(r2.get_Date());
+    }
 }
+

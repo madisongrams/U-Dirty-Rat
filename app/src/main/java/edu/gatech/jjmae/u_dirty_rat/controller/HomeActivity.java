@@ -76,6 +76,15 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
+
+        Button next4 = (Button) findViewById(R.id.button6);
+        next4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), SelectDatesActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+
+        });
     }
 
     /**
@@ -135,6 +144,8 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
+
+                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude), false);
                 model.addItem(new RatSightingDataItem(id, entryDate, tokens[7],
                         zip, tokens[9], tokens[16], tokens[23], latitude, longitude));
             }
