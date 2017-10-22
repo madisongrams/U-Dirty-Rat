@@ -23,6 +23,7 @@ public class RegistrationPageActivity extends AppCompatActivity {
     private Spinner spinner;
     private EditText newUsernameView;
     private EditText newPasswordView;
+    private EditText newEmailView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class RegistrationPageActivity extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         newUsernameView = (EditText) findViewById(R.id.editText);
         newPasswordView = (EditText) findViewById(R.id.editText2);
+        newEmailView = (EditText) findViewById(R.id.editText4);
         Button createaccount = (Button) findViewById(R.id.button);
         addItemsOnSpinner();
       //  addListenerOnSpinnerItemSelection();
@@ -79,7 +81,8 @@ public class RegistrationPageActivity extends AppCompatActivity {
         // Store values at the time of the login attempt.
         String username = newUsernameView.getText().toString();
         String password = newPasswordView.getText().toString();
-        if (username == null || password == null) {
+        String email = newEmailView.getText().toString();
+        if (username == null || password == null || email == null) {
             return false;
         }
 
@@ -100,6 +103,16 @@ public class RegistrationPageActivity extends AppCompatActivity {
             displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_email));
             return false;
         }
+
+        //check for a valid email
+        if (TextUtils.isEmpty(email)) {
+            displayErrorMessage(getApplicationContext().getString(R.string.error_field_required));
+            return false;
+        } else if (!email.contains("@") || !email.contains(".")) {
+            displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_email));
+            return false;
+        }
+
         boolean admin;
         admin = addListenerOnSpinnerItemSelection().equals("admin");
         String error = UserData.register(username, password, admin);

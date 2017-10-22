@@ -9,6 +9,7 @@ public abstract class AbstractUser {
 
     private String username;
     private boolean isAdmin;
+    private String email;
 
     /**
      * a constructor for AbstractUser
@@ -17,9 +18,10 @@ public abstract class AbstractUser {
      * @param isAdmin the administrator identifier
      *
      */
-    public AbstractUser(String username, boolean isAdmin) {
+    public AbstractUser(String username, boolean isAdmin, String email) {
         this.username = username;
         this.isAdmin = isAdmin;
+        this.email = email;
     }
 
     /**
@@ -62,5 +64,24 @@ public abstract class AbstractUser {
         return isAdmin;
     }
 
+    /**
+     * a setter for the email parameter
+     *
+     * @param email the new email
+     *
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * a getter for the email parameter
+     *
+     * @return email
+     *
+     */
+    public String getEmail() {
+        return email;
+    }
 
 }
