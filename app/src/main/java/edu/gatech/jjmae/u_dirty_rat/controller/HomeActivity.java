@@ -76,7 +76,8 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
-        //maps
+
+        // When this button (select dates activity) is hit, ..
         Button next4 = (Button) findViewById(R.id.button6);
         next4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

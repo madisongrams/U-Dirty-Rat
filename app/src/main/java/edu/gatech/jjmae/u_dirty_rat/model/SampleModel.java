@@ -97,6 +97,12 @@ public class SampleModel {
         return currentid++;
     }
 
+    /**
+     * Get list of rats whose entry date lies in the date range
+     * @param start the start date
+     * @param end the end date
+     * @return the list of rats
+     */
     public ArrayList<RatSightingDataItem> getRatsByDates(Date start, Date end) {
         ArrayList<RatSightingDataItem> rats = new ArrayList<RatSightingDataItem>();
 

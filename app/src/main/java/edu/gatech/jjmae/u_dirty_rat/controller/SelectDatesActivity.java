@@ -45,16 +45,17 @@ public class SelectDatesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (areDatesValid()) {
-                    ArrayList<RatSightingDataItem> rats = SampleModel.INSTANCE.getRatsByDates(startDate, endDate);
-                    if (rats.size() < 1) {
-                        displayErrorMessage("No rat data found between those dates.");
-                    } else {
-                        // TODO: EDIT THIS WHEN MAP IS READY!
-//                        Intent intent = new Intent(getBaseContext(), WHATEVERMAPACTIVITYISCALLED.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putSerializable("rats", rats);
-//                        startActivity(intent);
-                    }
+//                    ArrayList<RatSightingDataItem> rats = SampleModel.INSTANCE.getRatsByDates(startDate, endDate);
+//                    if (rats.size() < 1) {
+//                        displayErrorMessage("No rat data found between those dates.");
+//                    } else {
+//                         TODO: EDIT THIS WHEN MAP IS READY!
+                        Intent intent = new Intent(getBaseContext(), MapsActivity.class);
+
+                        intent.putExtra("start", startDate);
+                        intent.putExtra("end", endDate);
+                        startActivity(intent);
+                    //}
                 }
             }
         });
