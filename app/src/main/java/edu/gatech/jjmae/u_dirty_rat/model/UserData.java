@@ -100,10 +100,12 @@ public class UserData {
      * @param user username of new user
      * @param password user's password
      * @param isAdmin whether or not a user is an admin
+     * @param email the user's email address
      * @return error message or null if successful registration
      */
     public static String register(String user, String password, boolean isAdmin, String email) {
         user = user.toLowerCase();
+        email = email.toLowerCase();
         if (usernamesPasswords.containsKey(user)) {
             return "That username is taken.";
         }
