@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Button;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.DialogInterface;
@@ -115,13 +117,14 @@ public class RegistrationPageActivity extends AppCompatActivity {
 
         boolean admin;
         admin = addListenerOnSpinnerItemSelection().equals("admin");
-        String error = UserData.register(username, password, admin);
+        String error = UserData.register(username, password, admin, email);
         if (error != null) {
             displayErrorMessage(error);
             return false;
         }
-
-
+        Log.i("Registration", "new user registered, saving userdata");
+        File file = new File(this.getFilesDir(), "userData.txt");
+        UserData.saveText(file);
         return true;
     }
     /**

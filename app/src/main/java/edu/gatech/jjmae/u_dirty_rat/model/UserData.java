@@ -2,11 +2,19 @@ package edu.gatech.jjmae.u_dirty_rat.model;
 
 import android.util.Base64;
 import android.util.Log;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.security.KeyStore;
 import java.util.HashMap;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * The User data class for the user
@@ -94,7 +102,7 @@ public class UserData {
      * @param isAdmin whether or not a user is an admin
      * @return error message or null if successful registration
      */
-    public static String register(String user, String password, boolean isAdmin) {
+    public static String register(String user, String password, boolean isAdmin, String email) {
         user = user.toLowerCase();
         if (usernamesPasswords.containsKey(user)) {
             return "That username is taken.";
@@ -105,15 +113,87 @@ public class UserData {
         }
         usernamesPasswords.put(user, encryptedPassword);
         if (isAdmin) {
-            Admin admin = new Admin(user);
+            Admin admin = new Admin(user, email, encryptedPassword);
             currentUser = admin;
             admins.put(user, admin);
         } else {
-            User newUser = new User(user);
+            User newUser = new User(user, email, encryptedPassword);
             currentUser = newUser;
             users.put(user, newUser);
         }
+
         return null;
+    }
+
+    /**
+     * load the model from a custom text file
+     *
+     * @param reader  the file to read from
+     */
+    public static void loadFromText(BufferedReader reader) {
+        System.out.println("Loading Text File");
+        usernamesPasswords.clear();
+        users.clear();
+        admins.clear();
+        try {
+            String countStr = reader.readLine();
+            Log.d("UserData", "loadFromText: " + countStr);
+            assert countStr != null;
+            int count = Integer.parseInt(countStr);
+            // get secret key
+            String data = reader.readLine();
+            Log.d("UserData", "loadFromText: " + data);
+            byte[] encoded = Base64.decode(data, Base64.URL_SAFE|Base64.NO_WRAP);
+            key = new SecretKeySpec(encoded, "AES");
+            //then read in each user to model
+            for (int i = 0; i < count; i++) {
+                String line = reader.readLine();
+                Log.d("User Data", "loadFromText: " + line);
+                AbstractUser u = AbstractUser.parseEntry(line);
+                if (u.getIsAdmin()) {
+                    admins.put(u.getUsername(), (Admin) u);
+                } else {
+                    users.put(u.getUsername(), (User) u);
+                }
+
+                usernamesPasswords.put(u.getUsername(), u.getPassword());
+            }
+            //be sure and close the file
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Done loading text file with " + usernamesPasswords.size() + " users");
+
+    }
+
+    public static boolean saveText(File file) {
+        System.out.println("Saving as a text file");
+        try {
+            PrintWriter pw = new PrintWriter(file);
+            saveAsText(pw);
+            pw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Log.d("UserData", "Error opening the text file for save!");
+            return false;
+        }
+
+        return true;
+    }
+
+    static void saveAsText(PrintWriter writer) {
+        System.out.println("UserData saving: " + usernamesPasswords.size() + " users" );
+        writer.println(usernamesPasswords.size());
+        // also saving key
+        byte[] encoded = key.getEncoded();
+        writer.println(Base64.encodeToString(encoded, Base64.URL_SAFE|Base64.NO_WRAP));
+        for(String u : users.keySet()) {
+            users.get(u).saveAsText(writer);
+        }
+        for (String a : admins.keySet()) {
+            admins.get(a).saveAsText(writer);
+        }
     }
 
     /**
@@ -124,16 +204,10 @@ public class UserData {
         if (key != null) {
             return true;
         }
-        //TODO first try and get key from database, else create the new key
-        // so something like...
-        // if (key in database) {
-        //      key = value from database;
-        //      return true;
-        // }
+
         try {
             KeyGenerator keyGen = KeyGenerator.getInstance("AES");
             key = keyGen.generateKey();
-            //TODO add to database
             return true;
         } catch (Exception e) {
             Log.e(e.getMessage(), "setUpKey: exception initializing key");
@@ -168,7 +242,9 @@ public class UserData {
             }
             byte[] dataBytes = password.getBytes();
             byte[] encryptedBytes = cipher.doFinal(dataBytes);
-            return Base64.encodeToString(encryptedBytes, Base64.DEFAULT);
+            String encryptedPass = Base64.encodeToString(encryptedBytes, Base64.URL_SAFE|Base64.NO_WRAP);
+            Log.d("UserData", encryptedPass);
+            return encryptedPass;
         } catch (Exception e) {
             Log.e(e.getMessage(), "Encryption failed");
             return null;
