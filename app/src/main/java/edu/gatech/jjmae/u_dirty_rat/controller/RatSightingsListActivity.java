@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
@@ -48,7 +50,10 @@ public class RatSightingsListActivity extends AppCompatActivity {
      * @param recyclerView returns the recyclerview that's set up
      */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SampleItemRecyclerViewAdapter(SampleModel.INSTANCE.getItems()));
+        List<RatSightingDataItem> items = SampleModel.INSTANCE.getItems();
+        Collections.sort(items);
+        Collections.reverse(items);
+        recyclerView.setAdapter(new SampleItemRecyclerViewAdapter(items));
     }
 
     /**
