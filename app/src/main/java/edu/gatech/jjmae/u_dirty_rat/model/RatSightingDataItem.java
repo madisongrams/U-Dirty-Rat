@@ -1,14 +1,21 @@
 package edu.gatech.jjmae.u_dirty_rat.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Created by Justin on 10/9/2017.
  */
 
-public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Comparator<RatSightingDataItem> {
+public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Comparator<RatSightingDataItem>, Parcelable {
 
     private int _ID;
     private Date _Date;
@@ -45,6 +52,28 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         this._Latitude = latitude;
         this._Longitude = longitude;
     }
+
+    protected RatSightingDataItem(Parcel in) {
+        _ID = in.readInt();
+        _Location = in.readString();
+        _ZipCode = in.readInt();
+        _Address = in.readString();
+        _City = in.readString();
+        _Borough = in.readString();
+        _Latitude = in.readDouble();
+        _Longitude = in.readDouble();
+    }
+
+    public static final Parcelable.Creator<RatSightingDataItem> CREATOR
+            = new Parcelable.Creator<RatSightingDataItem>() {
+        public RatSightingDataItem createFromParcel(Parcel in) {
+            return new RatSightingDataItem(in);
+        }
+
+        public RatSightingDataItem[] newArray(int size) {
+            return new RatSightingDataItem[size];
+        }
+    };
 
     /**
      * All getters for the instance variables in this class
@@ -103,6 +132,24 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
     @Override
     public int compare(RatSightingDataItem r1, RatSightingDataItem r2) {
         return r1.get_Date().compareTo(r2.get_Date());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_Address);
+        dest.writeInt(_ID);
+        dest.writeString(_Location);
+        dest.writeSerializable(_Date);
+        dest.writeDouble(_Latitude);
+        dest.writeDouble(_Longitude);
+        dest.writeString(_Borough);
+        dest.writeString(_City);
+        dest.writeInt(_ZipCode);
     }
 }
 
