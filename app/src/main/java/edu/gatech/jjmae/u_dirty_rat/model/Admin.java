@@ -13,9 +13,19 @@ public class Admin extends AbstractUser {
      * @param username the username
      *
      */
-    public Admin(String username) {
-        super(username);
+    public Admin(String username, String password) {
+        super(username, true, null, password);
     }
 
+    /**
+     * a two param constructor for Admin
+     *
+     * @param username the username
+     * @param email the admin's email
+     *
+     */
+    public Admin(String username, String email, String password) {
+        super(username, true, email, password);
+    }
 
 }

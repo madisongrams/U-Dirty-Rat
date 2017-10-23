@@ -77,11 +77,23 @@ public class HomeActivity extends AppCompatActivity {
 
         });
 
-        // When this button (select dates activity) is hit, ...
+        // When this button (select dates activity) is hit, ..
         Button next4 = (Button) findViewById(R.id.button6);
         next4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), SelectDatesActivity.class);
+                myIntent.putExtra("activity", "maps");
+                startActivityForResult(myIntent, 0);
+            }
+
+        });
+
+        //graphs
+        Button next5 = (Button) findViewById(R.id.button6);
+        next5.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), SelectDatesActivity.class);
+                myIntent.putExtra("activity", "graphs");
                 startActivityForResult(myIntent, 0);
             }
 

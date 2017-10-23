@@ -13,8 +13,16 @@ public class User extends AbstractUser {
      *
      * @param username the username
      */
-    public User(String username) {
-        super(username);
+    public User(String username, String password) {
+        super(username, false, null, password);
     }
 
+    /**
+     * a two parameter constructor for User
+     *
+     * @param username the username
+     */
+    public User(String username, String email, String password) {
+        super(username, false, email, password);
+    }
 }
