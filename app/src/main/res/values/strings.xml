@@ -8,13 +8,13 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This username is invalid</string>
+    <string name="error_invalid_email">This email is invalid</string>
+    <string name="error_invalid_username">This username is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
-    <string name="title_activity_newratsighting">Newratsighting</string>
     <string name="title_activity_new_rat_sighting">NewRatSighting</string>
     <string name="title_activity_detail_rat_sighting">detail_rat_sighting</string>
     <string name="title_activity_select_dates">SelectDatesActivity</string>
