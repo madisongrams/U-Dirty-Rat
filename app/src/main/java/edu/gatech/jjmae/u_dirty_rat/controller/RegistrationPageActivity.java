@@ -102,7 +102,7 @@ public class RegistrationPageActivity extends AppCompatActivity {
             displayErrorMessage(getApplicationContext().getString(R.string.error_field_required));
             return false;
         } else if (!isUsernameValid(username)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_email));
+            displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_username));
             return false;
         }
 
