@@ -7,16 +7,6 @@ package edu.gatech.jjmae.u_dirty_rat.model;
 
 public class User extends AbstractUser {
 
-
-    /**
-     * a constructor for User
-     *
-     * @param username the username
-     */
-    public User(String username) {
-        super(username, false, null);
-    }
-
     /**
      * a two parameter constructor for User
      *

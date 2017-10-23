@@ -115,13 +115,12 @@ public class RegistrationPageActivity extends AppCompatActivity {
 
         boolean admin;
         admin = addListenerOnSpinnerItemSelection().equals("admin");
-        String error = UserData.register(username, password, admin);
+        String error = UserData.register(username, password, admin, email);
         if (error != null) {
             displayErrorMessage(error);
             return false;
         }
-
-
+        
         return true;
     }
     /**

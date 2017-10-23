@@ -6,17 +6,6 @@ package edu.gatech.jjmae.u_dirty_rat.model;
  */
 public class Admin extends AbstractUser {
 
-
-    /**
-     * a constructor for Admin
-     *
-     * @param username the username
-     *
-     */
-    public Admin(String username) {
-        super(username, true, null);
-    }
-
     /**
      * a two param constructor for Admin
      *

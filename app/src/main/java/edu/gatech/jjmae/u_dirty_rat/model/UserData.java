@@ -92,10 +92,12 @@ public class UserData {
      * @param user username of new user
      * @param password user's password
      * @param isAdmin whether or not a user is an admin
+     * @param email the user's email address
      * @return error message or null if successful registration
      */
-    public static String register(String user, String password, boolean isAdmin) {
+    public static String register(String user, String password, boolean isAdmin, String email) {
         user = user.toLowerCase();
+        email = email.toLowerCase();
         if (usernamesPasswords.containsKey(user)) {
             return "That username is taken.";
         }
@@ -105,11 +107,11 @@ public class UserData {
         }
         usernamesPasswords.put(user, encryptedPassword);
         if (isAdmin) {
-            Admin admin = new Admin(user);
+            Admin admin = new Admin(user, email);
             currentUser = admin;
             admins.put(user, admin);
         } else {
-            User newUser = new User(user);
+            User newUser = new User(user, email);
             currentUser = newUser;
             users.put(user, newUser);
         }
