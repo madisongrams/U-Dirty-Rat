@@ -2,10 +2,14 @@ package edu.gatech.jjmae.u_dirty_rat.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -43,7 +47,7 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
                                String address, String city, String borough, double latitude,
                                double longitude) {
         this._ID = id;
-        this._Date =date;
+        this._Date = date;
         this._Location = location;
         this._ZipCode = zip;
         this._Address = address;
@@ -115,6 +119,63 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         return _Longitude;
     }
 
+
+    /**
+     * This is a static factory method that constructs a rat data item given a text line in the correct format.
+     * It assumes that a rata data item is in a single string with each attribute separated by a tab character
+     * The order of the data is assumed to be:
+     *
+     * 0 - id
+     * 1 - date
+     * 2 - location
+     * 3 - zip
+     * 4 - address
+     * 5 - city
+     * 6 - borough
+     * 7 - latitude
+     * 8 - longitude
+     *
+     * @param line  the text line containing the data
+     * @return the rat data object
+     */
+    public static RatSightingDataItem parseEntry(String line) {
+        assert line != null;
+        String[] tokens = line.split("\t");
+        assert tokens.length == 9;
+
+        int id = 0;
+        int zip = 0;
+        try {
+            id = Integer.parseInt(tokens[0]);
+        } catch (Exception e) {
+        }
+        try {
+            zip = Integer.parseInt(tokens[3]);
+        } catch (Exception e) {
+        }
+        double latitude =  0.0;
+        double longitude = 0.0;
+        try {
+            latitude = Double.parseDouble(tokens[7]);
+            longitude = Double.parseDouble(tokens[8]);
+        } catch (Exception e) {
+
+        }
+        Date entryDate = new Date(1969, 12, 31);
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            entryDate = df.parse(tokens[1]);
+        } catch (Exception e) {
+
+        }
+        return new RatSightingDataItem(id, entryDate, tokens[2], zip, tokens[4], tokens[5], tokens[6], latitude, longitude);
+    }
+    public void saveAsText(PrintWriter writer) {
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        writer.println(_ID + "\t" + df.format(_Date) + "\t" + _Location + "\t" + _ZipCode
+                + "\t" + _Address + "\t" + _City + "\t" + _Borough + "\t" + _Latitude
+                + "\t" + _Longitude);
+    }
 
     /**
      * a simple tostring method

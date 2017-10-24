@@ -2,6 +2,11 @@ package edu.gatech.jjmae.u_dirty_rat.model;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +29,7 @@ public class SampleModel {
     private List<RatSightingDataItem> items;
 //    private List<RatSightingDataItem> csvRats;
 //    private List<RatSightingDataItem> newRats;
-    private int currentid = 40000000;
+    private int currentID = 40000000;
 
     /**
      * constructor that initializes backing array
@@ -40,33 +45,7 @@ public class SampleModel {
      */
     public void addItem(RatSightingDataItem item, boolean isNewRat) {
         items.add(item);
-//        if (isNewRat) {
-//            addToNewRats(item);
-//        } else {
-//            csvRats.add(item);
-//        }
     }
-
-//    /**
-//     * adds new rat item to new rats so that list remains ordered by date
-//     * @param item item to be added
-//     */
-//    private void addToNewRats(RatSightingDataItem item) {
-//        if (newRats.size() < 1) {
-//            newRats.add(item);
-//            return;
-//        }
-//        Date newDate = item.get_Date();
-//        int index = 0;
-//        while (index < newRats.size() && newDate.compareTo(newRats.get(index).get_Date()) > 0) {
-//            index++;
-//        }
-//        if (index >= newRats.size()) {
-//            newRats.add(item);
-//        } else {
-//            newRats.add(index, item);
-//        }
-//    }
     /**
      * getter for backing array
      * @return backing array
@@ -91,10 +70,11 @@ public class SampleModel {
 
     /**
      * current id is the id to be used for a new rat
+     * id is incremented for next rat to guarantee rats do not have same id
      * @return current id
      */
-    public int getCurrentid() {
-        return currentid++;
+    public int getCurrentID() {
+        return currentID++;
     }
 
     /**
@@ -119,6 +99,59 @@ public class SampleModel {
         }
 
         return rats;
+    }
+
+    public void loadFromText(BufferedReader reader) {
+        System.out.println("Loading Text File");
+        items.clear();
+        try {
+            String countStr = reader.readLine();
+            Log.d("SampleModel", "loadFromText: " + countStr);
+            assert countStr != null;
+            int count = Integer.parseInt(countStr);
+            // old current id
+            String idStr = reader.readLine();
+            Log.d("SampleModel", "loadFromText: " + idStr);
+            int id = Integer.parseInt(idStr);
+            currentID = id;
+            //then read in each user to model
+            for (int i = 0; i < count; i++) {
+                String line = reader.readLine();
+                RatSightingDataItem r = RatSightingDataItem.parseEntry(line);
+                items.add(r);
+            }
+            //be sure and close the file
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Done loading text file with " + items.size() + " rat data items");
 
     }
+
+    public boolean saveText(File file) {
+        System.out.println("Saving as a text file");
+        try {
+            PrintWriter pw = new PrintWriter(file);
+            saveAsText(pw);
+            pw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Log.d("UserData", "Error opening the text file for save!");
+            return false;
+        }
+
+        return true;
+    }
+
+    void saveAsText(PrintWriter writer) {
+        System.out.println("SampleModel saving: " + items.size() + " data items");
+        writer.println(items.size());
+        // also saving currentID
+        writer.println(currentID);
+        for (RatSightingDataItem r : items) {
+            r.saveAsText(writer);
+        }
+    }
+
 }

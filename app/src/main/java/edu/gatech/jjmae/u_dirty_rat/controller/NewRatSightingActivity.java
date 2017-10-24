@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -122,9 +123,11 @@ public class NewRatSightingActivity extends AppCompatActivity {
             return false;
         }
         SampleModel model = SampleModel.INSTANCE;
-        int id = model.getCurrentid();
+        int id = model.getCurrentID();
         //TODO: add borough entry
         model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city, latitudeDoub, longitudeDoub), true);
+        File file = new File(this.getFilesDir(), "ratData.txt");
+        SampleModel.INSTANCE.saveText(file);
         return true;
     }
 
