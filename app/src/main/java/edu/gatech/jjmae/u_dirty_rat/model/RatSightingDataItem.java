@@ -57,6 +57,10 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         this._Longitude = longitude;
     }
 
+    /**
+     * protected method used to create rat data from a parcel
+     * @param in parcel used to create rat data
+     */
     protected RatSightingDataItem(Parcel in) {
         _ID = in.readInt();
         _Location = in.readString();
@@ -68,12 +72,25 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         _Longitude = in.readDouble();
     }
 
+    /**
+     * used to let rat be properly parcelable
+     */
     public static final Parcelable.Creator<RatSightingDataItem> CREATOR
             = new Parcelable.Creator<RatSightingDataItem>() {
+        /**
+         * creating rat from parcel
+         * @param in parcel to be read from
+         * @return new rat data
+         */
         public RatSightingDataItem createFromParcel(Parcel in) {
             return new RatSightingDataItem(in);
         }
 
+        /**
+         * creates an array of rat data of size
+         * @param size size of array
+         * @return the created array
+         */
         public RatSightingDataItem[] newArray(int size) {
             return new RatSightingDataItem[size];
         }
@@ -170,6 +187,11 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         }
         return new RatSightingDataItem(id, entryDate, tokens[2], zip, tokens[4], tokens[5], tokens[6], latitude, longitude);
     }
+
+    /**
+     * Method that is used to write rat data to a file with a given order of the instance variables
+     * @param writer printwriter used to write data to
+     */
     public void saveAsText(PrintWriter writer) {
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         writer.println(_ID + "\t" + df.format(_Date) + "\t" + _Location + "\t" + _ZipCode

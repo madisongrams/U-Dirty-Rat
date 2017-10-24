@@ -15,8 +15,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-import edu.gatech.jjmae.u_dirty_rat.controller.HomeActivity;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.model.UserData;
@@ -25,7 +23,13 @@ import edu.gatech.jjmae.u_dirty_rat.model.UserData;
  * Created by Madison on 10/22/2017.
  */
 
+/**
+ * A custom Application class which is used on app start up to do some backend setup before app runs
+ */
 public class MyApp extends Application {
+    /**
+     * default constructor called when app first runs
+     */
     public MyApp() {
         // this method fires only once per application start.
         // getApplicationContext returns null here
@@ -55,6 +59,12 @@ public class MyApp extends Application {
 
     }
 
+    /**
+     * used to load a text file saved on the phone
+     * @param file file being loaded
+     * @param isUserData whether the file is userdata or rat data
+     * @return whether or not file loading was successful
+     */
     public boolean loadText(File file, boolean isUserData) {
         try {
             //make an input object for reading

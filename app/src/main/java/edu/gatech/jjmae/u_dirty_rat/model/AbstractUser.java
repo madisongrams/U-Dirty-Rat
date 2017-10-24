@@ -53,6 +53,11 @@ public abstract class AbstractUser {
         }
         return new User(tokens[0], tokens[3], tokens[1]);
     }
+
+    /**
+     * Method that is used to write user data to a file with a given order of the instance variables
+     * @param writer printwriter used to write data to
+     */
     public void saveAsText(PrintWriter writer) {
         System.out.println("Abstract user saving user: " + username);
         Log.d("AbstractUser", "saving userdata: " + username + "\t" + password + "\t" + String.valueOf(isAdmin) + "\t" + email);

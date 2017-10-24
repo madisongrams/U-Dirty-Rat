@@ -61,6 +61,10 @@ public class SelectDatesActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * method to determine whether given dates entered by user are valid
+     * @return true/false whether or not dates are valid
+     */
     private boolean areDatesValid() {
         String start = startDateText.getText().toString();
         String end = endDateText.getText().toString();

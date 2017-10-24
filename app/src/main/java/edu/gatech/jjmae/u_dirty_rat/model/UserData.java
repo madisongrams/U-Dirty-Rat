@@ -169,6 +169,11 @@ public class UserData {
 
     }
 
+    /**
+     * static method used to save data as text file
+     * @param file file we are writing to
+     * @return whether or not saving text was successful
+     */
     public static boolean saveText(File file) {
         System.out.println("Saving as a text file");
         try {
@@ -184,6 +189,11 @@ public class UserData {
         return true;
     }
 
+    /**
+     * used to save data as a text file given a printwriter
+     * saves the number of users, the secret key and every user's data
+     * @param writer writer we are writing to
+     */
     static void saveAsText(PrintWriter writer) {
         System.out.println("UserData saving: " + usernamesPasswords.size() + " users" );
         writer.println(usernamesPasswords.size());
@@ -199,8 +209,10 @@ public class UserData {
     }
 
     /**
-     * sets up private key and cipher first time around
-     * @return success or failure of key and cipher creation
+     * sets up private key first time around
+     * new key should only be created if nothing has yet been written into memory
+     * (key endcoding is saved to a text file for later use)
+     * @return success or failure of key creation
      */
     private static boolean setUpKey() {
         if (key != null) {
@@ -217,6 +229,10 @@ public class UserData {
         }
     }
 
+    /**
+     * sets up cipher first time around using the private key
+     * @return whether or not cipher was successful
+     */
     private static boolean setUpCipher() {
         if (cipher != null) {
             return true;
