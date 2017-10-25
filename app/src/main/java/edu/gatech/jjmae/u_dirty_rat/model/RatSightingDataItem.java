@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Comparator<RatSightingDataItem> {
 
-    private int _ID;
+    private long _ID;
     private Date _Date;
     private String _Location;
     private int _ZipCode;
@@ -20,6 +20,9 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
     private double _Latitude;
     private double _Longitude;
 
+    public RatSightingDataItem() {
+        // Default constructor required for calls to DataSnapshot.getValue(RatSightingDataItem.class)
+    }
     /**
      * constructor to create a data item with all necessary fields
      * @param id rat id
@@ -32,7 +35,7 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
      * @param latitude rat's location latitude
      * @param longitude rat's location longitude
      */
-    public RatSightingDataItem(int id, Date date, String location, int zip,
+    public RatSightingDataItem(long id, Date date, String location, int zip,
                                String address, String city, String borough, double latitude,
                                double longitude) {
         this._ID = id;
@@ -50,7 +53,7 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
      * All getters for the instance variables in this class
      *
      */
-    public int get_ID() {
+    public long get_ID() {
         return _ID;
     }
 

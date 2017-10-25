@@ -25,6 +25,7 @@ import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
 public class SelectDatesActivity extends AppCompatActivity {
+
     private EditText startDateText;
     private EditText endDateText;
     private Date startDate;

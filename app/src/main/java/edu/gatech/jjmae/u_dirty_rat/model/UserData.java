@@ -13,7 +13,6 @@ import javax.crypto.SecretKey;
  * Created by Madison on 9/29/2017.
  */
 
-//TODO: return specific reasons for login and registration failure
 public class UserData {
 
     private static HashMap<String, String> usernamesPasswords = new HashMap<String, String>();
@@ -61,7 +60,6 @@ public class UserData {
     public static String login(String user, String password) {
         user = user.toLowerCase();
         // here is the default login info, commented out to test registration
-        //TODO: just remove this entirely once registration is functional
 //        String defaultPass = encryptPassword("pass");
 //        if (defaultPass == null) {
 //            return false;

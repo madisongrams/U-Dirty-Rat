@@ -37,12 +37,10 @@
         <activity
             android:name=".controller.NewRatSightingActivity"
             android:label="@string/title_activity_new_rat_sighting"
-            android:name=".CreateNewRatSighting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".controller.RatSightingsListActivity"
             android:label="@string/title_activity_detail_rat_sighting"
-            android:name=".RatSightingsList"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".controller.RatSightingViewDetailActivity" />
         <activity

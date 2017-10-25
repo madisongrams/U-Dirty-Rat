@@ -2,6 +2,9 @@ package edu.gatech.jjmae.u_dirty_rat.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +20,16 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
@@ -25,8 +37,9 @@ import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
 public class HomeActivity extends AppCompatActivity {
-
+    private static Handler handler;
     private static final String TAG = "HomeActivity";
+    private static SampleModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +98,15 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
+
+        model = SampleModel.INSTANCE;
+        handler = new Handler(Looper.getMainLooper()) {
+             @Override
+             public void handleMessage(Message msg) {
+                 Log.d(TAG, "Handling message!");
+                 HomeActivity.this.updateModel((RatSightingDataItem) msg.obj);
+             }
+        };
     }
 
     /**
@@ -95,12 +117,86 @@ public class HomeActivity extends AppCompatActivity {
      */
     public void onLoadButtonPressed(View view) {
         Log.v(HomeActivity.TAG, "Pressed the load button");
-        SampleModel model = SampleModel.INSTANCE;
         if (model.getItems().size() < 100000) {
-            readSDFile();
+//            readSDFile();
+            readFromDatabase();
         }
         Intent intent = new Intent(this, RatSightingsListActivity.class);
         startActivity(intent);
+    }
+
+    private void updateModel(RatSightingDataItem rat) {
+        model.addItem(rat, false);
+    }
+
+    private void readFromDatabase() {
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        ValueEventListener listener = new ValueEventListener() {
+            private Handler handler;
+
+            public ValueEventListener init(Handler handler) {
+                this.handler = handler;
+                return this;
+            }
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: called");
+                for (DataSnapshot singleRat: dataSnapshot.getChildren()) {
+//                    Log.d(TAG, "onDataChange: looping");
+                    //Log.d(HomeActivity.TAG, line);
+//                            Map singleRat = (Map) entry.getValue();
+
+                    long id = 0;
+                    int zip = 0;
+                    try {
+                        id = (Long) singleRat.child("Unique_Key").getValue();
+                    } catch (Exception e) {
+                    }
+                    try {
+                        zip = (Integer) singleRat.child("Incident_Zip").getValue();
+                    } catch (Exception e) {
+                    }
+                    double latitude =  0.0;
+                    double longitude = 0.0;
+                    try {
+                        latitude = (Double) singleRat.child("Latitude").getValue();
+                        longitude = (Double) singleRat.child("Longitude").getValue();
+                    } catch (ClassCastException e) {
+                        latitude = 0.0;
+                        longitude = 0.0;
+                    }
+                    String incidentAddress = "";
+                    try {
+                        incidentAddress = (String) singleRat.child("Incident_Address").getValue();
+                    } catch (ClassCastException e) {}
+
+                    Date entryDate = new Date(1969, 12, 31);
+                    DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+                    try {
+                        entryDate = df.parse((String) singleRat.child("Created_Date").getValue());
+                    } catch (Exception e) {
+
+                    }
+                    Message msg = handler.obtainMessage();
+                    msg.obj = new RatSightingDataItem(id, entryDate,
+                            (String) singleRat.child("Location_Type").getValue(), zip,
+                            incidentAddress, (String) singleRat.child("City").getValue(),
+                            (String) singleRat.child("Borough").getValue(),
+                            latitude, longitude);
+                    handler.sendMessage(msg);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        }.init(handler);
+        ref.limitToFirst(10).addListenerForSingleValueEvent(listener);
     }
 
     /**
@@ -108,7 +204,6 @@ public class HomeActivity extends AppCompatActivity {
      * reads in entire csv file and records data into a SampleModel
      */
     private void readSDFile() {
-        SampleModel model = SampleModel.INSTANCE;
 
         try {
             InputStream is = getResources().openRawResource(R.raw.rat_sightings);
@@ -145,9 +240,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 }
 
-                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude), false);
-                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7],
-                        zip, tokens[9], tokens[16], tokens[23], latitude, longitude));
+                updateModel(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude));
+
             }
             br.close();
         } catch (IOException e) {
