@@ -22,8 +22,6 @@ public class SampleModel {
     public static final SampleModel INSTANCE = new SampleModel();
 
     private List<RatSightingDataItem> items;
-//    private List<RatSightingDataItem> csvRats;
-//    private List<RatSightingDataItem> newRats;
     private int currentid = 40000000;
 
     /**
@@ -40,33 +38,8 @@ public class SampleModel {
      */
     public void addItem(RatSightingDataItem item, boolean isNewRat) {
         items.add(item);
-//        if (isNewRat) {
-//            addToNewRats(item);
-//        } else {
-//            csvRats.add(item);
-//        }
     }
 
-//    /**
-//     * adds new rat item to new rats so that list remains ordered by date
-//     * @param item item to be added
-//     */
-//    private void addToNewRats(RatSightingDataItem item) {
-//        if (newRats.size() < 1) {
-//            newRats.add(item);
-//            return;
-//        }
-//        Date newDate = item.get_Date();
-//        int index = 0;
-//        while (index < newRats.size() && newDate.compareTo(newRats.get(index).get_Date()) > 0) {
-//            index++;
-//        }
-//        if (index >= newRats.size()) {
-//            newRats.add(item);
-//        } else {
-//            newRats.add(index, item);
-//        }
-//    }
     /**
      * getter for backing array
      * @return backing array
@@ -74,6 +47,10 @@ public class SampleModel {
 
     public List<RatSightingDataItem> getItems() {
         return items;
+    }
+
+    public int size() {
+        return items.size();
     }
 
     /**
