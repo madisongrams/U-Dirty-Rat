@@ -70,6 +70,11 @@
         android:textAppearance="?attr/textAppearanceListItem"
          />
 
+    <com.facebook.share.widget.ShareButton
+        android:id="@+id/share_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Share" />
     <!--<TextView-->
         <!--android:id="@+id/longitude"-->
         <!--android:layout_width="wrap_content"-->
