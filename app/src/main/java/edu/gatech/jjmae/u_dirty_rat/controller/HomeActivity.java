@@ -1,12 +1,17 @@
 package edu.gatech.jjmae.u_dirty_rat.controller;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -34,27 +39,19 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        
 
         // When this button (logout) is hit, we should go back to welcome screen.
         // User should also be logged out
-        Button next1 = (Button) findViewById(R.id.button3);
-        next1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                UserData.setCurrentUser(null);
-                Intent myIntent = new Intent(view.getContext(), WelcomeActivity.class);
-                startActivityForResult(myIntent, 0);
-            }
-
-        });
+//        Button next1 = (Button) findViewById(R.id.button3);
+//        next1.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                UserData.setCurrentUser(null);
+//                Intent myIntent = new Intent(view.getContext(), WelcomeActivity.class);
+//                startActivityForResult(myIntent, 0);
+//            }
+//
+//        });
 
 
 
@@ -89,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         //graphs
-        Button next5 = (Button) findViewById(R.id.button6);
+        Button next5 = (Button) findViewById(R.id.button3);
         next5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), SelectDatesActivity.class);
@@ -99,7 +96,36 @@ public class HomeActivity extends AppCompatActivity {
 
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_log_out:
+                UserData.setCurrentUser(null);
+                Intent myIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivityForResult(myIntent, 0);
+                return true;
+            case R.id.action_profile:
+                //go to profile page
+                return true;
+            case R.id.action_view_users:
+                if (!UserData.getCurrentUser().getIsAdmin()) {
+                    displayErrorMessage("Only admins can view this page!");
+                    return true;
+                }
+                // go to user list
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
     /**
      * method for what happens when view rat data is pressed.
      * if it is the app's first time, the data is read in from csv file and only then
@@ -170,6 +196,24 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // prevent back button from being pressed
+    }
+
+    /**
+     * method to display an error message with an alert dialog
+     * @param error the error message to be displayed
+     */
+    private void displayErrorMessage(String error) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        Log.e("error", "displayErrorMessage: " + error);
+        builder.setTitle("Error")
+                .setMessage(error)
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // co nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
 }
