@@ -84,9 +84,13 @@ public class UserData {
                 && usernamesPasswords.get(user).equals(encryptedPassword)) {
             Admin isAdmin = admins.get(user);
             User isUser = users.get(user);
+
             if (isAdmin != null) {
                 currentUser = isAdmin;
             } else {
+                if (isUser.getIsBanned()) {
+                    return "You have been banned. Please contact an admin for more details.";
+                }
                 currentUser = isUser;
             }
             return null;
@@ -119,7 +123,7 @@ public class UserData {
             currentUser = admin;
             admins.put(user, admin);
         } else {
-            User newUser = new User(user, email, encryptedPassword);
+            User newUser = new User(user, email, encryptedPassword, false);
             currentUser = newUser;
             users.put(user, newUser);
         }
@@ -161,9 +165,17 @@ public class UserData {
                 usernamesPasswords.put(u.getUsername(), u.getPassword());
             }
             //be sure and close the file
-            reader.close();
+            //reader.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException io) {
+                io.printStackTrace();
+            }
         }
         System.out.println("Done loading text file with " + usernamesPasswords.size() + " users");
 
@@ -176,14 +188,19 @@ public class UserData {
      */
     public static boolean saveText(File file) {
         System.out.println("Saving as a text file");
+        PrintWriter pw = null;
         try {
-            PrintWriter pw = new PrintWriter(file);
+            pw = new PrintWriter(file);
             saveAsText(pw);
-            pw.close();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Log.d("UserData", "Error opening the text file for save!");
             return false;
+        } finally {
+            if (pw != null) {
+                pw.close();
+            }
         }
 
         return true;
@@ -206,6 +223,24 @@ public class UserData {
         for (String a : admins.keySet()) {
             admins.get(a).saveAsText(writer);
         }
+    }
+
+    /**
+     * method to get user object from username
+     * @param username name of user looking for
+     * @return user that was found
+     */
+    public static User getUser(String username) {
+        return users.get(username);
+    }
+
+    /**
+     * method to get admin object from username
+     * @param username name of admin looking for
+     * @return admin that was found
+     */
+    public static Admin getAdmin(String username) {
+        return admins.get(username);
     }
 
     /**

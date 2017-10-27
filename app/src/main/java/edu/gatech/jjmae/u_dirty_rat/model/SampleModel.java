@@ -121,9 +121,17 @@ public class SampleModel {
                 items.add(r);
             }
             //be sure and close the file
-            reader.close();
+//            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException io) {
+                io.printStackTrace();
+            }
         }
         System.out.println("Done loading text file with " + items.size() + " rat data items");
 
@@ -131,16 +139,20 @@ public class SampleModel {
 
     public boolean saveText(File file) {
         System.out.println("Saving as a text file");
+        PrintWriter pw = null;
         try {
-            PrintWriter pw = new PrintWriter(file);
+            pw = new PrintWriter(file);
             saveAsText(pw);
-            pw.close();
+            //pw.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Log.d("UserData", "Error opening the text file for save!");
             return false;
+        } finally {
+            if (pw != null) {
+                pw.close();
+            }
         }
-
         return true;
     }
 

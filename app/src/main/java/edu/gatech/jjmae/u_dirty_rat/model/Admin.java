@@ -14,7 +14,7 @@ public class Admin extends AbstractUser {
      *
      */
     public Admin(String username, String password) {
-        super(username, true, null, password);
+        super(username, true, null, password, false);
     }
 
     /**
@@ -25,7 +25,15 @@ public class Admin extends AbstractUser {
      *
      */
     public Admin(String username, String email, String password) {
-        super(username, true, email, password);
+        super(username, true, email, password, false);
+    }
+
+    public void banUser(User user) {
+        user.ban();
+    }
+
+    public void unBanUser(User user) {
+        user.unBan();
     }
 
 }

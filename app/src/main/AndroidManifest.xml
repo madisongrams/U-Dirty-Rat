@@ -77,10 +77,17 @@
         <activity
             android:name=".controller.FacebookActivity"
             android:label="@string/title_activity_facebook"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1933062990348444"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
             android:name="com.facebook.FacebookContentProvider"
-            android:exported="true"/>
+            android:authorities="com.facebook.app.FacebookContentProvider1933062990348444"
+            android:exported="true" />
+
+        <activity
+            android:name=".controller.UserListActivity"
+            android:label="@string/title_activity_user_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

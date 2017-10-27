@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
 
         // When this button (logout) is hit, we should go back to welcome screen.
         // User should also be logged out
@@ -119,6 +119,8 @@ public class HomeActivity extends AppCompatActivity {
                     displayErrorMessage("Only admins can view this page!");
                     return true;
                 }
+                Intent intent = new Intent(getApplicationContext(), UserListActivity.class);
+                startActivityForResult(intent, 0);
                 // go to user list
                 return true;
             default:

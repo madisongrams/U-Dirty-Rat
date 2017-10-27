@@ -21,4 +21,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="facebook_app_id">1933062990348444</string>
     <string name="title_activity_facebook">FacebookActivity</string>
+    <string name="title_activity_user_list">UserListActivity</string>
 </resources>

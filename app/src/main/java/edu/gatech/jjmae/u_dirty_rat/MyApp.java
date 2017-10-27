@@ -46,10 +46,10 @@ public class MyApp extends Application {
 
         Log.i("main", "onCreate fired");
         File file = new File(getApplicationContext().getFilesDir(), "userData.txt");
-        loadText(file, true);
+        loadUserText(file);
 
         File file2 = new File(getApplicationContext().getFilesDir(), "ratData.txt");
-        loadText(file2, false);
+        loadRatDataText(file2);
 
         if (SampleModel.INSTANCE.getItems().size() < 100000) { //when app is used for first time, add csv file to model and save the file
             readCSVFile();
@@ -62,20 +62,14 @@ public class MyApp extends Application {
     /**
      * used to load a text file saved on the phone
      * @param file file being loaded
-     * @param isUserData whether the file is userdata or rat data
      * @return whether or not file loading was successful
      */
-    public boolean loadText(File file, boolean isUserData) {
+    public boolean loadUserText(File file) {
         try {
             //make an input object for reading
 
             BufferedReader reader = new BufferedReader(new FileReader(file));
-            if (isUserData) {
-                UserData.loadFromText(reader);
-            } else {
-               SampleModel.INSTANCE.loadFromText(reader);
-            }
-
+            UserData.loadFromText(reader);
         } catch (FileNotFoundException e) {
             Log.e("MyApp", "Failed to open text file for loading!");
             return false;
@@ -84,6 +78,23 @@ public class MyApp extends Application {
         return true;
     }
 
+    /**
+     * used to load a text file saved on the phone
+     * @param file file being loaded
+     * @return whether or not file loading was successful
+     */
+    public boolean loadRatDataText(File file) {
+        try {
+            //make an input object for reading
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            SampleModel.INSTANCE.loadFromText(reader);
+        } catch (FileNotFoundException e) {
+            Log.e("MyApp", "Failed to open text file for loading!");
+            return false;
+        }
+
+        return true;
+    }
     /**
      * method that reads in the csv file
      * reads in entire csv file and records data into a SampleModel

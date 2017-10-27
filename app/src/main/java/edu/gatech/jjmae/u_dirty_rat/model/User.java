@@ -7,14 +7,13 @@ package edu.gatech.jjmae.u_dirty_rat.model;
 
 public class User extends AbstractUser {
 
-
     /**
      * a constructor for User
      *
      * @param username the username
      */
-    public User(String username, String password) {
-        super(username, false, null, password);
+    public User(String username, String password, boolean isBanned) {
+        super(username, false, null, password, isBanned);
     }
 
     /**
@@ -22,7 +21,15 @@ public class User extends AbstractUser {
      *
      * @param username the username
      */
-    public User(String username, String email, String password) {
-        super(username, false, email, password);
+    public User(String username, String email, String password, boolean isBanned) {
+        super(username, false, email, password, isBanned);
+    }
+
+    protected void ban() {
+        setIsBanned(true);
+    }
+
+    protected void unBan() {
+        setIsBanned(false);
     }
 }
