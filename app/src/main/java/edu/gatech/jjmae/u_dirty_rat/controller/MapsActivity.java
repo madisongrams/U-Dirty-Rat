@@ -1,5 +1,7 @@
 package edu.gatech.jjmae.u_dirty_rat.controller;
 
+import android.content.Context;
+import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -7,15 +9,19 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.jar.Manifest;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
+
+import static com.google.android.gms.maps.UiSettings.*;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -25,6 +31,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setupMap();
         setContentView(R.layout.activity_maps);
         if (rats == null) {
 //            rats = (ArrayList<RatSightingDataItem>) getIntent().getParcelableExtra("rats");
@@ -52,6 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        setupMap();
         createMarkers(rats);
     }
 
@@ -77,7 +85,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .title(Integer.toString(rat.get_ID()))
                     .snippet(date));
         }
+//        mMap.moveCamera(android.Manifest.permission.ACCESS_COARSE_LOCATION);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(ratMarker));
-        mMap.setMinZoomPreference(10);
+        mMap.setMinZoomPreference(5);
+        mMap.setMaxZoomPreference(20);
+    }
+
+    private void setupMap() {
+        UiSettings mUiSettings = mMap.getUiSettings();
+        mUiSettings.setZoomGesturesEnabled(true);
+        mUiSettings.setZoomControlsEnabled(true);
+        mUiSettings.setMyLocationButtonEnabled(true);
     }
 }
