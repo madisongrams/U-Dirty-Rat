@@ -50,11 +50,19 @@ public class SelectDatesActivity extends AppCompatActivity {
 //                        displayErrorMessage("No rat data found between those dates.");
 //                    } else {
 //                         TODO: EDIT THIS WHEN MAP IS READY!
-                        Intent intent = new Intent(getBaseContext(), MapsActivity.class);
-
-                        intent.putExtra("start", startDate);
-                        intent.putExtra("end", endDate);
-                        startActivity(intent);
+                        Bundle bundle = getIntent().getExtras();
+                        if (bundle.getString("activity").equals("maps")) {
+                            Intent intent = new Intent(getBaseContext(), MapsActivity.class);
+                            intent.putExtra("start", startDate);
+                            intent.putExtra("end", endDate);
+                            startActivity(intent);
+                        }
+                        if (bundle.getString("activity").equals("graphs")) {
+                            Intent intent = new Intent(getBaseContext(), GraphActivity.class);
+                            intent.putExtra("start", startDate);
+                            intent.putExtra("end", endDate);
+                            startActivity(intent);
+                    }
                     //}
                 }
             }
