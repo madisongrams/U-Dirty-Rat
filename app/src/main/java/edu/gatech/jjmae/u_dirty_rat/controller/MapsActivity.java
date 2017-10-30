@@ -1,9 +1,12 @@
 package edu.gatech.jjmae.u_dirty_rat.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.LocationManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,7 +34,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setupMap();
         setContentView(R.layout.activity_maps);
         if (rats == null) {
 //            rats = (ArrayList<RatSightingDataItem>) getIntent().getParcelableExtra("rats");
@@ -44,6 +46,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), NewRatSightingActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
     }
 
 

@@ -30,6 +30,7 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
     private String _Borough;
     private double _Latitude;
     private double _Longitude;
+    public int[] ratcounter=new int[12];
 
     /**
      * constructor to create a data item with all necessary fields
@@ -234,5 +235,7 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         dest.writeString(_City);
         dest.writeInt(_ZipCode);
     }
+
+
 }
 
