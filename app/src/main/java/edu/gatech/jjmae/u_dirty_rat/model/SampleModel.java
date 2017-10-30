@@ -102,7 +102,7 @@ public class SampleModel {
     }
 
     public void loadFromText(BufferedReader reader) {
-        System.out.println("Loading Text File");
+        Log.d("SampleModel:", "Loading Text File");
         items.clear();
         try {
             String countStr = reader.readLine();
@@ -133,12 +133,12 @@ public class SampleModel {
                 io.printStackTrace();
             }
         }
-        System.out.println("Done loading text file with " + items.size() + " rat data items");
+        Log.d("SampleModel:", "Done loading text file with " + items.size() + " rat data items");
 
     }
 
     public boolean saveText(File file) {
-        System.out.println("Saving as a text file");
+        Log.d("SampleModel:", "Saving as a text file");
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(file);
@@ -157,7 +157,7 @@ public class SampleModel {
     }
 
     void saveAsText(PrintWriter writer) {
-        System.out.println("SampleModel saving: " + items.size() + " data items");
+        Log.d("SampleModel: ", "saving: " + items.size() + " data items");
         writer.println(items.size());
         // also saving currentID
         writer.println(currentID);

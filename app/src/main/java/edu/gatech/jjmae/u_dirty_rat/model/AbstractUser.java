@@ -62,8 +62,7 @@ public abstract class AbstractUser {
      * @param writer printwriter used to write data to
      */
     public void saveAsText(PrintWriter writer) {
-        System.out.println("Abstract user saving user: " + username);
-        Log.d("AbstractUser", "saving userdata: " + username + "\t" + password + "\t" + String.valueOf(isAdmin) + "\t" + email);
+        //Log.d("AbstractUser", "saving userdata: " + username + "\t" + password + "\t" + String.valueOf(isAdmin) + "\t" + email);
         writer.println(username + "\t" + password + "\t" + String.valueOf(isAdmin) + "\t" + email
         + "\t" + String.valueOf(isBanned));
     }

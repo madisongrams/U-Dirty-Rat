@@ -137,7 +137,7 @@ public class UserData {
      * @param reader  the file to read from
      */
     public static void loadFromText(BufferedReader reader) {
-        System.out.println("Loading Text File");
+        Log.d("UserData:","Loading Text File");
         usernamesPasswords.clear();
         users.clear();
         admins.clear();
@@ -154,7 +154,7 @@ public class UserData {
             //then read in each user to model
             for (int i = 0; i < count; i++) {
                 String line = reader.readLine();
-                Log.d("User Data", "loadFromText: " + line);
+                //Log.d("User Data", "loadFromText: " + line);
                 AbstractUser u = AbstractUser.parseEntry(line);
                 if (u.getIsAdmin()) {
                     admins.put(u.getUsername(), (Admin) u);
@@ -177,7 +177,7 @@ public class UserData {
                 io.printStackTrace();
             }
         }
-        System.out.println("Done loading text file with " + usernamesPasswords.size() + " users");
+        Log.d("UserData:", "Done loading text file with " + usernamesPasswords.size() + " users");
 
     }
 
@@ -187,7 +187,7 @@ public class UserData {
      * @return whether or not saving text was successful
      */
     public static boolean saveText(File file) {
-        System.out.println("Saving as a text file");
+        Log.d("UserData:", "Saving as a text file");
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(file);
@@ -212,7 +212,7 @@ public class UserData {
      * @param writer writer we are writing to
      */
     static void saveAsText(PrintWriter writer) {
-        System.out.println("UserData saving: " + usernamesPasswords.size() + " users" );
+        Log.d("UserData:", "UserData saving: " + usernamesPasswords.size() + " users" );
         writer.println(usernamesPasswords.size());
         // also saving key
         byte[] encoded = key.getEncoded();

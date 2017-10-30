@@ -52,9 +52,10 @@ public class MyApp extends Application {
         loadRatDataText(file2);
 
         if (SampleModel.INSTANCE.getItems().size() < 100000) { //when app is used for first time, add csv file to model and save the file
+            Log.d("MyApp", "onCreate: saving from csv file");
             readCSVFile();
-            File file3 = new File(this.getFilesDir(), "ratData.txt");
-            SampleModel.INSTANCE.saveText(file);
+//            File file3 = new File(this.getFilesDir(), "ratData.txt");
+            SampleModel.INSTANCE.saveText(file2);
         }
 
     }
@@ -67,11 +68,10 @@ public class MyApp extends Application {
     public boolean loadUserText(File file) {
         try {
             //make an input object for reading
-
             BufferedReader reader = new BufferedReader(new FileReader(file));
             UserData.loadFromText(reader);
         } catch (FileNotFoundException e) {
-            Log.e("MyApp", "Failed to open text file for loading!");
+            Log.e("MyApp", "Failed to open user text file for loading!");
             return false;
         }
 
@@ -89,7 +89,7 @@ public class MyApp extends Application {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             SampleModel.INSTANCE.loadFromText(reader);
         } catch (FileNotFoundException e) {
-            Log.e("MyApp", "Failed to open text file for loading!");
+            Log.e("MyApp", "Failed to open rat data text file for loading!");
             return false;
         }
 
