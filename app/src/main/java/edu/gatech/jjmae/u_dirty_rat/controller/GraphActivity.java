@@ -21,6 +21,8 @@ import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
 public class GraphActivity extends AppCompatActivity {
     private ArrayList<RatSightingDataItem> rats;
+    public int[] ratcounter=new int[12];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +57,23 @@ public class GraphActivity extends AppCompatActivity {
 
     private List<Entry> convertDataSetToEntry(ArrayList<RatSightingDataItem> rats) {
        List<Entry> entries = new ArrayList<>();
-
+        int[] usablearray=getTotalArray();
         for (RatSightingDataItem rat : rats) {
             if (rat != null) {
-                entries.add(new Entry(rat.get_Date().getMonth(), 10));
+                entries.add(new Entry(rat.get_Date().getMonth(), usablearray[rat.get_Date().getMonth()]));
             }
         }
 
         return entries;
    }
+   public int[] getTotalArray() {
+        for (RatSightingDataItem rat: rats) {
+            ratcounter[rat.get_Date().getMonth()]++;
+        }
+        return ratcounter;
+
+   }
+
 
 
 
