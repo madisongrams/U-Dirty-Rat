@@ -10,11 +10,14 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
+import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
 public class GraphActivity extends AppCompatActivity {
     private ArrayList<RatSightingDataItem> rats;
@@ -23,7 +26,14 @@ public class GraphActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
- /*       LineChart lineChart = (LineChart) findViewById(R.id.chart);
+        if (rats == null) {
+//            rats = (ArrayList<RatSightingDataItem>) getIntent().getParcelableExtra("rats");
+            Date start = (Date) getIntent().getSerializableExtra("start");
+            Date end = (Date) getIntent().getSerializableExtra("end");
+            rats = SampleModel.INSTANCE.getRatsByDates(start, end);
+
+        }
+        LineChart lineChart = (LineChart) findViewById(R.id.chart);
 
         List<Entry> entries = convertDataSetToEntry(rats);
 
@@ -42,15 +52,21 @@ public class GraphActivity extends AppCompatActivity {
         lineChart.getDescription().setText("Rats per Month");
 
     }
+
     private List<Entry> convertDataSetToEntry(ArrayList<RatSightingDataItem> rats) {
        List<Entry> entries = new ArrayList<>();
 
         for (RatSightingDataItem rat : rats) {
-            entries.add(new Entry(5, 1));
+            if (rat != null) {
+                entries.add(new Entry(rat.get_Date().getMonth(), 10));
+            }
         }
 
         return entries;
- */   }
+   }
+
+
+
 }
 
 
