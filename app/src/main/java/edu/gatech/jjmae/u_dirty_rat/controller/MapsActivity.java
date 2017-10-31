@@ -6,7 +6,9 @@ import android.location.LocationManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
 import static com.google.android.gms.maps.UiSettings.*;
+import static java.security.AccessController.getContext;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -36,7 +40,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         if (rats == null) {
-//            rats = (ArrayList<RatSightingDataItem>) getIntent().getParcelableExtra("rats");
             Date start = (Date) getIntent().getSerializableExtra("start");
             Date end = (Date) getIntent().getSerializableExtra("end");
             rats = SampleModel.INSTANCE.getRatsByDates(start, end);
@@ -47,7 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +98,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .position(ratMarker)
                     .title(Integer.toString(rat.get_ID()))
                     .snippet(date));
+
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    Context context = getApplicationContext();
+                    Intent intent = new Intent(context, RatSightingViewDetailActivity.class);
+                    Log.d("MYAPP", "Switch to detailed view for item: " + marker.getTitle());
+                    intent.putExtra(RatSightingDetailFragment.ARG_ITEM_ID, Integer.parseInt(marker.getTitle()));
+
+                    context.startActivity(intent);
+                }
+            });
         }
 //        mMap.moveCamera(android.Manifest.permission.ACCESS_COARSE_LOCATION);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(ratMarker));
