@@ -21,15 +21,15 @@ import java.util.Iterator;
 
 public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Comparator<RatSightingDataItem>, Parcelable {
 
-    private int _ID;
+    private final int _ID;
     private Date _Date;
-    private String _Location;
-    private int _ZipCode;
-    private String _Address;
-    private String _City;
-    private String _Borough;
-    private double _Latitude;
-    private double _Longitude;
+    private final String _Location;
+    private final int _ZipCode;
+    private final String _Address;
+    private final String _City;
+    private final String _Borough;
+    private final double _Latitude;
+    private final double _Longitude;
     public int[] ratcounter=new int[12];
 
     /**
@@ -83,6 +83,7 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
          * @param in parcel to be read from
          * @return new rat data
          */
+        @Override
         public RatSightingDataItem createFromParcel(Parcel in) {
             return new RatSightingDataItem(in);
         }
@@ -92,6 +93,7 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
          * @param size size of array
          * @return the created array
          */
+        @Override
         public RatSightingDataItem[] newArray(int size) {
             return new RatSightingDataItem[size];
         }

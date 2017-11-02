@@ -22,6 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //Replace HomeActivity class by "new user registration" class
         Button registration = (Button) findViewById(R.id.button);
         registration.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), RegistrationPageActivity.class);
                 startActivityForResult(myIntent, 0);
@@ -33,6 +34,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //Replace HomeActivity class by "existing user" class
         Button login = (Button) findViewById(R.id.button2);
         login.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), ExistingUserLoginActivity.class);
                 startActivityForResult(myIntent, 0);

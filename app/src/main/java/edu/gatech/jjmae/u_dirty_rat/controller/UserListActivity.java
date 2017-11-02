@@ -52,6 +52,7 @@ public class UserListActivity extends AppCompatActivity {
         builder.setMessage("Would you like to ban " + user.getUsername() +"?")
                 .setTitle("Ban User");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 admin.banUser(user);
                 File file = new File(getApplicationContext().getFilesDir(), "userData.txt");
@@ -59,6 +60,7 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
             }
@@ -73,6 +75,7 @@ public class UserListActivity extends AppCompatActivity {
         builder.setMessage("Would you like to unban " + user.getUsername() +"?")
                 .setTitle("Unban User");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 admin.unBanUser(user);
                 File file = new File(getApplicationContext().getFilesDir(), "userData.txt");
@@ -80,6 +83,7 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
             }
@@ -171,7 +175,7 @@ public class UserListActivity extends AppCompatActivity {
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mUsernameView= (TextView) view.findViewById(R.id.username);
+                mUsernameView= view.findViewById(R.id.username);
             }
 
             @Override

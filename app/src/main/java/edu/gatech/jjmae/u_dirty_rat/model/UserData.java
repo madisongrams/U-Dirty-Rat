@@ -23,9 +23,9 @@ import javax.crypto.spec.SecretKeySpec;
 
 //TODO: return specific reasons for login and registration failure
 public class UserData {
-    private static HashMap<String, String> usernamesPasswords = new HashMap<String, String>();
-    private static HashMap<String, User> users = new HashMap<String, User>();
-    private static HashMap<String, Admin> admins = new HashMap<String, Admin>();
+    private static final HashMap<String, String> usernamesPasswords = new HashMap<String, String>();
+    private static final HashMap<String, User> users = new HashMap<String, User>();
+    private static final HashMap<String, Admin> admins = new HashMap<String, Admin>();
 
     private static SecretKey key;
     private static Cipher cipher;

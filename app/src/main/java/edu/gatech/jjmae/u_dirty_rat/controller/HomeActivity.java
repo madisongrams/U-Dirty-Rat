@@ -61,6 +61,7 @@ public class HomeActivity extends AppCompatActivity {
         // When this button (add a rat entry) is hit, ...
         Button next2 = (Button) findViewById(R.id.button8);
         next2.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), NewRatSightingActivity.class);
                 startActivityForResult(myIntent, 0);
@@ -71,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         // When this button (view rat entries) is hit, ...
         Button next3 = (Button) findViewById(R.id.button7);
         next3.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 onLoadButtonPressed(view);
             }
@@ -80,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
         // When this button (select dates activity) is hit, ..
         Button next4 = (Button) findViewById(R.id.button6);
         next4.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), SelectDatesActivity.class);
                 myIntent.putExtra("activity", "maps");
@@ -91,6 +94,7 @@ public class HomeActivity extends AppCompatActivity {
         //graphs
         Button next5 = (Button) findViewById(R.id.button3);
         next5.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), SelectDatesActivity.class);
                 myIntent.putExtra("activity", "graphs");
@@ -213,6 +217,7 @@ public class HomeActivity extends AppCompatActivity {
         builder.setTitle("Error")
                 .setMessage(error)
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // co nothing
                     }

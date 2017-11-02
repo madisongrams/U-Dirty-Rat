@@ -131,8 +131,8 @@ public class RatSightingsListActivity extends AppCompatActivity {
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mDateView = (TextView) view.findViewById(R.id.date);
-            mBoroughView = (TextView) view.findViewById(R.id.borough);
+            mDateView = view.findViewById(R.id.date);
+            mBoroughView = view.findViewById(R.id.borough);
         }
 
 

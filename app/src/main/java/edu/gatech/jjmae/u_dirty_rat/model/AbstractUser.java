@@ -14,7 +14,7 @@ public abstract class AbstractUser {
     private String username;
     private boolean isAdmin;
     private String email;
-    private String password;
+    private final String password;
     private boolean isBanned;
 
     /**

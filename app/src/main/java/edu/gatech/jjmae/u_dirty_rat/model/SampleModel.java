@@ -23,7 +23,7 @@ import static android.content.ContentValues.TAG;
 public class SampleModel {
     public static final SampleModel INSTANCE = new SampleModel();
 
-    private List<RatSightingDataItem> items;
+    private final List<RatSightingDataItem> items;
 //    private List<RatSightingDataItem> csvRats;
 //    private List<RatSightingDataItem> newRats;
     private int currentID = 40000000;

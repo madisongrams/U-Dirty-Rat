@@ -162,6 +162,7 @@ public class RegistrationPageActivity extends AppCompatActivity {
         builder.setTitle("Error")
                 .setMessage(error)
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // co nothing
                     }
