@@ -30,6 +30,9 @@ import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import static com.google.android.gms.maps.UiSettings.*;
 import static java.security.AccessController.getContext;
 
+/**
+ * activity for maps
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

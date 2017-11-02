@@ -18,9 +18,6 @@ import static android.content.ContentValues.TAG;
 
 /**
  * Created by Justin on 10/9/2017.
- */
-
-/**
  * model class to hold a list of rat data
  */
 public class SampleModel {
@@ -102,6 +99,10 @@ public class SampleModel {
         return rats;
     }
 
+    /**
+     * loads in rat data from file in buffered reader
+     * @param reader where we are reading from
+     */
     public void loadFromText(BufferedReader reader) {
         Log.d("SampleModel:", "Loading Text File");
         items.clear();
@@ -138,6 +139,11 @@ public class SampleModel {
 
     }
 
+    /**
+     * save data to file
+     * @param file file data is being saved to
+     * @return true on success, false otherwise
+     */
     public boolean saveText(File file) {
         Log.d("SampleModel:", "Saving as a text file");
         PrintWriter pw = null;

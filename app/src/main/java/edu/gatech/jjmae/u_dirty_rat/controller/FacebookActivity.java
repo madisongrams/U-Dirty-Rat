@@ -9,6 +9,9 @@ import android.view.View;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
 
+/**
+ * Default facebook activity created for use of Facebook api
+ */
 public class FacebookActivity extends AppCompatActivity {
 
     @Override

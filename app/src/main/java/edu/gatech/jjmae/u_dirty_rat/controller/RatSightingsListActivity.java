@@ -22,6 +22,9 @@ import edu.gatech.jjmae.u_dirty_rat.R;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
+/**
+ * displays rat data in a list
+ */
 public class RatSightingsListActivity extends AppCompatActivity {
 
     @Override
@@ -64,6 +67,10 @@ public class RatSightingsListActivity extends AppCompatActivity {
 
         private final List<RatSightingDataItem> mValues;
 
+        /**
+         * constructor to create new recycler view
+         * @param items rat data to be displayed in the list
+         */
         public SampleItemRecyclerViewAdapter(List<RatSightingDataItem> items) {
             mValues = items;
         }
@@ -103,9 +110,6 @@ public class RatSightingsListActivity extends AppCompatActivity {
         }
 
         @Override
-        /**
-         * @return number of rat data items
-         */
         public int getItemCount() {
             return mValues.size();
         }

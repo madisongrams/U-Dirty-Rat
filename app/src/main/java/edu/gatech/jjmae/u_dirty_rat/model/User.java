@@ -8,18 +8,21 @@ package edu.gatech.jjmae.u_dirty_rat.model;
 public class User extends AbstractUser {
 
     /**
-     * a constructor for User
-     *
-     * @param username the username
+     * constructor for user
+     * @param username user's name
+     * @param password user's password
+     * @param isBanned whether or not user is banned
      */
     public User(String username, String password, boolean isBanned) {
         super(username, false, null, password, isBanned);
     }
 
     /**
-     * a two parameter constructor for User
-     *
-     * @param username the username
+     * constructor for user
+     * @param username user's name
+     * @param email user's email
+     * @param password user's password
+     * @param isBanned whether or not user is banned
      */
     public User(String username, String email, String password, boolean isBanned) {
         super(username, false, email, password, isBanned);

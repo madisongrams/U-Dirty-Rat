@@ -28,6 +28,9 @@ import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
 import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
 
+/**
+ * fragment to display detail about rat data
+ */
 public class RatSightingDetailFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment

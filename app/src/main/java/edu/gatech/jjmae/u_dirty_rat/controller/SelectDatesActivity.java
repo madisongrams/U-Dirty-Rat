@@ -24,6 +24,9 @@ import edu.gatech.jjmae.u_dirty_rat.R;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
+/**
+ * activity to select a date range. used for both maps and graphs
+ */
 public class SelectDatesActivity extends AppCompatActivity {
     private EditText startDateText;
     private EditText endDateText;

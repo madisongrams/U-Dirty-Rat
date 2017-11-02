@@ -8,7 +8,9 @@ import android.content.Intent;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
 
-
+/**
+ * welcome screen. first screen shown on startup
+ */
 public class WelcomeActivity extends AppCompatActivity {
 
     @Override

@@ -22,7 +22,9 @@ public abstract class AbstractUser {
      *
      * @param username the username
      * @param isAdmin the administrator identifier
-     *
+     * @param email user's email
+     * @param password user's password
+     * @param isBanned whether or not user is banned
      */
     public AbstractUser(String username, boolean isAdmin, String email, String password, boolean isBanned) {
         this.username = username;
@@ -134,9 +136,14 @@ public abstract class AbstractUser {
         return password;
     }
 
+    /**
+     * its a getter
+     * @return whether or not user is banned
+     */
     public boolean getIsBanned() {
         return isBanned;
     }
+
     protected void setIsBanned(boolean isBanned) {
         this.isBanned = isBanned;
     }

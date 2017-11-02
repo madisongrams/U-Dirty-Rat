@@ -29,6 +29,9 @@ import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
+/**
+ * activity for the homescreen. multiple navigation buttons and a drop down menu
+ */
 public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";

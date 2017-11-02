@@ -30,6 +30,9 @@ import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.model.User;
 import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
+/**
+ * displays list of users
+ */
 public class UserListActivity extends AppCompatActivity {
 
     @Override
@@ -104,6 +107,10 @@ public class UserListActivity extends AppCompatActivity {
 
         private final List<String> mValues;
 
+        /**
+         * constructor for recycler view
+         * @param items create recycler view from this list of usernames
+         */
         public SampleItemRecyclerViewAdapter(List<String> items) {
             mValues = items;
         }
@@ -144,9 +151,6 @@ public class UserListActivity extends AppCompatActivity {
         }
 
         @Override
-        /**
-         * @return number of rat data items
-         */
         public int getItemCount() {
             return mValues.size();
         }

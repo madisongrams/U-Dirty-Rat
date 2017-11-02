@@ -19,11 +19,9 @@ import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
-/**
- * Created by Madison on 10/22/2017.
- */
 
 /**
+ * Created by Madison on 10/22/2017.
  * A custom Application class which is used on app start up to do some backend setup before app runs
  */
 public class MyApp extends Application {
