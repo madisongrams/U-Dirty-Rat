@@ -225,6 +225,21 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         return 0;
     }
 
+    /**
+     * Returns a modified date used for viewing purposes
+     * @return String version of the date
+     */
+    public String getModifiedDate() {
+        String date = "";
+        date = this._Date.toString();
+            try {
+                date = date.substring(0, 10) + " " + date.substring(30, 34);
+            } catch (IndexOutOfBoundsException e) {
+                date = date.substring(0, 10) + " " + date.substring(24, 28);
+            }
+            return date;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_Address);
