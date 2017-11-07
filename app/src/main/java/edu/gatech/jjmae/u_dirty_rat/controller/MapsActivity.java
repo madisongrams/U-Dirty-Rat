@@ -1,10 +1,14 @@
 package edu.gatech.jjmae.u_dirty_rat.controller;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.test.mock.MockPackageManager;
 import android.util.Log;
 import android.view.View;
 
@@ -24,16 +28,26 @@ import edu.gatech.jjmae.u_dirty_rat.R;
 import edu.gatech.jjmae.u_dirty_rat.model.RatClusterItem;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
+import edu.gatech.jjmae.u_dirty_rat.services.GPSTracker;
+
 
 /**
  * activity for maps
  */
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ArrayList<RatSightingDataItem> rats;
     private ClusterManager<RatClusterItem> mClusterManager;
     private LatLng initialView;
+    private boolean mapsReady;
+
+    String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
+
+    //     GPSTracker class
+    GPSTracker gps;
+    private static final int REQUEST_CODE_PERMISSION = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +57,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Date start = (Date) getIntent().getSerializableExtra("start");
             Date end = (Date) getIntent().getSerializableExtra("end");
             rats = SampleModel.INSTANCE.getRatsByDates(start, end);
-            initialView = new LatLng(rats.get(0).get_Latitude(), rats.get(0).get_Longitude());
         }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        try {
+            if (ActivityCompat.checkSelfPermission(this, mPermission)
+                    != MockPackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this, new String[]{mPermission},
+                        REQUEST_CODE_PERMISSION);
+
+                // If any permission above not allowed by user, this condition will
+//                execute every time, else your else part will work
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        gps = new GPSTracker(MapsActivity.this);
+
+        // check if GPS enabled
+        if (gps.canGetLocation()) {
+            mapsReady = true;
+            initialView = new LatLng(gps.getLatitude(), gps.getLongitude());
+            Log.d("Initial location = ", String.valueOf(initialView));
+        } else {
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +99,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivityForResult(myIntent, 0);
             }
         });
+
+
     }
 
 
@@ -70,11 +113,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         setupMap();
         setUpClusterer();
+        mMap.setMyLocationEnabled(true);
+
+        if (mapsReady) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialView, 6));
+        } else {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(rats.get(500).get_Latitude(),
+                    rats.get(500).get_Longitude()), 6));
+        }
     }
 
     private void setUpClusterer() {
@@ -109,9 +161,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 context.startActivity(intent);
             }
         });
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialView, 8));
     }
-
     /**
      * this private method sets up the map for a better UX
      */
@@ -122,3 +172,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mUiSettings.setMyLocationButtonEnabled(true);
     }
 }
+

@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
 /**
- * Created by jpaul on 11/3/17.
+ * Created by jpaul on 11/7/17.
  */
 
 public class RatClusterItem implements ClusterItem {

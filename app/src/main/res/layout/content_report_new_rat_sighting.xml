@@ -7,27 +7,27 @@
     tools:context="edu.gatech.jjmae.u_dirty_rat.controller.NewRatSightingActivity">
 
     <EditText
-        android:id="@+id/editlatitude"
+        android:id="@+id/editlongitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginStart="3dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/latitude"
+        app:layout_constraintBaseline_toBaselineOf="@+id/longitude"
         tools:layout_constraintBaseline_creator="1"
         android:inputType="numberSigned"
-        app:layout_constraintLeft_toRightOf="@+id/latitude" />
+        app:layout_constraintLeft_toRightOf="@+id/longitude" />
 
     <EditText
-        android:id="@+id/editlongitude"
+        android:id="@+id/editlatitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberSigned"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/longitude"
-        app:layout_constraintLeft_toRightOf="@+id/longitude"
+        app:layout_constraintBottom_toBottomOf="@+id/latitude"
+        app:layout_constraintLeft_toRightOf="@+id/latitude"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="-33dp" />
 
@@ -53,20 +53,20 @@
         android:hint="Rattington"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/editlongitude"
+        app:layout_constraintBottom_toTopOf="@+id/editlatitude"
         android:layout_marginEnd="25dp"
         app:layout_constraintRight_toRightOf="@+id/editlongitude"
         android:layout_marginBottom="0dp"
         android:layout_marginRight="44dp" />
 
     <TextView
-        android:id="@+id/latitude"
+        android:id="@+id/longitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="407dp"
-        android:text="Latitude:"
+        android:text="Longitude:"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -75,13 +75,13 @@
         tools:layout_constraintTop_creator="1" />
 
     <TextView
-        android:id="@+id/longitude"
+        android:id="@+id/latitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="361dp"
-        android:text="Longitude:"
+        android:text="Latitude:"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"

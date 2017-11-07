@@ -252,7 +252,5 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         dest.writeString(_City);
         dest.writeInt(_ZipCode);
     }
-
-
 }
 
