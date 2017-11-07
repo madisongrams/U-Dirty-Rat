@@ -24,6 +24,9 @@ import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.services.GPSTracker;
 
+/**
+ * activty screen for reporting a new rat sighting
+ */
 public class NewRatSightingActivity extends AppCompatActivity {
     private EditText mEditDate;
     private EditText mEditLocation;
@@ -74,17 +77,15 @@ public class NewRatSightingActivity extends AppCompatActivity {
 
         // check if GPS enabled
         if(gps.canGetLocation()){
-            mCurrLatitude = gps.getLatitude();
-            mCurrLatitude = gps.getLongitude();
-//            EditText lat = (EditText)findViewById(R.id.editlatitude);
-            mEditLatitude.setText((int) mCurrLatitude);
-//            EditText lon = (EditText)findViewById(R.id.editlongitude);
-            mEditLongitude.setText((int) mCurrLongitude);
+            mEditLatitude.setText(String.valueOf(gps.getLatitude()));
+            mEditLongitude.setText(String.valueOf(gps.getLongitude()));
+
         } else {
             // can't get location
             // GPS or Network is not enabled
             // Ask user to enable GPS/network in settings
             gps.showSettingsAlert();
+
         }
 
 
@@ -215,6 +216,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
         builder.setTitle("Error")
                 .setMessage(error)
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // co nothing
                     }
@@ -224,3 +226,4 @@ public class NewRatSightingActivity extends AppCompatActivity {
     }
 
 }
+

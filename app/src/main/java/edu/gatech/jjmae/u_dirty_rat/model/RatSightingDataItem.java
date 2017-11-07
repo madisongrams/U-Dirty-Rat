@@ -236,6 +236,19 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         dest.writeInt(_ZipCode);
     }
 
+    public String getModifiedDate() {
+//        String date = "";
+        String date = this.get_Date().toString();
+        // the date string sometimes shows up as GMT which adds extra characters so taking that
+        // into account here
+        try {
+            date = (date.substring(0, 10) + " " + date.substring(30, 34));
+        } catch (IndexOutOfBoundsException e) {
+            date = (date.substring(0, 10) + " " + date.substring(24, 28));
+        }
+        return date;
+    }
+
 
 }
 
