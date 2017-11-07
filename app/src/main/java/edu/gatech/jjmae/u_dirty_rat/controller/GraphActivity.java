@@ -57,10 +57,10 @@ public class GraphActivity extends AppCompatActivity {
 
     private List<Entry> convertDataSetToEntry(ArrayList<RatSightingDataItem> rats) {
        List<Entry> entries = new ArrayList<>();
-        int[] usablearray=getTotalArray();
+        int[] usablearray = getTotalArray();
         for (RatSightingDataItem rat : rats) {
             if (rat != null) {
-                entries.add(new Entry(rat.get_Date().getMonth(), usablearray[rat.get_Date().getMonth()]));
+                entries.add(new Entry(rat.get_Date().getMonth() + 1, usablearray[rat.get_Date().getMonth()]));
             }
         }
 
