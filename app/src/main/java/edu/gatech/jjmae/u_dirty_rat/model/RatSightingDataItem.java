@@ -2,18 +2,12 @@ package edu.gatech.jjmae.u_dirty_rat.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import java.io.PrintWriter;
-import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 
 /**
  * Created by Justin on 10/9/2017.
