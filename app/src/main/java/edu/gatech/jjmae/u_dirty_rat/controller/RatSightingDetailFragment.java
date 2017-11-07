@@ -28,6 +28,9 @@ import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
 import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
 
+/**
+ * fragment to display detail about rat data
+ */
 public class RatSightingDetailFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment
@@ -60,7 +63,7 @@ public class RatSightingDetailFragment extends Fragment {
             Log.d("MYAPP", "Start details for: " + item_id);
             mItem = SampleModel.INSTANCE.findItemById(item_id);
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.get_Borough());
             }
@@ -90,7 +93,7 @@ public class RatSightingDetailFragment extends Fragment {
 //            ((TextView) rootView.findViewById(R.id.latitude)).setText("" + mItem.get_Latitude());
 //            ((TextView) rootView.findViewById(R.id.longitude)).setText("" + mItem.get_Longitude());
 
-            shareButton = (ShareButton) rootView.findViewById(R.id.share_btn);
+            shareButton = rootView.findViewById(R.id.share_btn);
             ShareLinkContent content = new ShareLinkContent.Builder()
                     .setContentUrl(Uri.parse("https://developers.facebook.com")) //TODO: change this url
                     .setQuote("Dirty Rat Spotted in " + mItem.get_City() + "!!")
@@ -101,6 +104,7 @@ public class RatSightingDetailFragment extends Fragment {
                     .build();
             shareButton.setShareContent(content);
             shareButton.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View view) {
                     Log.d("RatDetailFragment", "onClick: share button pressed");
 //                    postRat();

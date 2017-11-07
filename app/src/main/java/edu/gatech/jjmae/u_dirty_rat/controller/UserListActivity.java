@@ -30,6 +30,9 @@ import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.model.User;
 import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
+/**
+ * displays list of users
+ */
 public class UserListActivity extends AppCompatActivity {
 
     @Override
@@ -49,6 +52,7 @@ public class UserListActivity extends AppCompatActivity {
         builder.setMessage("Would you like to ban " + user.getUsername() +"?")
                 .setTitle("Ban User");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 admin.banUser(user);
                 File file = new File(getApplicationContext().getFilesDir(), "userData.txt");
@@ -56,6 +60,7 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
             }
@@ -70,6 +75,7 @@ public class UserListActivity extends AppCompatActivity {
         builder.setMessage("Would you like to unban " + user.getUsername() +"?")
                 .setTitle("Unban User");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 admin.unBanUser(user);
                 File file = new File(getApplicationContext().getFilesDir(), "userData.txt");
@@ -77,6 +83,7 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
             }
@@ -104,6 +111,10 @@ public class UserListActivity extends AppCompatActivity {
 
         private final List<String> mValues;
 
+        /**
+         * constructor for recycler view
+         * @param items create recycler view from this list of usernames
+         */
         public SampleItemRecyclerViewAdapter(List<String> items) {
             mValues = items;
         }
@@ -144,9 +155,6 @@ public class UserListActivity extends AppCompatActivity {
         }
 
         @Override
-        /**
-         * @return number of rat data items
-         */
         public int getItemCount() {
             return mValues.size();
         }
@@ -167,7 +175,7 @@ public class UserListActivity extends AppCompatActivity {
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mUsernameView= (TextView) view.findViewById(R.id.username);
+                mUsernameView= view.findViewById(R.id.username);
             }
 
             @Override

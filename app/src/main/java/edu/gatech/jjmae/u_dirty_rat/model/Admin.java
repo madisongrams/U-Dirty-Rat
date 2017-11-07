@@ -11,6 +11,7 @@ public class Admin extends AbstractUser {
      * a constructor for Admin
      *
      * @param username the username
+     * @param password the user's password
      *
      */
     public Admin(String username, String password) {

@@ -49,7 +49,7 @@ public class GraphActivity extends AppCompatActivity {
         dataset.setDrawFilled(true);
 
         lineChart.setData(data);
-        //lineChart.animateY(5000);
+        lineChart.animateY(5000);
 
         lineChart.getDescription().setText("Rats per Month");
 

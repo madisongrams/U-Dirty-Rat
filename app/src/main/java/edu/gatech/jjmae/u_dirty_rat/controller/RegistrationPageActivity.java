@@ -20,6 +20,9 @@ import android.widget.ArrayAdapter;
 import edu.gatech.jjmae.u_dirty_rat.R;
 import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
+/**
+ * user registration page
+ */
 public class RegistrationPageActivity extends AppCompatActivity {
 
     private Spinner spinner;
@@ -159,6 +162,7 @@ public class RegistrationPageActivity extends AppCompatActivity {
         builder.setTitle("Error")
                 .setMessage(error)
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // co nothing
                     }

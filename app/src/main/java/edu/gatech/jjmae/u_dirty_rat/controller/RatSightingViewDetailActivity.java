@@ -8,6 +8,9 @@ import android.view.MenuItem;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
 
+/**
+ * holder for rat data details
+ */
 public class RatSightingViewDetailActivity extends AppCompatActivity {
 
     @Override
