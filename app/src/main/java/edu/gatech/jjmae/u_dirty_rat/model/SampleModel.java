@@ -53,31 +53,13 @@ public class SampleModel {
     }
 
     /**
-     * Searches through the ratItems to find one matching the specified ID (Must be a valid ID)
-     *
+     * search method to find items
      * @param id id of item to be found
      * @return item found or null if id not in list
      */
     public RatSightingDataItem findItemById(int id) {
-        /**
-         * @pre id != 0 && id > 300000000
-         */
-        if (id == 0 || id < 300000000) throw new AssertionError();
-
-        /**
-         * @pre items != null
-         * @pre items is unchanged
-         * @post d in items != null
-         */
-        assert (items != null);
-
         for (RatSightingDataItem d : items) {
-            if (d.get_ID() == id) {
-                /**
-                 * @post return != null
-                 */
-                return d;
-            }
+            if (d.get_ID() == id) return d;
         }
         Log.d("MYAPP", "Warning - Failed to find id: " + id);
         return null;
