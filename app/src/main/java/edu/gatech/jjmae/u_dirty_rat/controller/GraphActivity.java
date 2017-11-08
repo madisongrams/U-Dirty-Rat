@@ -21,7 +21,8 @@ import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
 public class GraphActivity extends AppCompatActivity {
     private ArrayList<RatSightingDataItem> rats;
-    public int[] ratcounter=new int[12];
+    public int[] ratcounter;
+    int index;
 
 
     @Override
@@ -33,7 +34,11 @@ public class GraphActivity extends AppCompatActivity {
             Date start = (Date) getIntent().getSerializableExtra("start");
             Date end = (Date) getIntent().getSerializableExtra("end");
             rats = SampleModel.INSTANCE.getRatsByDates(start, end);
-
+            int startYear = start.getYear();
+            int endYear = end.getYear();
+            int startMonth = start.getMonth();
+            int endMonth = end.getMonth();
+            ratcounter = new int[((endMonth-startMonth) + ((endYear-startYear)*12)) + 1];
         }
         LineChart lineChart = (LineChart) findViewById(R.id.chart);
 
@@ -60,23 +65,36 @@ public class GraphActivity extends AppCompatActivity {
         int[] usablearray = getTotalArray();
         for (RatSightingDataItem rat : rats) {
             if (rat != null) {
-                entries.add(new Entry(rat.get_Date().getMonth() + 1, usablearray[rat.get_Date().getMonth()]));
+                entries.add(new Entry(rat.get_Date().getMonth() + index, usablearray[rat.get_Date().getMonth()]));
+            } else {
+                entries.add(new Entry(rat.get_Date().getMonth(), 0));
             }
         }
-
         return entries;
-   }
-   public int[] getTotalArray() {
-        for (RatSightingDataItem rat: rats) {
-            ratcounter[rat.get_Date().getMonth()]++;
+    }
+    public int[] getTotalArray() {
+        for (RatSightingDataItem rat : rats) {
+            int difference = rat.get_Date().getYear() - rats.get(0).get_Date().getYear();
+            if (rat.get_Date() != null) {
+            //    if (rat.get_Date().getYear() == rats.get(0).get_Date().getYear()) ;
+                    index = difference * 12;
+                    ratcounter[rat.get_Date().getMonth() + index]++;
+            }
         }
         return ratcounter;
+    }
 
-   }
+////        for (int i: ratcounter) {
+//            for (RatSightingDataItem rat: rats) {
+//                if (i+1 == rat.get_Date().getMonth()) {
+//                    ratcounter[i]++;
+//                }
+//            }
+////        }
+//               return ratcounter;
 
-
-
-
-}
+           }
+//       }
+//   }
 
 
