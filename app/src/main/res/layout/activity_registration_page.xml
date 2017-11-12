@@ -140,6 +140,7 @@
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="182dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText4" />
+        app:layout_constraintTop_toTopOf="@+id/editText4"
+        android:background="@color/light_grey"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -30,12 +30,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.WelcomeActivity"/>
-        <activity android:name=".controller.RegistrationPageActivity" />
+        <activity
+            android:name=".controller.WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controller.RegistrationPageActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".controller.ExistingUserLoginActivity"
             android:label="@string/title_activity_existing_user_login"
-            android:parentActivityName=".controller.WelcomeActivity">
+            android:parentActivityName=".controller.WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.gatech.jjmae.u_dirty_rat.controller.WelcomeActivity" />

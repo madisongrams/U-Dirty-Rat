@@ -33,7 +33,7 @@ public class RegistrationPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.AppTheme);
+//        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_registration_page);
         spinner = (Spinner) findViewById(R.id.spinner);
         newUsernameView = (EditText) findViewById(R.id.editText);

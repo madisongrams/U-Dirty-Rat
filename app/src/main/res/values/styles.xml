@@ -1,6 +1,7 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
 
     <color name="white_opaque">#FFFFFFFF</color>
+    <color name="light_grey">#fffafafa</color>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -16,7 +17,7 @@
     </style>
     
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">@drawable/ratchasetext</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

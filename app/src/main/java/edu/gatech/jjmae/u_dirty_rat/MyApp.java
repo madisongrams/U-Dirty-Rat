@@ -42,19 +42,19 @@ public class MyApp extends Application {
         // this method fires once as well as constructor
         // but also application has context here
 
-        Log.i("main", "onCreate fired");
-        File file = new File(getApplicationContext().getFilesDir(), "userData.txt");
-        loadUserText(file);
-
-        File file2 = new File(getApplicationContext().getFilesDir(), "ratData.txt");
-        loadRatDataText(file2);
-
-        if (SampleModel.INSTANCE.getItems().size() < 100000) { //when app is used for first time, add csv file to model and save the file
-            Log.d("MyApp", "onCreate: saving from csv file");
-            readCSVFile();
-//            File file3 = new File(this.getFilesDir(), "ratData.txt");
-            SampleModel.INSTANCE.saveText(file2);
-        }
+//        Log.i("main", "onCreate fired");
+//        File file = new File(getApplicationContext().getFilesDir(), "userData.txt");
+//        loadUserText(file);
+//
+//        File file2 = new File(getApplicationContext().getFilesDir(), "ratData.txt");
+//        loadRatDataText(file2);
+//
+//        if (SampleModel.INSTANCE.getItems().size() < 100000) { //when app is used for first time, add csv file to model and save the file
+//            Log.d("MyApp", "onCreate: saving from csv file");
+//            readCSVFile();
+////            File file3 = new File(this.getFilesDir(), "ratData.txt");
+//            SampleModel.INSTANCE.saveText(file2);
+//        }
 
     }
 
@@ -97,7 +97,7 @@ public class MyApp extends Application {
      * method that reads in the csv file
      * reads in entire csv file and records data into a SampleModel
      */
-    private void readCSVFile() {
+    public void readCSVFile() {
         SampleModel model = SampleModel.INSTANCE;
 
         try {

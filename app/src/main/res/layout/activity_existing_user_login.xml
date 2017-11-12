@@ -94,7 +94,8 @@
                 android:layout_weight="684.08"
                 android:text="@string/login"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:background="@color/light_grey"/>
 
         </LinearLayout>
     </ScrollView>

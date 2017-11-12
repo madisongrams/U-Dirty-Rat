@@ -16,12 +16,12 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.AppTheme);
+//        setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_welcome);
 
         //When this button is hit, new user registration page should be displayed
         //Replace HomeActivity class by "new user registration" class
-        Button registration = (Button) findViewById(R.id.button);
+        Button registration = (Button) findViewById(R.id.registerButton);
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // When this button is hit, existing user page should be displayed.
         //Replace HomeActivity class by "existing user" class
-        Button login = (Button) findViewById(R.id.button2);
+        Button login = (Button) findViewById(R.id.loginButton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
