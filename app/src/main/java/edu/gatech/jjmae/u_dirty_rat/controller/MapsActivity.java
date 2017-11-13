@@ -43,10 +43,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng initialView;
     private boolean mapsReady;
 
-    String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
-
-    //     GPSTracker class
-    GPSTracker gps;
     private static final int REQUEST_CODE_PERMISSION = 2;
 
     @Override
@@ -64,6 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         try {
+            String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
             if (ActivityCompat.checkSelfPermission(this, mPermission)
                     != MockPackageManager.PERMISSION_GRANTED) {
 
@@ -77,7 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
 
-        gps = new GPSTracker(MapsActivity.this);
+        GPSTracker gps = new GPSTracker(MapsActivity.this);
 
         // check if GPS enabled
         if (gps.canGetLocation()) {
@@ -155,7 +152,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onInfoWindowClick(Marker marker) {
                 Context context = getApplicationContext();
                 Intent intent = new Intent(context, RatSightingViewDetailActivity.class);
-                Log.d("MYAPP", "Switch to detailed view for item: " + marker.getTitle());
+                Log.d("MY APP", "Switch to detailed view for item: " + marker.getTitle());
                 intent.putExtra(RatSightingDetailFragment.ARG_ITEM_ID, Integer.parseInt(marker.getTitle()));
 
                 context.startActivity(intent);

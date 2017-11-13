@@ -3,8 +3,6 @@ package edu.gatech.jjmae.u_dirty_rat.controller;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,13 +14,10 @@ import android.widget.EditText;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
-import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
-import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
 /**
  * activity to select a date range. used for both maps and graphs
@@ -52,15 +47,18 @@ public class SelectDatesActivity extends AppCompatActivity {
 //                    if (rats.size() < 1) {
 //                        displayErrorMessage("No rat data found between those dates.");
 //                    } else {
-//                         TODO: EDIT THIS WHEN MAP IS READY!
+
                         Bundle bundle = getIntent().getExtras();
-                        if (bundle.getString("activity").equals("maps")) {
+                        if (bundle == null) {
+                            return;
+                        }
+                        if (("maps").equals(bundle.getString("activity"))) {
                             Intent intent = new Intent(getBaseContext(), MapsActivity.class);
                             intent.putExtra("start", startDate);
                             intent.putExtra("end", endDate);
                             startActivity(intent);
                         }
-                        if (bundle.getString("activity").equals("graphs")) {
+                        if ("graphs".equals(bundle.getString("activity"))) {
                             Intent intent = new Intent(getBaseContext(), GraphActivity.class);
                             intent.putExtra("start", startDate);
                             intent.putExtra("end", endDate);
@@ -95,7 +93,7 @@ public class SelectDatesActivity extends AppCompatActivity {
             } catch (ParseException e) {
             }
         } else {
-            if (!isValidDate(start)) {
+            if (isNotValidDate(start)) {
                 displayErrorMessage("Date must be in format MM/DD/YYYY");
                 return false;
             }
@@ -110,7 +108,7 @@ public class SelectDatesActivity extends AppCompatActivity {
         if (end.length() < 1) {
             endDate = today;
         } else {
-            if (!isValidDate(end)) {
+            if (isNotValidDate(end)) {
                 displayErrorMessage("Date must be in format MM/DD/YYYY");
                 return false;
             }
@@ -141,9 +139,9 @@ public class SelectDatesActivity extends AppCompatActivity {
      * @param date date string to be checked
      * @return whether or not date is valid
      */
-    private boolean isValidDate(String date) {
+    private boolean isNotValidDate(String date) {
         String regex =  "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
-        return date.matches(regex);
+        return !date.matches(regex);
     }
 
     /**

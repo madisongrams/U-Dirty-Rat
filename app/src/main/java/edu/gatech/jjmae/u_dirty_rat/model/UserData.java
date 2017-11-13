@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.KeyStore;
 import java.util.HashMap;
 
 import javax.crypto.Cipher;
@@ -80,8 +79,7 @@ public class UserData {
         if (encryptedPassword == null) {
             return "There was an issue on our end! Please try logging in again.";
         }
-        if (!(user == null) && !(password == null) && usernamesPasswords.containsKey(user)
-                && usernamesPasswords.get(user).equals(encryptedPassword)) {
+        if (!(password == null) && usernamesPasswords.containsKey(user) && usernamesPasswords.get(user).equals(encryptedPassword)) {
             Admin isAdmin = admins.get(user);
             User isUser = users.get(user);
 
@@ -184,9 +182,8 @@ public class UserData {
     /**
      * static method used to save data as text file
      * @param file file we are writing to
-     * @return whether or not saving text was successful
      */
-    public static boolean saveText(File file) {
+    public static void saveText(File file) {
         Log.d("UserData:", "Saving as a text file");
         PrintWriter pw = null;
         try {
@@ -196,22 +193,20 @@ public class UserData {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Log.d("UserData", "Error opening the text file for save!");
-            return false;
         } finally {
             if (pw != null) {
                 pw.close();
             }
         }
 
-        return true;
     }
 
     /**
-     * used to save data as a text file given a printwriter
+     * used to save data as a text file given a print writer
      * saves the number of users, the secret key and every user's data
      * @param writer writer we are writing to
      */
-    static void saveAsText(PrintWriter writer) {
+    private static void saveAsText(PrintWriter writer) {
         Log.d("UserData:", "UserData saving: " + usernamesPasswords.size() + " users" );
         writer.println(usernamesPasswords.size());
         // also saving key
@@ -246,7 +241,7 @@ public class UserData {
     /**
      * sets up private key first time around
      * new key should only be created if nothing has yet been written into memory
-     * (key endcoding is saved to a text file for later use)
+     * (key encoding is saved to a text file for later use)
      * @return success or failure of key creation
      */
     private static boolean setUpKey() {

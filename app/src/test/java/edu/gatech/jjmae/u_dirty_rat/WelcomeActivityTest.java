@@ -2,8 +2,6 @@ package edu.gatech.jjmae.u_dirty_rat;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by jackle91 on 9/21/17.
  */

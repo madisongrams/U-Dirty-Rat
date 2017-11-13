@@ -61,19 +61,17 @@ public class MyApp extends Application {
     /**
      * used to load a text file saved on the phone
      * @param file file being loaded
-     * @return whether or not file loading was successful
+     *
      */
-    public boolean loadUserText(File file) {
+    public void loadUserText(File file) {
         try {
             //make an input object for reading
             BufferedReader reader = new BufferedReader(new FileReader(file));
             UserData.loadFromText(reader);
         } catch (FileNotFoundException e) {
             Log.e("MyApp", "Failed to open user text file for loading!");
-            return false;
         }
 
-        return true;
     }
 
     /**
@@ -81,17 +79,15 @@ public class MyApp extends Application {
      * @param file file being loaded
      * @return whether or not file loading was successful
      */
-    public boolean loadRatDataText(File file) {
+    public void loadRatDataText(File file) {
         try {
             //make an input object for reading
             BufferedReader reader = new BufferedReader(new FileReader(file));
             SampleModel.INSTANCE.loadFromText(reader);
         } catch (FileNotFoundException e) {
             Log.e("MyApp", "Failed to open rat data text file for loading!");
-            return false;
         }
 
-        return true;
     }
     /**
      * method that reads in the csv file
@@ -114,10 +110,12 @@ public class MyApp extends Application {
                 try {
                     id = Integer.parseInt(tokens[0]);
                 } catch (Exception e) {
+                    id = 0;
                 }
                 try {
                     zip = Integer.parseInt(tokens[8]);
                 } catch (Exception e) {
+                    zip = 0;
                 }
                 double latitude =  0.0;
                 double longitude = 0.0;
@@ -125,6 +123,8 @@ public class MyApp extends Application {
                     latitude = Double.parseDouble(tokens[49]);
                     longitude = Double.parseDouble(tokens[50]);
                 } catch (IndexOutOfBoundsException e) {
+                    latitude = 0.0;
+                    longitude = 0.0;
 
                 }
                 Date entryDate = new Date(1969, 12, 31);
@@ -135,7 +135,7 @@ public class MyApp extends Application {
 
                 }
 
-                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude), false);
+                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude));
             }
             br.close();
         } catch (IOException e) {

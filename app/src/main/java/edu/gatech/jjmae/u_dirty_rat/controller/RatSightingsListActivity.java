@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,7 +49,7 @@ public class RatSightingsListActivity extends AppCompatActivity {
 
     /**
      * sets up the recycler view
-     * @param recyclerView returns the recyclerview that's set up
+     * @param recyclerView returns the recycler view that's set up
      */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         List<RatSightingDataItem> items = SampleModel.INSTANCE.getItems();
@@ -125,7 +124,7 @@ public class RatSightingsListActivity extends AppCompatActivity {
 
             /**
              * constructor that takes in a view for the view holder
-             * @param view view used for viewholder
+             * @param view view used for view holder
              */
 
         public ViewHolder(View view) {

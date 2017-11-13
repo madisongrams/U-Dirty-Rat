@@ -5,10 +5,11 @@ import com.google.maps.android.clustering.ClusterItem;
 
 /**
  * Created by jpaul on 11/7/17.
+ * clusters rat sightings
  */
 
 public class RatClusterItem implements ClusterItem {
-    private LatLng mPosition;
+    private final LatLng mPosition;
     private String mTitle;
     private String mSnippet;
 
