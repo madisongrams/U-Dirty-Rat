@@ -75,7 +75,7 @@ public class GraphActivity extends AppCompatActivity {
 
     }
 
-//    public int[] getTotalArray() {
+    //    public int[] getTotalArray() {
 //        for (RatSightingDataItem rat : rats) {
 //            int difference = rat.get_Date().getYear() - rats.get(0).get_Date().getYear();
 //            if (difference != 0) {
@@ -101,5 +101,4 @@ public class GraphActivity extends AppCompatActivity {
 //        return entries;
 //    }
 }
-
 
