@@ -24,16 +24,29 @@ public class RatClusterItem implements ClusterItem {
 
     @Override
     public LatLng getPosition() {
-        return mPosition;
+        if (mPosition == null) {
+            return new LatLng(0.0,0.0);
+        } else {
+            return mPosition;
+        }
     }
 
     @Override
     public String getTitle() {
-        return mTitle;
+        if (mTitle == null) {
+            return "";
+        } else {
+            return mTitle;
+        }
     }
 
     @Override
     public String getSnippet() {
-        return mSnippet;
+        if (mSnippet == null) {
+            return "";
+        } else {
+            return mSnippet;
+        }
     }
+
 }
