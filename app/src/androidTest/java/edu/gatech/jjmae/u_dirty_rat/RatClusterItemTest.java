@@ -72,8 +72,6 @@ public class RatClusterItemTest {
         testRats.add(new RatClusterItem(100, -100));
         assertEquals("", testRats.get(1).getTitle());
 
-        assert
-
     }
 
     @Test(timeout =  TIMEOUT)
