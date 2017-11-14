@@ -43,7 +43,8 @@ public class SelectDatesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (areDatesValid()) {
-//                    ArrayList<RatSightingDataItem> rats = SampleModel.INSTANCE.getRatsByDates(startDate, endDate);
+//                    ArrayList<RatSightingDataItem> rats = SampleModel.INSTANCE.
+// getRatsByDates(startDate, endDate);
 //                    if (rats.size() < 1) {
 //                        displayErrorMessage("No rat data found between those dates.");
 //                    } else {

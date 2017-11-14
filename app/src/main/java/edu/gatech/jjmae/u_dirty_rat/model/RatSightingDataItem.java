@@ -15,7 +15,8 @@ import java.util.Date;
  * model class for a rat sighting
  */
 
-public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Comparator<RatSightingDataItem>, Parcelable {
+public class RatSightingDataItem implements Comparable<RatSightingDataItem>,
+        Comparator<RatSightingDataItem>, Parcelable {
 
     private final int _ID;
     private Date _Date;
@@ -26,7 +27,7 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
     private final String _Borough;
     private final double _Latitude;
     private final double _Longitude;
-    public int[] ratCounter = new int[12];
+    //public int[] ratCounter = new int[12];
 
     /**
      * constructor to create a data item with all necessary fields
@@ -137,8 +138,10 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
 
 
     /**
-     * This is a static factory method that constructs a rat data item given a text line in the correct format.
-     * It assumes that a rat data item is in a single string with each attribute separated by a tab character
+     * This is a static factory method that constructs a rat data item given a text line
+     * in the correct format.
+     * It assumes that a rat data item is in a single string with each attribute
+     * separated by a tab character
      * The order of the data is assumed to be:
      *
      * 0 - id
@@ -159,8 +162,8 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         String[] tokens = line.split("\t");
         //assert tokens.length == 9;
 
-        int id = 0;
-        int zip = 0;
+        int id;
+        int zip;
         try {
             id = Integer.parseInt(tokens[0]);
         } catch (Exception e) {
@@ -171,8 +174,8 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         } catch (Exception e) {
             zip = 0;
         }
-        double latitude =  0.0;
-        double longitude = 0.0;
+        double latitude;
+        double longitude;
         try {
             latitude = Double.parseDouble(tokens[7]);
             longitude = Double.parseDouble(tokens[8]);
@@ -188,7 +191,8 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>, Com
         } catch (Exception e) {
 
         }
-        return new RatSightingDataItem(id, entryDate, tokens[2], zip, tokens[4], tokens[5], tokens[6], latitude, longitude);
+        return new RatSightingDataItem(id, entryDate, tokens[2], zip, tokens[4], tokens[5],
+                tokens[6], latitude, longitude);
     }
 
     /**

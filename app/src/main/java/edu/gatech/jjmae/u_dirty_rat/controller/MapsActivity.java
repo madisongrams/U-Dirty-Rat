@@ -21,8 +21,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.clustering.ClusterManager;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
 import edu.gatech.jjmae.u_dirty_rat.model.RatClusterItem;
@@ -38,7 +38,7 @@ import edu.gatech.jjmae.u_dirty_rat.services.GPSTracker;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private ArrayList<RatSightingDataItem> rats;
+    private List<RatSightingDataItem> rats;
     private ClusterManager<RatClusterItem> mClusterManager;
     private LatLng initialView;
     private boolean mapsReady;
@@ -121,8 +121,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mapsReady) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialView, 6));
         } else {
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(rats.get(500).get_Latitude(),
-                    rats.get(500).get_Longitude()), 6));
+            int fiveHundred = 500;
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+                    rats.get(fiveHundred).get_Latitude(),
+                    rats.get(fiveHundred).get_Longitude()), 6));
         }
     }
 
@@ -147,13 +149,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mClusterManager.addItem(ratItem);
         }
 
-        mClusterManager.getMarkerCollection().setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+        mClusterManager.getMarkerCollection().setOnInfoWindowClickListener(
+                new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Context context = getApplicationContext();
                 Intent intent = new Intent(context, RatSightingViewDetailActivity.class);
                 Log.d("MY APP", "Switch to detailed view for item: " + marker.getTitle());
-                intent.putExtra(RatSightingDetailFragment.ARG_ITEM_ID, Integer.parseInt(marker.getTitle()));
+                intent.putExtra(RatSightingDetailFragment.ARG_ITEM_ID, Integer.parseInt(
+                        marker.getTitle()));
 
                 context.startActivity(intent);
             }

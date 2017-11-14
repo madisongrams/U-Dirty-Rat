@@ -83,13 +83,13 @@ public class RatSightingDetailFragment extends Fragment {
 
 //            ((TextView) rootView.findViewById(R.id.borough)).setText(mItem.get_Borough());
 //            ((TextView) rootView.findViewById(R.id.latitude)).setText("" + mItem.get_Latitude());
-//            ((TextView) rootView.findViewById(R.id.longitude)).setText("" + mItem.get_Longitude());
+//           ((TextView) rootView.findViewById(R.id.longitude)).setText("" + mItem.get_Longitude());
             ShareButton shareButton;
             shareButton = rootView.findViewById(R.id.share_btn);
             ShareLinkContent content = new ShareLinkContent.Builder()
-                    .setContentUrl(Uri.parse("https://developers.facebook.com")) //TODO: change this url
+                    .setContentUrl(Uri.parse("https://developers.facebook.com"))
+                    //TODO: change this url
                     .setQuote("Dirty Rat Spotted in " + mItem.get_City() + "!!")
-                    .setImageUrl(Uri.parse("https://thumb1.shutterstock.com/display_pic_with_logo/1256479/187492997/stock-vector-fat-cartoon-rat-187492997.jpg"))
                     .setShareHashtag(new ShareHashtag.Builder()
                             .setHashtag("#UDirtyRat")
                             .build())

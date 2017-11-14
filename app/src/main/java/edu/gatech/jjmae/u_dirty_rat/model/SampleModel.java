@@ -57,7 +57,9 @@ public class SampleModel {
      */
     public RatSightingDataItem findItemById(int id) {
         for (RatSightingDataItem d : items) {
-            if (d.get_ID() == id) return d;
+            if (d.get_ID() == id) {
+                return d;
+            }
         }
         Log.d("MYAPP", "Warning - Failed to find id: " + id);
         return null;
@@ -79,7 +81,7 @@ public class SampleModel {
      * @param end the end date
      * @return the list of rats
      */
-    public ArrayList<RatSightingDataItem> getRatsByDates(Date start, Date end) {
+    public List<RatSightingDataItem> getRatsByDates(Date start, Date end) {
         ArrayList<RatSightingDataItem> rats = new ArrayList<>();
 
         Collections.sort(items);
@@ -90,7 +92,7 @@ public class SampleModel {
             index = (index + 1) * -1;
         }
         Log.d(TAG, "getRatsByDates: index = " + index);
-        while (index < items.size() && end.compareTo(items.get(index).get_Date()) >= 0) {
+        while ((index < items.size()) && (end.compareTo(items.get(index).get_Date()) >= 0)) {
             Log.d(TAG, "getRatsByDates: added data item " + items.get(index).get_ID());
             rats.add(items.get(index));
             index++;

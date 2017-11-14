@@ -19,6 +19,9 @@ import edu.gatech.jjmae.u_dirty_rat.R;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
+/**
+ * graph activity class
+ */
 public class GraphActivity extends AppCompatActivity {
     private List<RatSightingDataItem> rats;
     private int[] ratCounter;
@@ -28,12 +31,13 @@ public class GraphActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
+        int numMonths = 12;
         if (rats == null) {
 //          rats = (ArrayList<RatSightingDataItem>) getIntent().getParcelableExtra("rats");
             Date start = (Date) getIntent().getSerializableExtra("start");
             Date end = (Date) getIntent().getSerializableExtra("end");
             int monthGap = (end.getMonth() - start.getMonth());
-            int yearGap = 12 * (end.getYear() - start.getYear());
+            int yearGap = numMonths * (end.getYear() - start.getYear());
 
             ratCounter = new int[monthGap + yearGap];
             rats = SampleModel.INSTANCE.getRatsByDates(start, end);
@@ -46,7 +50,7 @@ public class GraphActivity extends AppCompatActivity {
 //            int monthDiff = rat.get_Date().getMonth() - rats.get(0).get_Date().getMonth();
 
             if (difference != 0) {
-                index = (difference * 12) - 1;
+                index = (difference * numMonths) - 1;
                 ratCounter[rat.get_Date().getMonth() + index]++;
             }
             ratCounter[rat.get_Date().getMonth()]++;
@@ -69,7 +73,8 @@ public class GraphActivity extends AppCompatActivity {
         dataSet.setDrawFilled(true);
 
         lineChart.setData(data);
-        lineChart.animateY(5000);
+        int aniDuration = 5000;
+        lineChart.animateY(aniDuration);
 
         lineChart.getDescription().setText("Rats per Month");
 

@@ -2,7 +2,7 @@ package edu.gatech.jjmae.u_dirty_rat;
 
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import edu.gatech.jjmae.u_dirty_rat.model.Admin;
 import edu.gatech.jjmae.u_dirty_rat.model.User;
@@ -22,8 +22,8 @@ public class UserDataTest {
     // tests login functionality
     @Test
     public void testLogin() {
-        HashMap<String, User> users = UserData.getUsers();
-        HashMap<String, Admin> admins = UserData.getAdmins();
+        Map<String, User> users = UserData.getUsers();
+        Map<String, Admin> admins = UserData.getAdmins();
         assertFalse(users.containsKey("abcd"));
         assertFalse(admins.containsKey("asdf"));
 

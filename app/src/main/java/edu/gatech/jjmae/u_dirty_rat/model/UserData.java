@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -20,7 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
  * Created by Madison on 9/29/2017.
  */
 
-//TODO: return specific reasons for login and registration failure
+
 public class UserData {
     private static final HashMap<String, String> usernamesPasswords = new HashMap<String, String>();
     private static final HashMap<String, User> users = new HashMap<String, User>();
@@ -38,11 +39,11 @@ public class UserData {
      * all getters and setters for UserData
      *
      */
-    public static HashMap<String, User> getUsers() {
+    public static Map<String, User> getUsers() {
         return users;
     }
 
-    public static HashMap<String, Admin> getAdmins() {
+    public static Map<String, Admin> getAdmins() {
         return admins;
     }
 
@@ -67,19 +68,13 @@ public class UserData {
      */
     public static String login(String user, String password) {
         user = user.toLowerCase();
-        // here is the default login info, commented out to test registration
-        //TODO: just remove this entirely once registration is functional
-//        String defaultPass = encryptPassword("pass");
-//        if (defaultPass == null) {
-//            return false;
-//        }
-//        usernamesPasswords.put("user", defaultPass);
 
         String encryptedPassword = encryptPassword(password);
         if (encryptedPassword == null) {
             return "There was an issue on our end! Please try logging in again.";
         }
-        if (!(password == null) && usernamesPasswords.containsKey(user) && usernamesPasswords.get(user).equals(encryptedPassword)) {
+        if (!(password == null) && usernamesPasswords.containsKey(user) &&
+                usernamesPasswords.get(user).equals(encryptedPassword)) {
             Admin isAdmin = admins.get(user);
             User isUser = users.get(user);
 
@@ -290,9 +285,9 @@ public class UserData {
             }
             byte[] dataBytes = password.getBytes();
             byte[] encryptedBytes = cipher.doFinal(dataBytes);
-            String encryptedPass = Base64.encodeToString(encryptedBytes, Base64.URL_SAFE|Base64.NO_WRAP);
+            return Base64.encodeToString(encryptedBytes, Base64.URL_SAFE|Base64.NO_WRAP);
             //Log.d("UserData", encryptedPass);
-            return encryptedPass;
+            //return encryptedPass;
         } catch (Exception e) {
             //Log.e(e.getMessage(), "Encryption failed");
             return null;

@@ -100,7 +100,8 @@ public class UserListActivity extends AppCompatActivity {
      * Class for the Recycler view adapter that displays rat data
      */
     public class SampleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<UserListActivity.SampleItemRecyclerViewAdapter.ViewHolder> {
+            extends RecyclerView.Adapter<UserListActivity.SampleItemRecyclerViewAdapter.ViewHolder>
+    {
 
         private final List<String> mValues;
 
@@ -113,14 +114,16 @@ public class UserListActivity extends AppCompatActivity {
         }
 
         @Override
-        public UserListActivity.SampleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public UserListActivity.SampleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(
+                ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.user_list_content, parent, false);
             return new UserListActivity.SampleItemRecyclerViewAdapter.ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(final UserListActivity.SampleItemRecyclerViewAdapter.ViewHolder holder, int position) {
+        public void onBindViewHolder(final UserListActivity.SampleItemRecyclerViewAdapter.
+                ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
             String date = holder.mItem;
             // the date string sometimes shows up as GMT which adds extra characters so taking that
@@ -134,7 +137,7 @@ public class UserListActivity extends AppCompatActivity {
 
                     Log.d("UserList", "onClick: User pressed: " + holder.mItem);
                     User user = UserData.getUser(holder.mItem);
-                    if (user != null && user.getIsBanned()) {
+                    if ((user != null) && (user.getIsBanned())) {
                         //ask to unban
                         displayUnBanAlertDialog((Admin) UserData.getCurrentUser(), user);
 
@@ -156,9 +159,9 @@ public class UserListActivity extends AppCompatActivity {
          * View Holder class to display the recycler view
          */
         public class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mUsernameView;
-            public String mItem;
+            private final View mView;
+            private final TextView mUsernameView;
+            private String mItem;
 
             /**
              * constructor that takes in a view for the view holder
