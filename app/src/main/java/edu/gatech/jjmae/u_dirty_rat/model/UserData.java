@@ -254,7 +254,7 @@ public class UserData {
             key = keyGen.generateKey();
             return true;
         } catch (Exception e) {
-            Log.e(e.getMessage(), "setUpKey: exception initializing key");
+            //Log.e(e.getMessage(), "setUpKey: exception initializing key");
             return false;
         }
     }
@@ -272,7 +272,7 @@ public class UserData {
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return true;
         } catch (Exception e) {
-            Log.e(e.getMessage(), "setUpCipher: exception setting up cipher");
+            //Log.e(e.getMessage(), "setUpCipher: exception setting up cipher");
             return false;
         }
     }
@@ -291,10 +291,10 @@ public class UserData {
             byte[] dataBytes = password.getBytes();
             byte[] encryptedBytes = cipher.doFinal(dataBytes);
             String encryptedPass = Base64.encodeToString(encryptedBytes, Base64.URL_SAFE|Base64.NO_WRAP);
-            Log.d("UserData", encryptedPass);
+            //Log.d("UserData", encryptedPass);
             return encryptedPass;
         } catch (Exception e) {
-            Log.e(e.getMessage(), "Encryption failed");
+            //Log.e(e.getMessage(), "Encryption failed");
             return null;
         }
 
