@@ -26,7 +26,8 @@ public abstract class AbstractUser {
      * @param password user's password
      * @param isBanned whether or not user is banned
      */
-    public AbstractUser(String username, boolean isAdmin, String email, String password, boolean isBanned) {
+    AbstractUser(String username, boolean isAdmin, String email, String password,
+                 boolean isBanned) {
         this.username = username;
         this.isAdmin = isAdmin;
         this.email = email;
@@ -34,7 +35,8 @@ public abstract class AbstractUser {
         this.isBanned = isBanned;
     }
     /**
-     * This is a static factory method that constructs a user given a text line in the correct format.
+     * This is a static factory method that constructs a user given a text line in the correct
+     * format.
      * It assumes that a user is in a single string with each attribute separated by a tab character
      * The order of the data is assumed to be:
      *
@@ -51,20 +53,21 @@ public abstract class AbstractUser {
         assert line != null;
         Log.d("Abstract User", line);
         String[] tokens = line.split("\t");
-        assert tokens.length == 5;
+        //assert tokens.length == 5;
 
-        if (tokens[2].equals("true")) {
+        if ("true".equals(tokens[2])) {
             return new Admin(tokens[0], tokens[3], tokens[1]);
         }
-        return new User(tokens[0], tokens[3], tokens[1], new Boolean(tokens[4]));
+        return new User(tokens[0], tokens[3], tokens[1], Boolean.valueOf(tokens[4]));
     }
 
     /**
      * Method that is used to write user data to a file with a given order of the instance variables
-     * @param writer printwriter used to write data to
+     * @param writer print writer used to write data to
      */
     public void saveAsText(PrintWriter writer) {
-        //Log.d("AbstractUser", "saving userdata: " + username + "\t" + password + "\t" + String.valueOf(isAdmin) + "\t" + email);
+        //Log.d("AbstractUser", "saving userdata: " + username + "\t" +
+        // password + "\t" + String.valueOf(isAdmin) + "\t" + email);
         writer.println(username + "\t" + password + "\t" + String.valueOf(isAdmin) + "\t" + email
         + "\t" + String.valueOf(isBanned));
     }
@@ -144,7 +147,7 @@ public abstract class AbstractUser {
         return isBanned;
     }
 
-    protected void setIsBanned(boolean isBanned) {
+    void setIsBanned(boolean isBanned) {
         this.isBanned = isBanned;
     }
 }

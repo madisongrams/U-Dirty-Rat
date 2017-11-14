@@ -3,8 +3,6 @@ package edu.gatech.jjmae.u_dirty_rat.controller;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +28,7 @@ import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.model.UserData;
 
 /**
- * activity for the homescreen. multiple navigation buttons and a drop down menu
+ * activity for the home screen. multiple navigation buttons and a drop down menu
  */
 public class HomeActivity extends AppCompatActivity {
 
@@ -74,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         next3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onLoadButtonPressed(view);
+                onLoadButtonPressed();
             }
 
         });
@@ -139,12 +137,12 @@ public class HomeActivity extends AppCompatActivity {
      * method for what happens when view rat data is pressed.
      * if it is the app's first time, the data is read in from csv file and only then
      *
-     * @param view view where button is located
      */
-    public void onLoadButtonPressed(View view) {
+    private void onLoadButtonPressed() {
         Log.v(HomeActivity.TAG, "Pressed the load button");
         SampleModel model = SampleModel.INSTANCE;
-        if (model.getItems().size() < 100000) {
+        int numRatItems = 100000;
+        if (model.getItems().size() < numRatItems) {
             readSDFile();
         }
         Intent intent = new Intent(this, RatSightingsListActivity.class);
@@ -160,29 +158,34 @@ public class HomeActivity extends AppCompatActivity {
 
         try {
             InputStream is = getResources().openRawResource(R.raw.rat_sightings);
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(is, StandardCharsets.UTF_8));
 
             String line;
             br.readLine(); //get rid of header line
             while ((line = br.readLine()) != null) {
                 //Log.d(HomeActivity.TAG, line);
                 String[] tokens = line.split(",");
-                int id = 0;
-                int zip = 0;
+                int id;
+                int zip;
                 try {
                     id = Integer.parseInt(tokens[0]);
                 } catch (Exception e) {
+                    id = 0;
                 }
                 try {
                     zip = Integer.parseInt(tokens[8]);
                 } catch (Exception e) {
+                    zip = 0;
                 }
-                double latitude =  0.0;
-                double longitude = 0.0;
+                double latitude;
+                double longitude;
                 try {
                     latitude = Double.parseDouble(tokens[49]);
                     longitude = Double.parseDouble(tokens[50]);
                 } catch (IndexOutOfBoundsException e) {
+                    latitude = 0.0;
+                    longitude = 0.0;
 
                 }
                 Date entryDate = new Date(1969, 12, 31);
@@ -190,10 +193,10 @@ public class HomeActivity extends AppCompatActivity {
                 try {
                     entryDate = df.parse(tokens[1]);
                 } catch (Exception e) {
-
                 }
 
-                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude), false);
+                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9],
+                        tokens[16], tokens[23], latitude, longitude));
             }
             br.close();
         } catch (IOException e) {

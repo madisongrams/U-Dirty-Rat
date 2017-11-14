@@ -7,9 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -38,9 +36,9 @@ public class SampleModel {
     /**
      * method to add item to backing arrays
      * @param item item to be added to array
-     * @param isNewRat whether or not rat is new
+     *
      */
-    public void addItem(RatSightingDataItem item, boolean isNewRat) {
+    public void addItem(RatSightingDataItem item) {
         items.add(item);
     }
     /**
@@ -59,7 +57,9 @@ public class SampleModel {
      */
     public RatSightingDataItem findItemById(int id) {
         for (RatSightingDataItem d : items) {
-            if (d.get_ID() == id) return d;
+            if (d.get_ID() == id) {
+                return d;
+            }
         }
         Log.d("MYAPP", "Warning - Failed to find id: " + id);
         return null;
@@ -81,21 +81,22 @@ public class SampleModel {
      * @param end the end date
      * @return the list of rats
      */
-    public ArrayList<RatSightingDataItem> getRatsByDates(Date start, Date end) {
-        ArrayList<RatSightingDataItem> rats = new ArrayList<RatSightingDataItem>();
+    public List<RatSightingDataItem> getRatsByDates(Date start, Date end) {
+        List<RatSightingDataItem> rats = new ArrayList<>();
 
         Collections.sort(items);
-        int index = Collections.binarySearch(items, new RatSightingDataItem(0, start, "default", 0, "default", "default", "default", 0, 0));
+        int index = Collections.binarySearch(items, new RatSightingDataItem(0, start,
+                "default", 0, "default", "default",
+                "default", 0, 0));
         if (index < 0) {
             index = (index + 1) * -1;
         }
         Log.d(TAG, "getRatsByDates: index = " + index);
-        while (index < items.size() && end.compareTo(items.get(index).get_Date()) >= 0) {
+        while ((index < items.size()) && (end.compareTo(items.get(index).get_Date()) >= 0)) {
             Log.d(TAG, "getRatsByDates: added data item " + items.get(index).get_ID());
             rats.add(items.get(index));
             index++;
         }
-
         return rats;
     }
 
@@ -114,8 +115,8 @@ public class SampleModel {
             // old current id
             String idStr = reader.readLine();
             Log.d("SampleModel", "loadFromText: " + idStr);
-            int id = Integer.parseInt(idStr);
-            currentID = id;
+            currentID = Integer.parseInt(idStr);
+
             //then read in each user to model
             for (int i = 0; i < count; i++) {
                 String line = reader.readLine();
@@ -142,9 +143,8 @@ public class SampleModel {
     /**
      * save data to file
      * @param file file data is being saved to
-     * @return true on success, false otherwise
      */
-    public boolean saveText(File file) {
+    public void saveText(File file) {
         Log.d("SampleModel:", "Saving as a text file");
         PrintWriter pw = null;
         try {
@@ -154,16 +154,14 @@ public class SampleModel {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Log.d("UserData", "Error opening the text file for save!");
-            return false;
         } finally {
             if (pw != null) {
                 pw.close();
             }
         }
-        return true;
     }
 
-    void saveAsText(PrintWriter writer) {
+    private void saveAsText(PrintWriter writer) {
         Log.d("SampleModel: ", "saving: " + items.size() + " data items");
         writer.println(items.size());
         // also saving currentID

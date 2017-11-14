@@ -21,8 +21,6 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
     // UI references.
     private EditText mUsernameView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +40,8 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        View mLoginFormView = findViewById(R.id.login_form);
+        View mProgressView = findViewById(R.id.login_progress);
     }
 
     /**
@@ -57,9 +55,6 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
         // Store values at the time of the login attempt.
         String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
-        if (username == null || password == null) {
-            return false;
-        }
 
         // Check for a valid password
         if (TextUtils.isEmpty(password)) {
