@@ -82,7 +82,7 @@ public class SampleModel {
      * @return the list of rats
      */
     public List<RatSightingDataItem> getRatsByDates(Date start, Date end) {
-        ArrayList<RatSightingDataItem> rats = new ArrayList<>();
+        List<RatSightingDataItem> rats = new ArrayList<>();
 
         Collections.sort(items);
         int index = Collections.binarySearch(items, new RatSightingDataItem(0, start,
