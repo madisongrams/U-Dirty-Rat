@@ -97,41 +97,68 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>,
     };
 
     /**
-     * All getters for the instance variables in this class
-     *
+     * getter
+     * @return rat's id
      */
     public int get_ID() {
         return _ID;
     }
 
+    /**
+     * date rat is seen
+     * @return date
+     */
     public Date get_Date() {
         return _Date;
     }
 
+    /**
+     * location rat was found
+     * @return location
+     */
     public String get_Location() {
         return _Location;
     }
 
+    /**
+     * zip code
+     * @return zip
+     */
     public int get_ZipCode() {
         return _ZipCode;
     }
-
+    /**
+     * rat spotted at address
+     * @return address
+     */
     public String get_Address() {
         return _Address;
     }
-
+    /**
+     * rat spotted in city
+     * @return city
+     */
     public String get_City() {
         return _City;
     }
-
+    /**
+     * rat spotted in borough
+     * @return borough
+     */
     public String get_Borough() {
         return _Borough;
     }
-
+    /**
+     * latitude
+     * @return latitude
+     */
     public double get_Latitude() {
         return _Latitude;
     }
-
+    /**
+     * longitude
+     * @return longitude
+     */
     public double get_Longitude() {
         return _Longitude;
     }

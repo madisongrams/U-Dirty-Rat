@@ -33,20 +33,25 @@ public class UserData {
     private static AbstractUser currentUser;
 
 
-
     /**
-     *
-     * all getters and setters for UserData
-     *
+     * map of usernames to user objects
+     * @return map
      */
     public static Map<String, User> getUsers() {
         return users;
     }
-
+    /**
+     * map of usernames to admin objects
+     * @return map
+     */
     public static Map<String, Admin> getAdmins() {
         return admins;
     }
 
+    /**
+     * getter for currentuser
+     * @return the current user using the app
+     */
     public static AbstractUser getCurrentUser() {
         return currentUser;
     }
