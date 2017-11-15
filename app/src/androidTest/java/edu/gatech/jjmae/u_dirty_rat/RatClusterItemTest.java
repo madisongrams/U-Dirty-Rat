@@ -94,12 +94,12 @@ public class RatClusterItemTest {
         assertEquals(new LatLng(100.00, -100.00), testRats.get(1).getPosition());
 
     }
-
-    @Test(timeout = TIMEOUT)
-    public void testCreateEmpties() {
-        Random rand = new Random(13);
-        for (int i = 0; i < 10; i++) {
-            testRats.add(i, new RatClusterItem(rand.nextDouble(), rand.nextDouble()));
-        }
-    }
+//
+//    @Test(timeout = TIMEOUT)
+//    public void testCreateEmpties() {
+//        Random rand = new Random(13);
+//        for (int i = 0; i < 10; i++) {
+//            testRats.add(i, new RatClusterItem(rand.nextDouble(), rand.nextDouble()));
+//        }
+//    }
 }
