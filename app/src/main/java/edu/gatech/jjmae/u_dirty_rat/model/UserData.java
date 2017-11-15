@@ -49,7 +49,7 @@ public class UserData {
     }
 
     /**
-     * getter for currentuser
+     * getter for current user
      * @return the current user using the app
      */
     public static AbstractUser getCurrentUser() {

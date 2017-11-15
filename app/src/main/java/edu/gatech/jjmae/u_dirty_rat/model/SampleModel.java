@@ -93,7 +93,7 @@ public class SampleModel {
         }
         Log.d(TAG, "getRatsByDates: index = " + index);
         while ((index < items.size()) && (end.compareTo(items.get(index).get_Date()) >= 0)) {
-            Log.d(TAG, "getRatsByDates: added data item " + items.get(index).get_ID());
+            //Log.d(TAG, "getRatsByDates: added data item " + items.get(index).get_ID());
             rats.add(items.get(index));
             index++;
         }

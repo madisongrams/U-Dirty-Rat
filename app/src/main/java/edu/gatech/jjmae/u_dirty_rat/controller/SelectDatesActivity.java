@@ -37,18 +37,12 @@ public class SelectDatesActivity extends AppCompatActivity {
 
         startDateText = (EditText) findViewById(R.id.startDateInput);
         endDateText = (EditText) findViewById(R.id.endDateInput);
-
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (areDatesValid()) {
-//                    ArrayList<RatSightingDataItem> rats = SampleModel.INSTANCE.
-// getRatsByDates(startDate, endDate);
-//                    if (rats.size() < 1) {
-//                        displayErrorMessage("No rat data found between those dates.");
-//                    } else {
 
+                if (areDatesValid()) {
                         Bundle bundle = getIntent().getExtras();
                         if (bundle == null) {
                             return;
@@ -60,12 +54,18 @@ public class SelectDatesActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         if ("graphs".equals(bundle.getString("activity"))) {
-                            Intent intent = new Intent(getBaseContext(), GraphActivity.class);
-                            intent.putExtra("start", startDate);
-                            intent.putExtra("end", endDate);
-                            startActivity(intent);
+                            if ((startDate.getMonth() == endDate.getMonth()) &&
+                                    (startDate.getYear() == endDate.getYear()) &&
+                                    (startDate.getDate() == endDate.getDate())) {
+                                displayErrorMessage("Please include two separate dates to " +
+                                        "show a graph.");
+                            } else {
+                                Intent intent = new Intent(getBaseContext(), GraphActivity.class);
+                                intent.putExtra("start", startDate);
+                                intent.putExtra("end", endDate);
+                                startActivity(intent);
+                            }
                     }
-                    //}
                 }
             }
         });
