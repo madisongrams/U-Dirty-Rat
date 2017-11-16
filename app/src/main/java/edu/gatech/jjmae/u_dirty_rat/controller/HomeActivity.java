@@ -141,7 +141,8 @@ public class HomeActivity extends AppCompatActivity {
     private void onLoadButtonPressed() {
         Log.v(HomeActivity.TAG, "Pressed the load button");
         SampleModel model = SampleModel.INSTANCE;
-        if (model.getItems().size() < 100000) {
+        int numRatItems = 100000;
+        if (model.getItems().size() < numRatItems) {
             readSDFile();
         }
         Intent intent = new Intent(this, RatSightingsListActivity.class);
@@ -157,15 +158,16 @@ public class HomeActivity extends AppCompatActivity {
 
         try {
             InputStream is = getResources().openRawResource(R.raw.rat_sightings);
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(is, StandardCharsets.UTF_8));
 
             String line;
             br.readLine(); //get rid of header line
             while ((line = br.readLine()) != null) {
                 //Log.d(HomeActivity.TAG, line);
                 String[] tokens = line.split(",");
-                int id = 0;
-                int zip = 0;
+                int id;
+                int zip;
                 try {
                     id = Integer.parseInt(tokens[0]);
                 } catch (Exception e) {
@@ -176,8 +178,8 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     zip = 0;
                 }
-                double latitude =  0.0;
-                double longitude = 0.0;
+                double latitude;
+                double longitude;
                 try {
                     latitude = Double.parseDouble(tokens[49]);
                     longitude = Double.parseDouble(tokens[50]);
@@ -193,7 +195,8 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (Exception e) {
                 }
 
-                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude));
+                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9],
+                        tokens[16], tokens[23], latitude, longitude));
             }
             br.close();
         } catch (IOException e) {

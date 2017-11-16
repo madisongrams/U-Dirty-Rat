@@ -8,6 +8,7 @@ package edu.gatech.jjmae.u_dirty_rat;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -19,7 +20,7 @@ import static junit.framework.Assert.assertEquals;
  */
 public class RatClusterItemTest {
 
-    private ArrayList<RatClusterItem> testRats;
+    private List<RatClusterItem> testRats;
 //    private RatClusterItem[] correctRats;
     private static final int TIMEOUT = 200;
 
@@ -93,12 +94,12 @@ public class RatClusterItemTest {
         assertEquals(new LatLng(100.00, -100.00), testRats.get(1).getPosition());
 
     }
-
-    @Test(timeout = TIMEOUT)
-    public void testCreateEmpties() {
-        Random rand = new Random(13);
-        for (int i = 0; i < 10; i++) {
-            testRats.add(i, new RatClusterItem(rand.nextDouble(), rand.nextDouble()));
-        }
-    }
+//
+//    @Test(timeout = TIMEOUT)
+//    public void testCreateEmpties() {
+//        Random rand = new Random(13);
+//        for (int i = 0; i < 10; i++) {
+//            testRats.add(i, new RatClusterItem(rand.nextDouble(), rand.nextDouble()));
+//        }
+//    }
 }

@@ -61,7 +61,8 @@ public class RegistrationPageActivity extends AppCompatActivity {
         List<String> list = new ArrayList<String>();
         list.add("user");
         list.add("admin");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
     }
@@ -115,7 +116,7 @@ public class RegistrationPageActivity extends AppCompatActivity {
         }
 
         boolean admin;
-        admin = addListenerOnSpinnerItemSelection().equals("admin");
+        admin = "admin".equals(addListenerOnSpinnerItemSelection());
         String error = UserData.register(username, password, admin, email);
         if (error != null) {
             displayErrorMessage(error);

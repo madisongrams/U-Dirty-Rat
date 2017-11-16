@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -20,11 +21,11 @@ import javax.crypto.spec.SecretKeySpec;
  * Created by Madison on 9/29/2017.
  */
 
-//TODO: return specific reasons for login and registration failure
+
 public class UserData {
     private static final HashMap<String, String> usernamesPasswords = new HashMap<String, String>();
-    private static final HashMap<String, User> users = new HashMap<String, User>();
-    private static final HashMap<String, Admin> admins = new HashMap<String, Admin>();
+    private static final Map<String, User> users = new HashMap<String, User>();
+    private static final Map<String, Admin> admins = new HashMap<String, Admin>();
 
     private static SecretKey key;
     private static Cipher cipher;
@@ -32,20 +33,25 @@ public class UserData {
     private static AbstractUser currentUser;
 
 
-
     /**
-     *
-     * all getters and setters for UserData
-     *
+     * map of usernames to user objects
+     * @return map
      */
-    public static HashMap<String, User> getUsers() {
+    public static Map<String, User> getUsers() {
         return users;
     }
-
-    public static HashMap<String, Admin> getAdmins() {
+    /**
+     * map of usernames to admin objects
+     * @return map
+     */
+    public static Map<String, Admin> getAdmins() {
         return admins;
     }
 
+    /**
+     * getter for current user
+     * @return the current user using the app
+     */
     public static AbstractUser getCurrentUser() {
         return currentUser;
     }
@@ -67,19 +73,13 @@ public class UserData {
      */
     public static String login(String user, String password) {
         user = user.toLowerCase();
-        // here is the default login info, commented out to test registration
-        //TODO: just remove this entirely once registration is functional
-//        String defaultPass = encryptPassword("pass");
-//        if (defaultPass == null) {
-//            return false;
-//        }
-//        usernamesPasswords.put("user", defaultPass);
 
         String encryptedPassword = encryptPassword(password);
         if (encryptedPassword == null) {
             return "There was an issue on our end! Please try logging in again.";
         }
-        if (!(password == null) && usernamesPasswords.containsKey(user) && usernamesPasswords.get(user).equals(encryptedPassword)) {
+        if (!(password == null) && usernamesPasswords.containsKey(user) &&
+                usernamesPasswords.get(user).equals(encryptedPassword)) {
             Admin isAdmin = admins.get(user);
             User isUser = users.get(user);
 
@@ -254,7 +254,7 @@ public class UserData {
             key = keyGen.generateKey();
             return true;
         } catch (Exception e) {
-            Log.e(e.getMessage(), "setUpKey: exception initializing key");
+            //Log.e(e.getMessage(), "setUpKey: exception initializing key");
             return false;
         }
     }
@@ -272,7 +272,7 @@ public class UserData {
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return true;
         } catch (Exception e) {
-            Log.e(e.getMessage(), "setUpCipher: exception setting up cipher");
+            //Log.e(e.getMessage(), "setUpCipher: exception setting up cipher");
             return false;
         }
     }
@@ -290,11 +290,11 @@ public class UserData {
             }
             byte[] dataBytes = password.getBytes();
             byte[] encryptedBytes = cipher.doFinal(dataBytes);
-            String encryptedPass = Base64.encodeToString(encryptedBytes, Base64.URL_SAFE|Base64.NO_WRAP);
-            Log.d("UserData", encryptedPass);
-            return encryptedPass;
+            return Base64.encodeToString(encryptedBytes, Base64.URL_SAFE|Base64.NO_WRAP);
+            //Log.d("UserData", encryptedPass);
+            //return encryptedPass;
         } catch (Exception e) {
-            Log.e(e.getMessage(), "Encryption failed");
+            //Log.e(e.getMessage(), "Encryption failed");
             return null;
         }
 

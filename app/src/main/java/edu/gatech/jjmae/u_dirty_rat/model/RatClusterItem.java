@@ -13,10 +13,22 @@ public class RatClusterItem implements ClusterItem {
     private String mTitle;
     private String mSnippet;
 
+    /**
+     * constructor
+     * @param lat latitude
+     * @param lng longitude
+     */
     public RatClusterItem(double lat, double lng) {
         mPosition = new LatLng(lat, lng);
     }
 
+    /**
+     * constructor
+     * @param lat latitude
+     * @param lng longitude
+     * @param title title
+     * @param snippet snippet
+     */
     public RatClusterItem(double lat, double lng, String title, String snippet) {
         mPosition = new LatLng(lat, lng);
         mTitle = title;
@@ -25,11 +37,12 @@ public class RatClusterItem implements ClusterItem {
 
     @Override
     public LatLng getPosition() {
-        if (mPosition == null) {
-            return new LatLng(0.0,0.0);
-        } else {
-            return mPosition;
-        }
+//        if (mPosition == null) {
+//            return new LatLng(0.0,0.0);
+//        } else {
+//            return mPosition;
+//        }
+        return mPosition;
     }
 
     @Override

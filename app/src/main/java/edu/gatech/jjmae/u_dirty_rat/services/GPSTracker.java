@@ -39,6 +39,10 @@ public class GPSTracker extends Service implements LocationListener {
     // Declaring a Location Manager
     private LocationManager locationManager;
 
+    /**
+     * constructor for gpstracker
+     * @param context app context
+     */
     public GPSTracker(Context context) {
         this.mContext = context;
         getLocation();
@@ -48,6 +52,9 @@ public class GPSTracker extends Service implements LocationListener {
     private void getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+            if (locationManager == null) {
+                return;
+            }
 
             // getting GPS status
             boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -58,6 +65,7 @@ public class GPSTracker extends Service implements LocationListener {
 
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled
+                Log.e("MYAPP", "Network is not enabled");
             } else {
                 this.canGetLocation = true;
                 // First get location from Network Provider
@@ -119,11 +127,12 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     /**
-     * Function to get latitude
-     * */
+     * gets longitude
+     * @return longitude
+     */
 
     public double getLatitude(){
-        if(location != null){
+        if (location != null){
             latitude = location.getLatitude();
         }
 
@@ -132,11 +141,11 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     /**
-     * Function to get longitude
-     * */
-
+     * gets longitude
+     * @return longitude
+     */
     public double getLongitude(){
-        if(location != null){
+        if (location != null){
             longitude = location.getLongitude();
         }
 
@@ -169,7 +178,8 @@ public class GPSTracker extends Service implements LocationListener {
 
         // On pressing Settings button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
             }
@@ -177,6 +187,7 @@ public class GPSTracker extends Service implements LocationListener {
 
         // on pressing cancel button
         alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }

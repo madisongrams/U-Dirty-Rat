@@ -149,7 +149,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
 
         double longitudeDoub;
         double latitudeDoub;
-        if (mCurrLongitude != 0 && mCurrLatitude != 0) {
+        if ((mCurrLongitude != 0) && (mCurrLatitude != 0)) {
             longitudeDoub = mCurrLongitude;
             latitudeDoub = mCurrLatitude;
         } else {
@@ -159,7 +159,9 @@ public class NewRatSightingActivity extends AppCompatActivity {
                 displayErrorMessage("Longitude must be a valid decimal.");
                 return false;
             }
-            if (longitudeDoub < -180 || longitudeDoub > 180) {
+            int minLong = -180;
+            int maxLong = 180;
+            if ((longitudeDoub < minLong) || (longitudeDoub > maxLong)) {
                 displayErrorMessage("Invalid longitude.");
             }
 
@@ -169,7 +171,9 @@ public class NewRatSightingActivity extends AppCompatActivity {
                 displayErrorMessage("Latitude must be a valid decimal.");
                 return false;
             }
-            if (latitudeDoub < -90 || latitudeDoub > 90) {
+            int minLat = -90;
+            int maxLat = 90;
+            if ((latitudeDoub < minLat) || (latitudeDoub > maxLat)) {
                 displayErrorMessage("Invalid latitude.");
                 return false;
             }
@@ -178,8 +182,9 @@ public class NewRatSightingActivity extends AppCompatActivity {
 //
         SampleModel model = SampleModel.INSTANCE;
         int id = model.getCurrentID();
-        //TODO: add borough entry
-        model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city, latitudeDoub, longitudeDoub));
+
+        model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city,
+                latitudeDoub, longitudeDoub));
         File file = new File(this.getFilesDir(), "ratData.txt");
         SampleModel.INSTANCE.saveText(file);
         return true;
