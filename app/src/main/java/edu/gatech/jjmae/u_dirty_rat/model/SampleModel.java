@@ -29,7 +29,7 @@ public class SampleModel {
     /**
      * constructor that initializes backing array
      */
-    private SampleModel() {
+    public SampleModel() {
         items = new ArrayList<>();
     }
 
@@ -41,6 +41,7 @@ public class SampleModel {
     public void addItem(RatSightingDataItem item) {
         items.add(item);
     }
+
     /**
      * getter for backing array
      * @return backing array
@@ -61,7 +62,7 @@ public class SampleModel {
                 return d;
             }
         }
-        Log.d("MYAPP", "Warning - Failed to find id: " + id);
+        // Log.d("MYAPP", "Warning - Failed to find id: " + id);
         return null;
     }
 
