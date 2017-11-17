@@ -23,59 +23,23 @@ import pl.droidsonroids.gif.GifDrawable;
 
 public class SplashLoadingActivity extends AppCompatActivity {
 
-    private final int DISPLAY_TIME = 7000;
+    private final int DISPLAY_TIME = 3500;
 //    private MyApp app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ((AnimationDrawable) getWindow().getDecorView().getBackground()).start();
         setContentView(R.layout.activity_splash_loading);
-//        app = (MyApp) getApplication();
-//
-//        Log.i("main", "onCreate fired");
-//        File file = new File(getApplicationContext().getFilesDir(), "userData.txt");
-//        app.loadUserText(file);
-//
-//        File file2 = new File(getApplicationContext().getFilesDir(), "ratData.txt");
-//        app.loadRatDataText(file2);
-//
-//        if (SampleModel.INSTANCE.getItems().size() < 100000) { //when app is used for first time, add csv file to model and save the file
-//            Log.d("MyApp", "onCreate: saving from csv file");
-//            app.readCSVFile();
-////            File file3 = new File(this.getFilesDir(), "ratData.txt");
-//            SampleModel.INSTANCE.saveText(file2);
-//        }
-//        Intent intent = new Intent(SplashLoadingActivity.this, WelcomeActivity.class);
-//        SplashLoadingActivity.this.startActivity(intent);
-//        SplashLoadingActivity.this.finish();
 
-        Thread timer = new Thread() {
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
             public void run() {
-                try {
-                    sleep(DISPLAY_TIME);
-
-                } catch(InterruptedException e) {
-                    e.printStackTrace();
-
-                } finally {
-                    Intent intent = new Intent(SplashLoadingActivity.this, WelcomeActivity.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(SplashLoadingActivity.this, WelcomeActivity.class);
+                SplashLoadingActivity.this.startActivity(intent);
+                SplashLoadingActivity.this.finish();
             }
-        };
-        timer.start();
+        }, DISPLAY_TIME);
     }
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(SplashLoadingActivity.this, WelcomeActivity.class);
-//                SplashLoadingActivity.this.startActivity(intent);
-//                SplashLoadingActivity.this.finish();
-//            }
-//        }, DISPLAY_TIME);
-//    }
 
     @Override
     protected void onPause() {
