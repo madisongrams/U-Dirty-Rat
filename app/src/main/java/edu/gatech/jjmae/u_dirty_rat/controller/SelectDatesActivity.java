@@ -86,12 +86,11 @@ public class SelectDatesActivity extends AppCompatActivity {
         endDate = today;
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
-
-
         if (start.length() < 1) {
             try {
                 startDate = df.parse("01/01/2017");
             } catch (ParseException e) {
+                Log.e("tag", "Parse issue", e);
             }
         } else {
             if (isNotValidDate(start)) {

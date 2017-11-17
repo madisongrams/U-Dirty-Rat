@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.google.android.gms.maps.model.LatLng;
 import edu.gatech.jjmae.u_dirty_rat.model.RatClusterItem;

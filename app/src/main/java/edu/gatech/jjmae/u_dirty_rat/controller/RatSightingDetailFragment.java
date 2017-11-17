@@ -49,9 +49,10 @@ public class RatSightingDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        Bundle args = getArguments();
+        if (args.containsKey(ARG_ITEM_ID)) {
 
-            int item_id = getArguments().getInt(ARG_ITEM_ID);
+            int item_id = args.getInt(ARG_ITEM_ID);
             Log.d("MY APP", "Start details for: " + item_id);
             mItem = SampleModel.INSTANCE.findItemById(item_id);
             Activity activity = this.getActivity();

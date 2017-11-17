@@ -1,5 +1,6 @@
 package edu.gatech.jjmae.u_dirty_rat.controller;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -87,31 +88,31 @@ public class RegistrationPageActivity extends AppCompatActivity {
         String username = newUsernameView.getText().toString();
         String password = newPasswordView.getText().toString();
         String email = newEmailView.getText().toString();
-
+        Context context = getApplicationContext();
         // Check for a valid password
         if (TextUtils.isEmpty(password)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_field_required));
+            displayErrorMessage(context.getString(R.string.error_field_required));
             return false;
         } else if (!isPasswordValid(password)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_password));
+            displayErrorMessage(context.getString(R.string.error_invalid_password));
             return false;
         }
 
         // Check for a valid username.
         if (TextUtils.isEmpty(username)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_field_required));
+            displayErrorMessage(context.getString(R.string.error_field_required));
             return false;
         } else if (!isUsernameValid(username)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_username));
+            displayErrorMessage(context.getString(R.string.error_invalid_username));
             return false;
         }
 
         //check for a valid email
         if (TextUtils.isEmpty(email)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_field_required));
+            displayErrorMessage(context.getString(R.string.error_field_required));
             return false;
         } else if (!email.contains("@") || !email.contains(".")) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_email));
+            displayErrorMessage(context.getString(R.string.error_invalid_email));
             return false;
         }
 

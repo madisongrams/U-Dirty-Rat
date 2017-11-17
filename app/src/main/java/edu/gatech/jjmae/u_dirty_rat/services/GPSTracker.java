@@ -40,7 +40,7 @@ public class GPSTracker extends Service implements LocationListener {
     private LocationManager locationManager;
 
     /**
-     * constructor for gpstracker
+     * constructor for GPS Tracker
      * @param context app context
      */
     public GPSTracker(Context context) {
@@ -65,7 +65,7 @@ public class GPSTracker extends Service implements LocationListener {
 
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled
-                Log.e("MYAPP", "Network is not enabled");
+                Log.e("MY APP", "Network is not enabled");
             } else {
                 this.canGetLocation = true;
                 // First get location from Network Provider

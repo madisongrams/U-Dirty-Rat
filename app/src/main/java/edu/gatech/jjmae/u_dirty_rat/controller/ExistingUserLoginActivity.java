@@ -1,5 +1,6 @@
 package edu.gatech.jjmae.u_dirty_rat.controller;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -40,8 +41,8 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
             }
         });
 
-        View mLoginFormView = findViewById(R.id.login_form);
-        View mProgressView = findViewById(R.id.login_progress);
+        //View mLoginFormView = findViewById(R.id.login_form);
+        //View mProgressView = findViewById(R.id.login_progress);
     }
 
     /**
@@ -55,22 +56,22 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
         // Store values at the time of the login attempt.
         String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
-
+        Context context = getApplicationContext();
         // Check for a valid password
         if (TextUtils.isEmpty(password)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_field_required));
+            displayErrorMessage(context.getString(R.string.error_field_required));
             return false;
         } else if (!isPasswordValid(password)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_password));
+            displayErrorMessage(context.getString(R.string.error_invalid_password));
             return false;
         }
 
         // Check for a valid username.
         if (TextUtils.isEmpty(username)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_field_required));
+            displayErrorMessage(context.getString(R.string.error_field_required));
             return false;
         } else if (!isUsernameValid(username)) {
-            displayErrorMessage(getApplicationContext().getString(R.string.error_invalid_email));
+            displayErrorMessage(context.getString(R.string.error_invalid_email));
             return false;
         }
         String error = UserData.login(username, password);

@@ -1,6 +1,7 @@
 package edu.gatech.jjmae.u_dirty_rat;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -25,7 +26,6 @@ import edu.gatech.jjmae.u_dirty_rat.model.UserData;
  * A custom Application class which is used on app start up to do some backend setup before app runs
  */
 public class MyApp extends Application {
-    private final int numRatItems = 100000;
     /**
      * default constructor called when app first runs
      */
@@ -44,12 +44,14 @@ public class MyApp extends Application {
         // but also application has context here
 
         Log.i("main", "onCreate fired");
-        File file = new File(getApplicationContext().getFilesDir(), "userData.txt");
+        Context context = getApplicationContext();
+        File file = new File(context.getFilesDir(), "userData.txt");
         loadUserText(file);
 
-        File file2 = new File(getApplicationContext().getFilesDir(), "ratData.txt");
+        File file2 = new File(context.getFilesDir(), "ratData.txt");
         loadRatDataText(file2);
 
+        final int numRatItems = 100000;
         if (SampleModel.INSTANCE.getItems().size() < numRatItems) { //when app is used for
             // first time, add csv file to model and save the file
             Log.d("MyApp", "onCreate: saving from csv file");
@@ -134,7 +136,7 @@ public class MyApp extends Application {
                 try {
                     entryDate = df.parse(tokens[1]);
                 } catch (Exception e) {
-
+                    Log.e("tag", "Parse issue", e);
                 }
 
                 model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9],
