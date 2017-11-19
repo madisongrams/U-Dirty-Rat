@@ -97,7 +97,7 @@ public class MyApp extends Application {
      * method that reads in the csv file
      * reads in entire csv file and records data into a SampleModel
      */
-    public void readCSVFile() {
+    private void readCSVFile() {
         SampleModel model = SampleModel.INSTANCE;
 
         try {
