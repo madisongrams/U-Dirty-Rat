@@ -93,12 +93,29 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
     }
     /**
      * determines whether given password is valid
+     * password much be at least three characters long and must not contain  &, ., -, or *
      * @param password password to be tested
      * @return boolean whether or not password is valid
      */
     private boolean isPasswordValid(String password) {
-        //TODO: make this better and more clear
-        return password.length() > 2;
+        if (password.length() < 3) {
+            return false;
+        }
+        char temp;
+        for (int i = 0; i < password.length(); i++) {
+            temp = password.charAt(i);
+            if (temp == '&' || temp == '.' || temp == '-' || temp == '*') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+    a getter for isPasswordValid
+     */
+    public boolean getIsPasswordValid(String password) {
+        return isPasswordValid(password);
     }
 
     /**
