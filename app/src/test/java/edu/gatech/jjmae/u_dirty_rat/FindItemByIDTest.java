@@ -10,11 +10,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-//import java.util.list;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 
-import static com.google.android.gms.common.ConnectionResult.TIMEOUT;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
 
@@ -68,6 +66,7 @@ public class FindItemByIDTest {
             throw new RuntimeException(e);
         }
     }
+
     @Before
     public void populateList() {
         setUp();
@@ -91,6 +90,7 @@ public class FindItemByIDTest {
         assertEquals(model.findItemById(7), item7);
         assertEquals(model.findItemById(5050), item8);
         assertEquals(model.findItemById(-99), item9);
+
         assertNull(model.findItemById(100));
         assertNull(model.findItemById(-1));
 
