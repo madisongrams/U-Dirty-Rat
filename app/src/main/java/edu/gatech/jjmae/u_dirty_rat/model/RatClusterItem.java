@@ -37,11 +37,6 @@ public class RatClusterItem implements ClusterItem {
 
     @Override
     public LatLng getPosition() {
-//        if (mPosition == null) {
-//            return new LatLng(0.0,0.0);
-//        } else {
-//            return mPosition;
-//        }
         return mPosition;
     }
 
