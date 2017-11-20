@@ -42,6 +42,8 @@ public class SelectDatesActivity extends AppCompatActivity {
 
         startDateText = (EditText) findViewById(R.id.startDateInput);
         endDateText = (EditText) findViewById(R.id.endDateInput);
+        startDateText.setFocusable(true);
+        startDateText.requestFocus();
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
