@@ -40,6 +40,7 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
             }
         });
 
+        mLoginFormView = findViewById(R.id.login_form);
         View mLoginFormView = findViewById(R.id.login_form);
         View mProgressView = findViewById(R.id.login_progress);
     }
@@ -101,14 +102,21 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
         if (password.length() < 3) {
             return false;
         }
-        String temp = "";
+        char temp;
         for (int i = 0; i < password.length(); i++) {
-            temp = password.substring(i, i+1);
-            if (temp == "&" || temp == "." || temp == "-" || temp == "*") {
+            temp = password.charAt(i);
+            if (temp == '&' || temp == '.' || temp == '-' || temp == '*') {
                 return false;
             }
         }
         return true;
+    }
+
+    /*
+    a getter for isPasswordValid
+     */
+    public boolean getIsPasswordValid(String password) {
+        return isPasswordValid(password);
     }
 
     /**

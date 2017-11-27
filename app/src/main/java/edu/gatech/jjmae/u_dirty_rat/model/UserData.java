@@ -23,6 +23,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 public class UserData {
+
     private static final HashMap<String, String> usernamesPasswords = new HashMap<String, String>();
     private static final Map<String, User> users = new HashMap<String, User>();
     private static final Map<String, Admin> admins = new HashMap<String, Admin>();

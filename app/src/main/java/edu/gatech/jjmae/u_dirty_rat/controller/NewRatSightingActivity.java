@@ -56,6 +56,8 @@ public class NewRatSightingActivity extends AppCompatActivity {
         mEditLatitude = (EditText) findViewById(R.id.editlatitude);
         mCurrLatitude = 0.0;
         mCurrLongitude = 0.0;
+        mEditDate.setFocusable(true);
+        mEditDate.requestFocus();
 
         try {
             String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
