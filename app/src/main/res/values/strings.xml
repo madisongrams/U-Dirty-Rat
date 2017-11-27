@@ -1,5 +1,5 @@
 <resources>
-    <string name="title_activity_home">Home</string>
+    <string name="title_activity_home"> </string>
     <string name="app_name">U-Dirty-Rat</string>
     <string name="title_activity_existing_user_login">Existing User Login</string>
 
@@ -15,11 +15,12 @@
     <string name="error_field_required">This field is required</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
-    <string name="title_activity_new_rat_sighting">NewRatSighting</string>
-    <string name="title_activity_detail_rat_sighting">detail_rat_sighting</string>
-    <string name="title_activity_select_dates">SelectDatesActivity</string>
+    <string name="title_activity_new_rat_sighting"> </string>
+    <string name="title_activity_detail_rat_sighting"> </string>
+    <string name="title_activity_select_dates"> </string>
     <string name="title_activity_maps">Map</string>
     <string name="facebook_app_id">1933062990348444</string>
     <string name="title_activity_facebook">FacebookActivity</string>
-    <string name="title_activity_user_list">UserListActivity</string>
+    <string name="title_activity_user_list"> </string>
+    <string name="create_new_user">Create New User</string>
 </resources>
