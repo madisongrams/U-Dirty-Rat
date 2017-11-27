@@ -38,10 +38,10 @@ public class RegistrationPageActivity extends AppCompatActivity {
         newUsernameView = (EditText) findViewById(R.id.editText);
         newPasswordView = (EditText) findViewById(R.id.editText2);
         newEmailView = (EditText) findViewById(R.id.editText4);
-        Button createaccount = (Button) findViewById(R.id.button);
+        Button createAccount = (Button) findViewById(R.id.button);
         addItemsOnSpinner();
       //  addListenerOnSpinnerItemSelection();
-        createaccount.setOnClickListener(new View.OnClickListener() {
+        createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (properRegistration()) {
@@ -56,12 +56,13 @@ public class RegistrationPageActivity extends AppCompatActivity {
     /**
      * adds items (user, admin) to the spinner for this page
      */
-    public void addItemsOnSpinner() {
+    private void addItemsOnSpinner() {
         spinner = (Spinner) findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
         list.add("user");
         list.add("admin");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
     }
@@ -70,9 +71,8 @@ public class RegistrationPageActivity extends AppCompatActivity {
      * listener for spinner
      * @return current spinner selection
      */
-    public String addListenerOnSpinnerItemSelection() {
-        String selectedItem = (String) spinner.getSelectedItem();
-        return selectedItem;
+    private String addListenerOnSpinnerItemSelection() {
+        return (String) spinner.getSelectedItem();
     }
 
     /**
@@ -87,9 +87,6 @@ public class RegistrationPageActivity extends AppCompatActivity {
         String username = newUsernameView.getText().toString();
         String password = newPasswordView.getText().toString();
         String email = newEmailView.getText().toString();
-        if (username == null || password == null || email == null) {
-            return false;
-        }
 
         // Check for a valid password
         if (TextUtils.isEmpty(password)) {
@@ -119,7 +116,7 @@ public class RegistrationPageActivity extends AppCompatActivity {
         }
 
         boolean admin;
-        admin = addListenerOnSpinnerItemSelection().equals("admin");
+        admin = "admin".equals(addListenerOnSpinnerItemSelection());
         String error = UserData.register(username, password, admin, email);
         if (error != null) {
             displayErrorMessage(error);

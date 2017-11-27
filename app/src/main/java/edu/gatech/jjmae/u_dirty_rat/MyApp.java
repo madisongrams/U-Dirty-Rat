@@ -25,6 +25,7 @@ import edu.gatech.jjmae.u_dirty_rat.model.UserData;
  * A custom Application class which is used on app start up to do some backend setup before app runs
  */
 public class MyApp extends Application {
+    private final int numRatItems = 100000;
     /**
      * default constructor called when app first runs
      */
@@ -49,7 +50,8 @@ public class MyApp extends Application {
         File file2 = new File(getApplicationContext().getFilesDir(), "ratData.txt");
         loadRatDataText(file2);
 
-        if (SampleModel.INSTANCE.getItems().size() < 100000) { //when app is used for first time, add csv file to model and save the file
+        if (SampleModel.INSTANCE.getItems().size() < numRatItems) { //when app is used for
+            // first time, add csv file to model and save the file
             Log.d("MyApp", "onCreate: saving from csv file");
             readCSVFile();
 //            File file3 = new File(this.getFilesDir(), "ratData.txt");
@@ -61,37 +63,32 @@ public class MyApp extends Application {
     /**
      * used to load a text file saved on the phone
      * @param file file being loaded
-     * @return whether or not file loading was successful
+     *
      */
-    public boolean loadUserText(File file) {
+    public void loadUserText(File file) {
         try {
             //make an input object for reading
             BufferedReader reader = new BufferedReader(new FileReader(file));
             UserData.loadFromText(reader);
         } catch (FileNotFoundException e) {
             Log.e("MyApp", "Failed to open user text file for loading!");
-            return false;
         }
 
-        return true;
     }
 
     /**
      * used to load a text file saved on the phone
      * @param file file being loaded
-     * @return whether or not file loading was successful
      */
-    public boolean loadRatDataText(File file) {
+    public void loadRatDataText(File file) {
         try {
             //make an input object for reading
             BufferedReader reader = new BufferedReader(new FileReader(file));
             SampleModel.INSTANCE.loadFromText(reader);
         } catch (FileNotFoundException e) {
             Log.e("MyApp", "Failed to open rat data text file for loading!");
-            return false;
         }
 
-        return true;
     }
     /**
      * method that reads in the csv file
@@ -102,29 +99,34 @@ public class MyApp extends Application {
 
         try {
             InputStream is = getResources().openRawResource(R.raw.rat_sightings);
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(is, StandardCharsets.UTF_8));
 
             String line;
             br.readLine(); //get rid of header line
             while ((line = br.readLine()) != null) {
                 //Log.d(HomeActivity.TAG, line);
                 String[] tokens = line.split(",");
-                int id = 0;
-                int zip = 0;
+                int id;
+                int zip;
                 try {
                     id = Integer.parseInt(tokens[0]);
                 } catch (Exception e) {
+                    id = 0;
                 }
                 try {
                     zip = Integer.parseInt(tokens[8]);
                 } catch (Exception e) {
+                    zip = 0;
                 }
-                double latitude =  0.0;
-                double longitude = 0.0;
+                double latitude;
+                double longitude;
                 try {
                     latitude = Double.parseDouble(tokens[49]);
                     longitude = Double.parseDouble(tokens[50]);
                 } catch (IndexOutOfBoundsException e) {
+                    latitude = 0.0;
+                    longitude = 0.0;
 
                 }
                 Date entryDate = new Date(1969, 12, 31);
@@ -135,7 +137,8 @@ public class MyApp extends Application {
 
                 }
 
-                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9], tokens[16], tokens[23], latitude, longitude), false);
+                model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9],
+                        tokens[16], tokens[23], latitude, longitude));
             }
             br.close();
         } catch (IOException e) {

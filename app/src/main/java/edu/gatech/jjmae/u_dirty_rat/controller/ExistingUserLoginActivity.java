@@ -21,8 +21,6 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
     // UI references.
     private EditText mUsernameView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +41,8 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
         });
 
         mLoginFormView = findViewById(R.id.login_form);
+        View mLoginFormView = findViewById(R.id.login_form);
+        View mProgressView = findViewById(R.id.login_progress);
     }
 
     /**
@@ -56,9 +56,6 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
         // Store values at the time of the login attempt.
         String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
-        if (username == null || password == null) {
-            return false;
-        }
 
         // Check for a valid password
         if (TextUtils.isEmpty(password)) {
@@ -97,12 +94,29 @@ public class ExistingUserLoginActivity extends AppCompatActivity {
     }
     /**
      * determines whether given password is valid
+     * password much be at least three characters long and must not contain  &, ., -, or *
      * @param password password to be tested
      * @return boolean whether or not password is valid
      */
     private boolean isPasswordValid(String password) {
-        //TODO: make this better and more clear
-        return password.length() > 2;
+        if (password.length() < 3) {
+            return false;
+        }
+        char temp;
+        for (int i = 0; i < password.length(); i++) {
+            temp = password.charAt(i);
+            if (temp == '&' || temp == '.' || temp == '-' || temp == '*') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+    a getter for isPasswordValid
+     */
+    public boolean getIsPasswordValid(String password) {
+        return isPasswordValid(password);
     }
 
     /**

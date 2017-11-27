@@ -25,7 +25,7 @@ import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.services.GPSTracker;
 
 /**
- * activty screen for reporting a new rat sighting
+ * activity screen for reporting a new rat sighting
  */
 public class NewRatSightingActivity extends AppCompatActivity {
     private EditText mEditDate;
@@ -37,10 +37,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
     private EditText mEditLatitude;
     private double mCurrLatitude;
     private double mCurrLongitude;
-    String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
 
-    // GPSTracker class
-    GPSTracker gps;
     private static final int REQUEST_CODE_PERMISSION = 2;
 
     @Override
@@ -63,6 +60,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
         mEditDate.requestFocus();
 
         try {
+            String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
             if (ActivityCompat.checkSelfPermission(this, mPermission)
                     != MockPackageManager.PERMISSION_GRANTED) {
 
@@ -75,7 +73,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        gps = new GPSTracker(NewRatSightingActivity.this);
+        GPSTracker gps = new GPSTracker(NewRatSightingActivity.this);
 
         // check if GPS enabled
         if(gps.canGetLocation()){
@@ -130,7 +128,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
             displayErrorMessage("Date must be in format MM/DD/YYYY");
             return false;
         }
-        Date entryDate = new Date(1969, 12, 31);
+        Date entryDate;
         try {
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             entryDate = df.parse(date);
@@ -143,7 +141,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
             displayErrorMessage("Zip Code must be a number.");
             return false;
         }
-        int zipInt = 0;
+        int zipInt;
         try {
             zipInt = Integer.parseInt(zip);
         } catch (Exception e) {
@@ -151,9 +149,9 @@ public class NewRatSightingActivity extends AppCompatActivity {
             return false;
         }
 
-        double longitudeDoub = 0.0;
-        double latitudeDoub = 0.0;
-        if (mCurrLongitude != 0 && mCurrLatitude != 0) {
+        double longitudeDoub;
+        double latitudeDoub;
+        if ((mCurrLongitude != 0) && (mCurrLatitude != 0)) {
             longitudeDoub = mCurrLongitude;
             latitudeDoub = mCurrLatitude;
         } else {
@@ -163,7 +161,9 @@ public class NewRatSightingActivity extends AppCompatActivity {
                 displayErrorMessage("Longitude must be a valid decimal.");
                 return false;
             }
-            if (longitudeDoub < -180 || longitudeDoub > 180) {
+            int minLong = -180;
+            int maxLong = 180;
+            if ((longitudeDoub < minLong) || (longitudeDoub > maxLong)) {
                 displayErrorMessage("Invalid longitude.");
             }
 
@@ -173,7 +173,9 @@ public class NewRatSightingActivity extends AppCompatActivity {
                 displayErrorMessage("Latitude must be a valid decimal.");
                 return false;
             }
-            if (latitudeDoub < -90 || latitudeDoub > 90) {
+            int minLat = -90;
+            int maxLat = 90;
+            if ((latitudeDoub < minLat) || (latitudeDoub > maxLat)) {
                 displayErrorMessage("Invalid latitude.");
                 return false;
             }
@@ -182,8 +184,9 @@ public class NewRatSightingActivity extends AppCompatActivity {
 //
         SampleModel model = SampleModel.INSTANCE;
         int id = model.getCurrentID();
-        //TODO: add borough entry
-        model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city, latitudeDoub, longitudeDoub), true);
+
+        model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city,
+                latitudeDoub, longitudeDoub));
         File file = new File(this.getFilesDir(), "ratData.txt");
         SampleModel.INSTANCE.saveText(file);
         return true;
@@ -201,7 +204,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
 
     /**
      * method using regex to make sure zip code string is valid
-     * @param zip zipcode string to be checked
+     * @param zip zip code string to be checked
      * @return whether or not zip code is valid
      */
     private boolean isValidZip(String zip) {
