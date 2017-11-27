@@ -98,7 +98,6 @@
         <activity
             android:name=".controller.GraphActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".controller.GraphActivity"></activity>
     </application>
 
 </manifest>
