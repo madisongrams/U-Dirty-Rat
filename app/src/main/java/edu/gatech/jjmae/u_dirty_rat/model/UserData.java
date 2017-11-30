@@ -32,6 +32,8 @@ public class UserData {
     private static Cipher cipher;
 
     private static AbstractUser currentUser;
+    private static int tries = 0;
+    private static boolean lockout = false;
 
 
     /**
@@ -73,12 +75,19 @@ public class UserData {
      * @return error message when there's an error, and null on success
      */
     public static String login(String user, String password) {
-        user = user.toLowerCase();
+        if (tries >= 3) {
+            lockout = true;
+        }
+        if (lockout) {
+            return "You have had too many login attempts and have been locked out.";
+        }
 
+        user = user.toLowerCase();
         String encryptedPassword = encryptPassword(password);
         if (encryptedPassword == null) {
             return "There was an issue on our end! Please try logging in again.";
         }
+
         if (!(password == null) && usernamesPasswords.containsKey(user) &&
                 usernamesPasswords.get(user).equals(encryptedPassword)) {
             Admin isAdmin = admins.get(user);
@@ -94,6 +103,7 @@ public class UserData {
             }
             return null;
         } else {
+            tries += 1;
             return "Username and Password combination are incorrect.";
         }
     }
@@ -109,6 +119,9 @@ public class UserData {
     public static String register(String user, String password, boolean isAdmin, String email) {
         user = user.toLowerCase();
         email = email.toLowerCase();
+        if (lockout) {
+            return "You have had too many login attempts and have been locked out.";
+        }
         if (usernamesPasswords.containsKey(user)) {
             return "That username is taken.";
         }
@@ -145,6 +158,9 @@ public class UserData {
             Log.d("UserData", "loadFromText: " + countStr);
             assert countStr != null;
             int count = Integer.parseInt(countStr);
+            //get lockout
+            //String boolString = reader.readLine();
+            //lockout = Boolean.getBoolean(boolString);
             // get secret key
             String data = reader.readLine();
             Log.d("UserData", "loadFromText: " + data);
@@ -210,6 +226,7 @@ public class UserData {
     private static void saveAsText(PrintWriter writer) {
         Log.d("UserData:", "UserData saving: " + usernamesPasswords.size() + " users" );
         writer.println(usernamesPasswords.size());
+        //writer.println(Boolean.toString(lockout));
         // also saving key
         byte[] encoded = key.getEncoded();
         writer.println(Base64.encodeToString(encoded, Base64.URL_SAFE|Base64.NO_WRAP));
