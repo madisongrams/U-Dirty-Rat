@@ -19,14 +19,6 @@
         android:textSize="22sp"
         android:textStyle="bold" />
 
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
-
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
@@ -56,6 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
+                    android:textColor="@color/colorAccent"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:text=""
@@ -76,6 +69,7 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/password"
                     android:hint="@string/password"
+                    android:textColor="@color/colorAccent"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
@@ -87,14 +81,15 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
+                android:backgroundTint="@color/colorAccent"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 android:layout_weight="684.08"
                 android:text="@string/login"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>
