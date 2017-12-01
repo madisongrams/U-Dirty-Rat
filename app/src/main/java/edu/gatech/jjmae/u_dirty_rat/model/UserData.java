@@ -70,10 +70,11 @@ public class UserData {
 
     /**
      * A method that allows for login functionality
-     * @param user the username entered
+     * @param userParam the username entered
      * @param password the password entered
      * @return error message when there's an error, and null on success
      */
+
     public static String login(String user, String password) {
         if (tries >= 3) {
             lockout = true;
@@ -110,10 +111,10 @@ public class UserData {
 
     /**
      * backend for user registration
-     * @param user username of new user
+     * @param userParam username of new user
      * @param password user's password
      * @param isAdmin whether or not a user is an admin
-     * @param email the user's email address
+     * @param emailParam the user's email address
      * @return error message or null if successful registration
      */
     public static String register(String user, String password, boolean isAdmin, String email) {
@@ -122,6 +123,7 @@ public class UserData {
         if (lockout) {
             return "You have had too many login attempts and have been locked out.";
         }
+
         if (usernamesPasswords.containsKey(user)) {
             return "That username is taken.";
         }

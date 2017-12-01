@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.gatech.jjmae.u_dirty_rat.R;
+import edu.gatech.jjmae.u_dirty_rat.model.AbstractUser;
 import edu.gatech.jjmae.u_dirty_rat.model.RatSightingDataItem;
 import edu.gatech.jjmae.u_dirty_rat.model.SampleModel;
 import edu.gatech.jjmae.u_dirty_rat.model.UserData;
@@ -120,7 +121,8 @@ public class HomeActivity extends AppCompatActivity {
                 //go to profile page
                 return true;
             case R.id.action_view_users:
-                if (!UserData.getCurrentUser().getIsAdmin()) {
+                AbstractUser curUser = UserData.getCurrentUser();
+                if (curUser.getIsAdmin()) {
                     displayErrorMessage("Only admins can view this page!");
                     return true;
                 }
@@ -141,7 +143,7 @@ public class HomeActivity extends AppCompatActivity {
     private void onLoadButtonPressed() {
         Log.v(HomeActivity.TAG, "Pressed the load button");
         SampleModel model = SampleModel.INSTANCE;
-        int numRatItems = 100000;
+        final int numRatItems = 100000;
         if (model.getItems().size() < numRatItems) {
             readSDFile();
         }
@@ -193,6 +195,7 @@ public class HomeActivity extends AppCompatActivity {
                 try {
                     entryDate = df.parse(tokens[1]);
                 } catch (Exception e) {
+                    Log.e("tag", "Parse issue", e);
                 }
 
                 model.addItem(new RatSightingDataItem(id, entryDate, tokens[7], zip, tokens[9],

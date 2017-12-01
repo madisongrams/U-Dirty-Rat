@@ -149,33 +149,33 @@ public class NewRatSightingActivity extends AppCompatActivity {
             return false;
         }
 
-        double longitudeDoub;
-        double latitudeDoub;
+        double longitudeDouble;
+        double latitudeDouble;
         if ((mCurrLongitude != 0) && (mCurrLatitude != 0)) {
-            longitudeDoub = mCurrLongitude;
-            latitudeDoub = mCurrLatitude;
+            longitudeDouble = mCurrLongitude;
+            latitudeDouble = mCurrLatitude;
         } else {
             try {
-                longitudeDoub = Double.parseDouble(longitude);
+                longitudeDouble = Double.parseDouble(longitude);
             } catch (Exception e) {
                 displayErrorMessage("Longitude must be a valid decimal.");
                 return false;
             }
-            int minLong = -180;
-            int maxLong = 180;
-            if ((longitudeDoub < minLong) || (longitudeDoub > maxLong)) {
+            final int minLong = -180;
+            final int maxLong = 180;
+            if ((longitudeDouble < minLong) || (longitudeDouble > maxLong)) {
                 displayErrorMessage("Invalid longitude.");
             }
 
             try {
-                latitudeDoub = Double.parseDouble(latitude);
+                latitudeDouble = Double.parseDouble(latitude);
             } catch (Exception e) {
                 displayErrorMessage("Latitude must be a valid decimal.");
                 return false;
             }
-            int minLat = -90;
-            int maxLat = 90;
-            if ((latitudeDoub < minLat) || (latitudeDoub > maxLat)) {
+            final int minLat = -90;
+            final int maxLat = 90;
+            if ((latitudeDouble < minLat) || (latitudeDouble > maxLat)) {
                 displayErrorMessage("Invalid latitude.");
                 return false;
             }
@@ -186,7 +186,7 @@ public class NewRatSightingActivity extends AppCompatActivity {
         int id = model.getCurrentID();
 
         model.addItem(new RatSightingDataItem(id, entryDate, location, zipInt, address, city, city,
-                latitudeDoub, longitudeDoub));
+                latitudeDouble, longitudeDouble));
         File file = new File(this.getFilesDir(), "ratData.txt");
         SampleModel.INSTANCE.saveText(file);
         return true;

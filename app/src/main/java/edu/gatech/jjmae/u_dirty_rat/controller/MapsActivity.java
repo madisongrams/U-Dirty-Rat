@@ -49,9 +49,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        Intent intent = getIntent();
         if (rats == null) {
-            Date start = (Date) getIntent().getSerializableExtra("start");
-            Date end = (Date) getIntent().getSerializableExtra("end");
+            Date start = (Date) intent.getSerializableExtra("start");
+            Date end = (Date) intent.getSerializableExtra("end");
             rats = SampleModel.INSTANCE.getRatsByDates(start, end);
         }
 
@@ -121,10 +122,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mapsReady) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialView, 6));
         } else {
-            int fiveHundred = 500;
+            int ratFocus = 500;
+            if (rats.size() < ratFocus) {
+                ratFocus = rats.size() - 1;
+            }
+            RatSightingDataItem rat = rats.get(ratFocus);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-                    rats.get(fiveHundred).get_Latitude(),
-                    rats.get(fiveHundred).get_Longitude()), 6));
+                    rat.get_Latitude(),
+                    rat.get_Longitude()), 6));
         }
     }
 

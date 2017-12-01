@@ -84,23 +84,30 @@ public class RatSightingsListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            String date = mValues.get(position).get_Date().toString();
+            String date = holder.mItem.get_Date().toString();
             // the date string sometimes shows up as GMT which adds extra characters so taking that
             // into account here
+            final int startIndexGMT = 30;
+            final int endIndexGMT = 34;
+            final int normStart = 24;
+            final int normEnd = 28;
+
             try {
-                holder.mDateView.setText(date.substring(0, 10) + " " + date.substring(30, 34));
+                holder.mDateView.setText(date.substring(0, 10) + " " + date.substring(startIndexGMT,
+                        endIndexGMT));
             } catch (IndexOutOfBoundsException e) {
-                holder.mDateView.setText(date.substring(0, 10) + " " + date.substring(24, 28));
+                holder.mDateView.setText(date.substring(0, 10) + " " + date.substring(normStart,
+                        normEnd));
             }
 
-            holder.mBoroughView.setText(mValues.get(position).get_Borough());
+            holder.mBoroughView.setText(holder.mItem.get_Borough());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, RatSightingViewDetailActivity.class);
-                        Log.d("MYAPP", "Switch to detailed view for item: " +
+                        Log.d("MY APP", "Switch to detailed view for item: " +
                                 holder.mItem.get_ID());
                         intent.putExtra(RatSightingDetailFragment.ARG_ITEM_ID,
                                 holder.mItem.get_ID());

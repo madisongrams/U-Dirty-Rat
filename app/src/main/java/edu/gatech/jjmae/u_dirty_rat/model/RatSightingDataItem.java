@@ -3,6 +3,7 @@ package edu.gatech.jjmae.u_dirty_rat.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -215,7 +216,7 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>,
         try {
             entryDate = df.parse(tokens[1]);
         } catch (Exception e) {
-
+            Log.e("tag", "Parse issue", e);
         }
         return new RatSightingDataItem(id, entryDate, tokens[2], zip, tokens[4], tokens[5],
                 tokens[6], latitude, longitude);
@@ -242,12 +243,14 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>,
 
     @Override
     public int compareTo(@NonNull RatSightingDataItem r) {
-        return get_Date().compareTo(r.get_Date());
+        Date date = get_Date();
+        return date.compareTo(r.get_Date());
     }
 
     @Override
     public int compare(RatSightingDataItem r1, RatSightingDataItem r2) {
-        return r1.get_Date().compareTo(r2.get_Date());
+        Date r1Date = r1.get_Date();
+        return r1Date.compareTo(r2.get_Date());
     }
 
     @Override
@@ -261,11 +264,15 @@ public class RatSightingDataItem implements Comparable<RatSightingDataItem>,
      */
     public String getModifiedDate() {
         String date;
+        final int startIndexGMT = 30;
+        final int endIndexGMT = 34;
+        final int normStart = 24;
+        final int normEnd = 28;
         date = this._Date.toString();
             try {
-                date = date.substring(0, 10) + " " + date.substring(30, 34);
+                date = date.substring(0, 10) + " " + date.substring(startIndexGMT, endIndexGMT);
             } catch (IndexOutOfBoundsException e) {
-                date = date.substring(0, 10) + " " + date.substring(24, 28);
+                date = date.substring(0, 10) + " " + date.substring(normStart, normEnd);
             }
             return date;
     }
