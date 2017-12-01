@@ -122,7 +122,7 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             case R.id.action_view_users:
                 AbstractUser curUser = UserData.getCurrentUser();
-                if (curUser.getIsAdmin()) {
+                if (!curUser.getIsAdmin()) {
                     displayErrorMessage("Only admins can view this page!");
                     return true;
                 }
